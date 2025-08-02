@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Paper drawing light mode styles */
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50;
+    font-family: 'Comic Neue', 'Kalam', 'Caveat', cursive, sans-serif;
+  }
+}
+
+/* Hand-drawn border utilities */
+@layer utilities {
+  .border-sketchy {
+    border-style: dashed;
+    border-width: 2px;
+  }
+  
+  .border-sketchy-dotted {
+    border-style: dotted;
+    border-width: 2px;
+  }
+  
+  .border-3 {
+    border-width: 3px;
+  }
+  
+  .shadow-sketchy {
+    box-shadow: 4px 4px 0px rgba(245, 158, 11, 0.3);
+  }
+  
+  .shadow-sketchy-lg {
+    box-shadow: 6px 6px 0px rgba(245, 158, 11, 0.4);
+  }
+}
 
 /* Custom animations */
 @keyframes blob {
@@ -29,6 +61,32 @@
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-10px) rotate(5deg); 
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { 
+    transform: rotate(-3deg); 
+  }
+  50% { 
+    transform: rotate(3deg); 
+  }
+}
+
+.animate-wiggle {
+  animation: wiggle 2s ease-in-out infinite;
 }
 
 @keyframes slide {
@@ -69,10 +127,6 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  @apply bg-slate-900 font-sans;
-}
-
 /* Custom scrollbar for the community chat */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
@@ -106,4 +160,44 @@ body {
 
 .cm-gutters{
   background-color: #1c212d !important; /* Tailwind gray-900 */
+}
+
+/* Paper texture and hand-drawn effects */
+.paper-texture {
+  background-image: 
+    radial-gradient(circle at 25px 25px, rgba(212, 165, 116, 0.1) 2%, transparent 0%),
+    radial-gradient(circle at 75px 75px, rgba(245, 158, 11, 0.1) 1%, transparent 0%);
+  background-size: 100px 100px;
+}
+
+.hand-drawn-border {
+  position: relative;
+}
+
+.hand-drawn-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent 30%, rgba(245, 158, 11, 0.3) 30%, rgba(245, 158, 11, 0.3) 70%, transparent 70%);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* Fade in animation for FAQ items */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
 }

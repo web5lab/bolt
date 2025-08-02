@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, User } from 'lucide-react';
+import { Menu, X, User, PenTool } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { UserSelector } from '../store/global.Selctor';
 import logo from "../assets/logo.webp"
@@ -30,26 +30,82 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-slate-900/95 backdrop-blur-md shadow-lg`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b-2 border-amber-200' 
+          : 'bg-white/90 backdrop-blur-sm'
+      }`}
+      style={{
+        borderRadius: isScrolled ? '0 0 20px 20px' : '0'
+      }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-2 text-indigo-400 font-bold text-xl">
-              <img src={logo} className="h-10 w-10" alt="Logo" />
-              <span>redesignr<span className="text-purple-400">.ai</span></span>
+            <Link to="/" className="flex items-center gap-2 text-amber-600 font-bold text-xl hover:text-orange-600 transition-colors">
+              <div className="relative">
+                <img src={logo} className="h-10 w-10" alt="Logo" />
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full opacity-70"></div>
+              </div>
+              <span className="relative">
+                redesignr
+                <span className="text-orange-500">.ai</span>
+                <svg className="absolute -bottom-1 left-0 w-full h-1" viewBox="0 0 100 4" fill="none">
+                  <path d="M2 2 Q50 1 98 2" stroke="#f59e0b" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.6"/>
+                </svg>
+              </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:block">
             <ul className="flex space-x-8">
-              <li><a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a></li>
-              <li><Link to="/blog" className="text-slate-300 hover:text-white transition-colors">Blog</Link></li>
-              <li><a href="#how-it-works" className="text-slate-300 hover:text-white transition-colors">How It Works</a></li>
-              <li><a href="#pricing" className="text-slate-300 hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#faq" className="text-slate-300 hover:text-white transition-colors">FAQ</a></li>
+              <li>
+                <a 
+                  href="#features" 
+                  className="text-slate-700 hover:text-amber-600 transition-colors font-medium relative group"
+                >
+                  Features
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </li>
+              <li>
+                <Link 
+                  to="/blog" 
+                  className="text-slate-700 hover:text-amber-600 transition-colors font-medium relative group"
+                >
+                  Blog
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              </li>
+              <li>
+                <a 
+                  href="#how-it-works" 
+                  className="text-slate-700 hover:text-amber-600 transition-colors font-medium relative group"
+                >
+                  How It Works
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#pricing" 
+                  className="text-slate-700 hover:text-amber-600 transition-colors font-medium relative group"
+                >
+                  Pricing
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#faq" 
+                  className="text-slate-700 hover:text-amber-600 transition-colors font-medium relative group"
+                >
+                  FAQ
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </li>
             </ul>
           </nav>
 
@@ -57,29 +113,33 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center space-x-4">
             {user && user.name ? (
               <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2 cursor-pointer">
+                <div className="flex items-center space-x-2 cursor-pointer group">
                   {user.profilePicture ? (
                     <img
                       onClick={() => navigate('/dashboard')}
                       src={user.profilePicture}
                       alt="Profile"
-                      className="h-8 w-8 rounded-full object-cover"
+                      className="h-8 w-8 rounded-full object-cover border-2 border-amber-300 group-hover:border-orange-400 transition-colors"
                     />
                   ) : (
-                    <div className="h-8 w-8 rounded-full bg-indigo-600 flex items-center justify-center">
+                    <div className="h-8 w-8 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center border-2 border-amber-300 group-hover:border-orange-400 transition-colors">
                       <User className="h-4 w-4 text-white" />
                     </div>
                   )}
                   <span 
                     onClick={() => navigate('/dashboard')}
-                    className="text-white cursor-pointer"
+                    className="text-slate-700 cursor-pointer font-medium group-hover:text-amber-600 transition-colors"
                   >
                     {user.name}
                   </span>
                 </div>
                 <Link
                   to="/dashboard"
-                  className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25"
+                  className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-6 py-2 font-semibold hover:from-amber-500 hover:to-orange-600 transition-all duration-300 shadow-lg hover:shadow-amber-500/25 transform hover:scale-105"
+                  style={{
+                    borderRadius: '20px 10px 25px 15px',
+                    boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
+                  }}
                 >
                   Dashboard
                 </Link>
@@ -88,13 +148,20 @@ const Navbar = () => {
               <>
                 <a
                   href="https://discord.gg/mg7Z4XeF3k"
-                  className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25"
+                  className="bg-white border-2 border-amber-400 text-amber-600 px-6 py-2 font-semibold hover:bg-amber-50 hover:border-orange-400 hover:text-orange-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+                  style={{
+                    borderRadius: '15px 25px 15px 25px'
+                  }}
                 >
                   Contact Us
                 </a>
                 <Link
                   to="/login"
-                  className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25"
+                  className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-6 py-2 font-semibold hover:from-amber-500 hover:to-orange-600 transition-all duration-300 shadow-lg hover:shadow-amber-500/25 transform hover:scale-105"
+                  style={{
+                    borderRadius: '20px 10px 25px 15px',
+                    boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
+                  }}
                 >
                   Dashboard
                 </Link>
@@ -102,7 +169,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Tablet User Section (visible on md and hidden on lg+) */}
+          {/* Tablet User Section */}
           <div className="hidden md:flex lg:hidden items-center space-x-3">
             {user && user.name ? (
               <div className="flex items-center space-x-3">
@@ -112,23 +179,24 @@ const Navbar = () => {
                       onClick={() => navigate('/dashboard')}
                       src={user.profilePicture}
                       alt="Profile"
-                      className="h-8 w-8 rounded-full object-cover"
+                      className="h-8 w-8 rounded-full object-cover border-2 border-amber-300"
                     />
                   ) : (
-                    <div className="h-8 w-8 rounded-full bg-indigo-600 flex items-center justify-center">
+                    <div className="h-8 w-8 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center border-2 border-amber-300">
                       <User className="h-4 w-4 text-white" />
                     </div>
                   )}
                   <span 
                     onClick={() => navigate('/dashboard')}
-                    className="text-white cursor-pointer text-sm"
+                    className="text-slate-700 cursor-pointer text-sm font-medium"
                   >
                     {user.name.length > 10 ? `${user.name.substring(0, 10)}...` : user.name}
                   </span>
                 </div>
                 <Link
                   to="/dashboard"
-                  className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-3 py-2 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25 text-sm"
+                  className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-4 py-2 font-semibold hover:from-amber-500 hover:to-orange-600 transition-all duration-300 text-sm"
+                  style={{borderRadius: '15px 10px 20px 15px'}}
                 >
                   Dashboard
                 </Link>
@@ -137,15 +205,17 @@ const Navbar = () => {
               <>
                 <a
                   href="https://discord.gg/mg7Z4XeF3k"
-                  className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-3 py-2 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25 text-sm"
+                  className="bg-white border-2 border-amber-400 text-amber-600 px-4 py-2 font-semibold hover:bg-amber-50 text-sm"
+                  style={{borderRadius: '15px 20px 15px 20px'}}
                 >
                   Contact
                 </a>
                 <Link
                   to="/login"
-                  className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-3 py-2 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25 text-sm"
+                  className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-4 py-2 font-semibold hover:from-amber-500 hover:to-orange-600 transition-all duration-300 text-sm"
+                  style={{borderRadius: '15px 10px 20px 15px'}}
                 >
-                  DashBoard
+                  Dashboard
                 </Link>
               </>
             )}
@@ -156,14 +226,16 @@ const Navbar = () => {
             {user && user.name && (
               <Link
                 to="/dashboard"
-                className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-3 py-2 rounded-lg text-sm"
+                className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-3 py-2 text-sm font-semibold"
+                style={{borderRadius: '15px 10px 15px 10px'}}
               >
                 Dashboard
               </Link>
             )}
             <button
               onClick={toggleMobileMenu}
-              className="text-white p-2 rounded-lg hover:bg-slate-800 transition-colors"
+              className="text-slate-700 p-2 hover:bg-amber-50 transition-colors border-2 border-amber-300 hover:border-orange-400"
+              style={{borderRadius: '10px 15px 10px 15px'}}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -173,14 +245,18 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-2 pb-4 border-t border-slate-700">
+          <div className="md:hidden mt-2 pb-4 border-t-2 border-amber-200" style={{
+            background: 'linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%)',
+            borderRadius: '0 0 20px 20px'
+          }}>
             <nav className="pt-4">
               <ul className="space-y-2">
                 <li>
                   <a 
                     href="#features" 
-                    className="block text-slate-300 hover:text-white transition-colors py-2 px-4 rounded-lg hover:bg-slate-800"
+                    className="block text-slate-700 hover:text-amber-600 transition-colors py-2 px-4 hover:bg-white/50 font-medium"
                     onClick={closeMobileMenu}
+                    style={{borderRadius: '15px 10px 15px 10px'}}
                   >
                     Features
                   </a>
@@ -188,8 +264,9 @@ const Navbar = () => {
                 <li>
                   <Link 
                     to="/blog" 
-                    className="block text-slate-300 hover:text-white transition-colors py-2 px-4 rounded-lg hover:bg-slate-800"
+                    className="block text-slate-700 hover:text-amber-600 transition-colors py-2 px-4 hover:bg-white/50 font-medium"
                     onClick={closeMobileMenu}
+                    style={{borderRadius: '10px 15px 10px 15px'}}
                   >
                     Blog
                   </Link>
@@ -197,8 +274,9 @@ const Navbar = () => {
                 <li>
                   <a 
                     href="#how-it-works" 
-                    className="block text-slate-300 hover:text-white transition-colors py-2 px-4 rounded-lg hover:bg-slate-800"
+                    className="block text-slate-700 hover:text-amber-600 transition-colors py-2 px-4 hover:bg-white/50 font-medium"
                     onClick={closeMobileMenu}
+                    style={{borderRadius: '15px 10px 15px 10px'}}
                   >
                     How It Works
                   </a>
@@ -206,8 +284,9 @@ const Navbar = () => {
                 <li>
                   <a 
                     href="#pricing" 
-                    className="block text-slate-300 hover:text-white transition-colors py-2 px-4 rounded-lg hover:bg-slate-800"
+                    className="block text-slate-700 hover:text-amber-600 transition-colors py-2 px-4 hover:bg-white/50 font-medium"
                     onClick={closeMobileMenu}
+                    style={{borderRadius: '10px 15px 10px 15px'}}
                   >
                     Pricing
                   </a>
@@ -215,8 +294,9 @@ const Navbar = () => {
                 <li>
                   <a 
                     href="#faq" 
-                    className="block text-slate-300 hover:text-white transition-colors py-2 px-4 rounded-lg hover:bg-slate-800"
+                    className="block text-slate-700 hover:text-amber-600 transition-colors py-2 px-4 hover:bg-white/50 font-medium"
                     onClick={closeMobileMenu}
+                    style={{borderRadius: '15px 10px 15px 10px'}}
                   >
                     FAQ
                   </a>
@@ -225,37 +305,39 @@ const Navbar = () => {
               
               {/* Mobile User Section */}
               {user && user.name ? (
-                <div className="mt-4 pt-4 border-t border-slate-700">
+                <div className="mt-4 pt-4 border-t-2 border-amber-200">
                   <div className="flex items-center space-x-3 px-4 py-2">
                     {user.profilePicture ? (
                       <img
                         src={user.profilePicture}
                         alt="Profile"
-                        className="h-8 w-8 rounded-full object-cover"
+                        className="h-8 w-8 rounded-full object-cover border-2 border-amber-300"
                       />
                     ) : (
-                      <div className="h-8 w-8 rounded-full bg-indigo-600 flex items-center justify-center">
+                      <div className="h-8 w-8 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center border-2 border-amber-300">
                         <User className="h-4 w-4 text-white" />
                       </div>
                     )}
-                    <span className="text-white">{user.name}</span>
+                    <span className="text-slate-700 font-medium">{user.name}</span>
                   </div>
                 </div>
               ) : (
-                <div className="mt-4 pt-4 border-t border-slate-700 space-y-2">
+                <div className="mt-4 pt-4 border-t-2 border-amber-200 space-y-2">
                   <a
                     href="https://discord.gg/mg7Z4XeF3k"
-                    className="block bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 text-center mx-4"
+                    className="block bg-white border-2 border-amber-400 text-amber-600 px-4 py-2 font-semibold hover:bg-amber-50 text-center mx-4"
                     onClick={closeMobileMenu}
+                    style={{borderRadius: '15px 20px 15px 20px'}}
                   >
                     Contact Us
                   </a>
                   <Link
                     to="/login"
-                    className="block bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 text-center mx-4"
+                    className="block bg-gradient-to-r from-amber-400 to-orange-500 text-white px-4 py-2 font-semibold hover:from-amber-500 hover:to-orange-600 transition-all duration-300 text-center mx-4"
                     onClick={closeMobileMenu}
+                    style={{borderRadius: '20px 15px 25px 10px'}}
                   >
-                    DashBoard
+                    Dashboard
                   </Link>
                 </div>
               )}

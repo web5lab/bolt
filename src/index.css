@@ -3,12 +3,6 @@
 @tailwind utilities;
 
 /* Paper drawing light mode styles */
-@layer base {
-  body {
-    @apply bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50;
-    font-family: 'Comic Neue', 'Kalam', 'Caveat', cursive, sans-serif;
-  }
-}
 
 /* Hand-drawn border utilities */
 @layer utilities {

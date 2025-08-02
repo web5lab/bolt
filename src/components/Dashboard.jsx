@@ -388,58 +388,98 @@ const Dashboard = () => {
   const closeMobileSidebar = () => setIsMobileSidebarOpen(false);
 
   return (
-    <div className="flex min-h-screen bg-slate-900 text-slate-100 font-sans">
+    <div className="flex min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 text-slate-800 font-sans relative overflow-hidden">
+      {/* Paper texture overlay */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+      }}></div>
+      
+      {/* Hand-drawn decorative elements */}
+      <div className="absolute top-1/4 right-1/4 w-32 h-32 border-3 border-amber-300 opacity-20 transform rotate-12 pointer-events-none" style={{
+        borderRadius: '60% 40% 70% 30%',
+        borderStyle: 'dashed'
+      }}></div>
+      <div className="absolute bottom-1/2 left-1/4 w-24 h-24 border-2 border-orange-400 opacity-15 transform -rotate-12 pointer-events-none" style={{
+        borderRadius: '40% 60% 30% 70%',
+        borderStyle: 'dotted'
+      }}></div>
+
       {(showConvertToWebAppModal) && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeInScaleUp">
-          <div className="bg-slate-800 rounded-xl shadow-2xl w-full max-w-sm sm:max-w-md md:max-w-lg border border-slate-700/60 p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-700/50">
+        <div className="fixed inset-0 bg-amber-900/70 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fadeInScaleUp">
+          <div className="bg-white/95 backdrop-blur-sm shadow-2xl w-full max-w-sm sm:max-w-md md:max-w-lg border-3 border-amber-400 p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto relative" style={{
+            borderRadius: '30px 20px 35px 25px',
+            boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
+          }}>
+            {/* Paper texture overlay */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+            }}></div>
+            
+            {/* Decorative elements */}
+            <div className="absolute top-2 right-2 w-4 h-4 bg-yellow-400 opacity-60 rounded-full"></div>
+            <div className="absolute top-4 left-4 w-3 h-3 border-2 border-orange-400 opacity-50 transform rotate-45"></div>
+            <div className="absolute bottom-4 right-6 w-2 h-2 bg-amber-400 opacity-70 transform rotate-12" style={{borderRadius: '30% 70%'}}></div>
+
             {showConvertToWebAppModal && (
               <Fragment>
-                <div className="flex justify-between items-center mb-4 sm:mb-6">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500 flex items-center">
-                    <Zap size={20} md:size={24} className="mr-2 md:mr-3 text-amber-400" /> Edit Your App In Bolt.new
+                <div className="flex justify-between items-center mb-4 sm:mb-6 relative z-10">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-800 flex items-center">
+                    <div className="p-2 bg-gradient-to-r from-amber-200 to-orange-200 border-2 border-amber-400 mr-2 md:mr-3" style={{borderRadius: '12px 8px 15px 10px'}}>
+                      <Zap size={16} className="text-amber-600" />
+                    </div>
+                    Edit Your App In Bolt.new
+                    <svg className="absolute -bottom-1 left-0 w-full h-2" viewBox="0 0 200 8" fill="none">
+                      <path d="M2 6 Q100 2 198 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.4"/>
+                    </svg>
                   </h3>
-                  <button onClick={() => setShowConvertToWebAppModal(false)} className="text-slate-400 hover:text-white p-1 rounded-full hover:bg-slate-700 transition-colors">
+                  <button onClick={() => setShowConvertToWebAppModal(false)} className="text-slate-600 hover:text-slate-800 p-2 hover:bg-amber-200 border-2 border-amber-300 hover:border-orange-400 transition-colors relative z-10" style={{borderRadius: '12px 8px 15px 10px'}}>
                     <XIcon size={20} md:size={22} />
                   </button>
                 </div>
-                <div className="space-y-4 sm:space-y-6">
+                <div className="space-y-4 sm:space-y-6 relative z-10">
                   <div>
-                    <label className="block text-slate-300 text-xs sm:text-sm font-medium mb-1 sm:mb-2">
+                    <label className="block text-slate-700 text-xs sm:text-sm font-bold mb-1 sm:mb-2">
                       Step 1: Copy this tailored prompt for Bolt.new
                     </label>
                     <textarea
                       value={webAppBoltPrompt}
                       readOnly
                       rows={4}
-                      className="w-full bg-slate-700 text-slate-300 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg border border-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 placeholder-slate-500 text-sm"
+                      className="w-full bg-white border-2 border-amber-300 text-slate-700 px-3 py-2 sm:px-4 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 placeholder-slate-500 text-sm font-mono" style={{borderRadius: '15px 20px 15px 20px'}}
                     />
                     <button
                       onClick={() => {
                         navigator.clipboard.writeText(webAppBoltPrompt);
                         toast.success('Prompt copied to clipboard!', { icon: <Copy size={16} className="text-green-400" /> });
                       }}
-                      className="mt-2 w-full bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg flex items-center justify-center font-medium transition-colors shadow-sm hover:shadow-md text-sm sm:text-base"
+                      className="mt-2 w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white px-3 sm:px-4 py-2 sm:py-2.5 flex items-center justify-center font-bold transition-all duration-300 transform hover:scale-105 shadow-lg text-sm sm:text-base" style={{
+                        borderRadius: '20px 15px 25px 10px',
+                        boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.4)'
+                      }}
                     >
                       <Copy size={14} sm:size={16} className="mr-1 sm:mr-2" /> Copy Prompt
                     </button>
                   </div>
                   <div>
-                    <label className="block text-slate-300 text-xs sm:text-sm font-medium mb-1 sm:mb-2">
+                    <label className="block text-slate-700 text-xs sm:text-sm font-bold mb-1 sm:mb-2">
                       Step 2: Paste into Bolt.new
                     </label>
                     <a
                       href="https://bolt.new"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 rounded-lg bg-slate-600 hover:bg-slate-500 text-slate-100 font-medium transition-colors duration-200 group"
+                      className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-white border-2 border-amber-300 hover:border-orange-400 text-slate-700 hover:text-amber-700 font-bold transition-all duration-300 hover:bg-amber-50 transform hover:scale-105 group" style={{
+                        borderRadius: '15px 25px 15px 25px',
+                        boxShadow: '2px 2px 0px rgba(245, 158, 11, 0.3)'
+                      }}
                     >
                       <span>Open Bolt.new</span>
                       <ExternalLink size={16} className="opacity-70 group-hover:opacity-100" />
                     </a>
-                    <p className="text-xs text-slate-400 mt-2 text-center">Bolt.new will guide you through the app creation process.</p>
+                    <p className="text-xs text-slate-600 mt-2 text-center">Bolt.new will guide you through the app creation process.</p>
                   </div>
                   <div className="pt-4 sm:pt-6 flex justify-end">
-                    <button onClick={() => setShowConvertToWebAppModal(false)} className="px-4 py-2 sm:px-5 sm:py-2.5 bg-slate-700 hover:bg-slate-600/80 text-slate-200 rounded-lg transition-colors font-medium text-sm sm:text-base">
+                    <button onClick={() => setShowConvertToWebAppModal(false)} className="px-4 py-2 sm:px-5 sm:py-2.5 bg-white border-2 border-amber-300 hover:border-orange-400 text-slate-700 hover:text-amber-700 hover:bg-amber-50 transition-all duration-300 font-bold text-sm sm:text-base" style={{borderRadius: '15px 20px 15px 20px'}}>
                       Done
                     </button>
                   </div>
@@ -462,20 +502,37 @@ const Dashboard = () => {
       />
 
       {showAddWebpageModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeInScaleUp">
-          <div className="bg-slate-800 rounded-xl shadow-2xl w-full max-w-sm sm:max-w-md md:max-w-lg border border-slate-700/60 p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-700/50">
+        <div className="fixed inset-0 bg-amber-900/70 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fadeInScaleUp">
+          <div className="bg-white/95 backdrop-blur-sm shadow-2xl w-full max-w-sm sm:max-w-md md:max-w-lg border-3 border-amber-400 p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto relative" style={{
+            borderRadius: '30px 20px 35px 25px',
+            boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
+          }}>
+            {/* Paper texture and decorative elements */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+            }}></div>
+            <div className="absolute top-2 right-2 w-4 h-4 bg-yellow-400 opacity-60 rounded-full"></div>
+            <div className="absolute top-4 left-4 w-3 h-3 border-2 border-orange-400 opacity-50 transform rotate-45"></div>
+            <div className="absolute bottom-4 right-6 w-2 h-2 bg-amber-400 opacity-70 transform rotate-12" style={{borderRadius: '30% 70%'}}></div>
+
             <Fragment>
-              <div className="flex justify-between items-center mb-4 sm:mb-6">
-                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 flex items-center">
-                  <FilePlus2 size={20} md:size={24} className="mr-2 md:mr-3 text-indigo-400" /> Add New Webpage
+              <div className="flex justify-between items-center mb-4 sm:mb-6 relative z-10">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-800 flex items-center relative">
+                  <div className="p-2 bg-gradient-to-r from-amber-200 to-orange-200 border-2 border-amber-400 mr-2 md:mr-3" style={{borderRadius: '12px 8px 15px 10px'}}>
+                    <FilePlus2 size={16} className="text-amber-600" />
+                  </div>
+                  Add New Webpage
+                  <svg className="absolute -bottom-1 left-0 w-full h-2" viewBox="0 0 200 8" fill="none">
+                    <path d="M2 6 Q100 2 198 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.4"/>
+                  </svg>
                 </h3>
-                <button onClick={() => setShowAddWebpageModal(false)} className="text-slate-400 hover:text-white p-1 rounded-full hover:bg-slate-700 transition-colors">
+                <button onClick={() => setShowAddWebpageModal(false)} className="text-slate-600 hover:text-slate-800 p-2 hover:bg-amber-200 border-2 border-amber-300 hover:border-orange-400 transition-colors relative z-10" style={{borderRadius: '12px 8px 15px 10px'}}>
                   <XIcon size={20} md:size={22} />
                 </button>
               </div>
-              <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-4 sm:space-y-6 relative z-10">
                 <div>
-                  <label htmlFor="pagePrompt" className="block text-slate-300 text-xs sm:text-sm font-medium mb-1 sm:mb-2">
+                  <label htmlFor="pagePrompt" className="block text-slate-700 text-xs sm:text-sm font-bold mb-1 sm:mb-2">
                     Describe the new page (e.g., "A page about our company history and team")
                   </label>
                   <textarea
@@ -484,20 +541,23 @@ const Dashboard = () => {
                     onChange={(e) => setNewPagePrompt(e.target.value)}
                     rows={3}
                     placeholder="Enter page details or features..."
-                    className="w-full bg-slate-700 text-slate-100 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg border border-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 placeholder-slate-400 text-sm"
+                    className="w-full bg-white border-2 border-amber-300 text-slate-700 px-3 py-2 sm:px-4 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 placeholder-slate-500 text-sm" style={{borderRadius: '15px 20px 15px 20px'}}
                   />
                 </div>
                 <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row justify-end gap-3">
                   <button
                     onClick={() => setShowAddWebpageModal(false)}
-                    className="px-4 py-2 sm:px-5 sm:py-2.5 bg-slate-700 hover:bg-slate-600/80 text-slate-200 rounded-lg transition-colors font-medium text-sm sm:text-base order-2 sm:order-1"
+                    className="px-4 py-2 sm:px-5 sm:py-2.5 bg-white border-2 border-amber-300 hover:border-orange-400 text-slate-700 hover:text-amber-700 hover:bg-amber-50 transition-all duration-300 font-bold text-sm sm:text-base order-2 sm:order-1" style={{borderRadius: '15px 20px 15px 20px'}}
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleGenerateNewPage}
                     disabled={!newPagePrompt.trim()}
-                    className="px-4 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-lg transition-all font-medium text-sm sm:text-base shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed order-1 sm:order-2"
+                    className="px-4 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white transition-all font-bold text-sm sm:text-base shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed order-1 sm:order-2 transform hover:scale-105" style={{
+                      borderRadius: '20px 15px 25px 10px',
+                      boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.4)'
+                    }}
                   >
                     Generate New Page
                   </button>
@@ -508,39 +568,62 @@ const Dashboard = () => {
         </div>
       )}
 
-      <main className={`flex-1 p-4 sm:p-6 md:p-8 md:ml-72 overflow-y-auto`}>
-        <header className={`md:hidden flex items-center justify-between mb-6 ${mainContentAnimation}`} style={{ animationDelay: '0.1s' }}>
+      <main className={`flex-1 p-4 sm:p-6 md:p-8 md:ml-72 overflow-y-auto relative z-10`}>
+        <header className={`md:hidden flex items-center justify-between mb-6 ${mainContentAnimation} bg-white/80 backdrop-blur-sm border-2 border-amber-300 p-4`} style={{ 
+          animationDelay: '0.1s',
+          borderRadius: '20px 15px 25px 10px',
+          boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
+        }}>
           <button
             onClick={() => setIsMobileSidebarOpen(true)}
-            className="text-slate-300 hover:text-white p-2 -ml-2"
+            className="text-slate-700 hover:text-amber-600 p-2 -ml-2 border-2 border-amber-300 hover:border-orange-400 hover:bg-amber-50 transition-all duration-300" style={{borderRadius: '12px 8px 15px 10px'}}
             aria-label="Open menu"
           >
             <Menu size={28} />
           </button>
-          <Link to="/" className="flex items-center gap-1.5 text-indigo-400 font-bold text-lg">
+          <Link to="/" className="flex items-center gap-1.5 text-amber-600 font-bold text-lg hover:text-orange-600 transition-colors">
             <img src={logo} className="h-7 w-7" alt="Redesignr.ai Logo" />
-            <span>redesignr<span className="text-purple-400">.ai</span></span>
+            <span>redesignr<span className="text-orange-500">.ai</span></span>
           </Link>
           <div className="w-8"></div>
         </header>
 
-        {activeTab === 'websites' && (<header className={`hidden md:block mb-8 sm:mb-10 ${mainContentAnimation}`} style={{ animationDelay: '0.3s' }}>
-          <div className="flex items-center justify-between">
+        {activeTab === 'websites' && (<header className={`hidden md:block mb-8 sm:mb-10 ${mainContentAnimation} bg-white/80 backdrop-blur-sm border-3 border-amber-300 p-6`} style={{ 
+          animationDelay: '0.3s',
+          borderRadius: '30px 20px 35px 25px',
+          boxShadow: '6px 6px 0px rgba(245, 158, 11, 0.3)'
+        }}>
+          <div className="flex items-center justify-between relative">
+            {/* Decorative elements */}
+            <div className="absolute top-2 right-2 w-4 h-4 bg-yellow-400 opacity-50 rounded-full"></div>
+            <div className="absolute bottom-2 left-2 w-3 h-3 border-2 border-orange-400 opacity-40 transform rotate-45"></div>
+            
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-white">Your Websites</h1>
-              <p className="text-slate-400 mt-1 text-sm sm:text-base">Manage your websites</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 relative">
+                Your Websites
+                <svg className="absolute -bottom-1 left-0 w-32 h-2" viewBox="0 0 128 8" fill="none">
+                  <path d="M2 6 Q64 2 126 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
+                </svg>
+              </h1>
+              <p className="text-slate-600 mt-2 text-sm sm:text-base">Manage your websites with AI-powered tools ✨</p>
             </div>
             <div className='flex gap-2'>
               <button
                 onClick={() => setIsNewWebsiteModalOpen(true)}
-                className="hidden md:flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105"
+                className="hidden md:flex items-center gap-2 bg-gradient-to-r from-amber-400 to-orange-500 text-white px-4 py-2 font-bold hover:from-amber-500 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg" style={{
+                  borderRadius: '20px 15px 25px 10px',
+                  boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.4)'
+                }}
               >
                 <Plus className="h-4 w-4" />
                 Create
               </button>
               <a
                 href='mailto:shiva@redesignr.ai'
-                className="hidden md:flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105"
+                className="hidden md:flex items-center gap-2 bg-white border-2 border-amber-300 hover:border-orange-400 text-slate-700 hover:text-amber-700 px-4 py-2 font-bold hover:bg-amber-50 transition-all duration-300 transform hover:scale-105" style={{
+                  borderRadius: '15px 25px 15px 25px',
+                  boxShadow: '2px 2px 0px rgba(245, 158, 11, 0.3)'
+                }}
               >
                 <Contact2Icon className="h-4 w-4" />
                 Contact Support
@@ -560,12 +643,16 @@ const Dashboard = () => {
             <div className="space-y-6">
               {/* Pagination */}
               {websites && websites.length > itemsPerPage && (
-                <div className={`flex items-center justify-between ${mainContentAnimation}`} style={{ animationDelay: '0.6s' }}>
+                <div className={`flex items-center justify-between ${mainContentAnimation} bg-white/80 backdrop-blur-sm border-2 border-amber-300 p-4`} style={{ 
+                  animationDelay: '0.6s',
+                  borderRadius: '20px 15px 25px 10px',
+                  boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
+                }}>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={goToPreviousPage}
                       disabled={currentPage === 1}
-                      className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-300 bg-slate-800 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                      className="flex items-center gap-1 px-3 py-2 text-sm font-bold text-slate-700 bg-white border-2 border-amber-300 hover:border-orange-400 hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200" style={{borderRadius: '15px 10px 20px 15px'}}
                     >
                       <ChevronLeft className="h-4 w-4" />
                       Previous
@@ -579,10 +666,11 @@ const Dashboard = () => {
                           ) : (
                             <button
                               onClick={() => goToPage(page)}
-                              className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${currentPage === page
-                                ? 'bg-indigo-500 text-white'
-                                : 'text-slate-300 bg-slate-800 hover:bg-slate-700'
+                              className={`px-3 py-2 text-sm font-bold transition-all duration-200 ${currentPage === page
+                                ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-lg'
+                                : 'text-slate-700 bg-white border-2 border-amber-300 hover:border-orange-400 hover:bg-amber-50'
                                 }`}
+                              style={{borderRadius: '12px 8px 15px 10px'}}
                             >
                               {page}
                             </button>
@@ -593,13 +681,13 @@ const Dashboard = () => {
                     <button
                       onClick={goToNextPage}
                       disabled={currentPage === totalPages}
-                      className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-300 bg-slate-800 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                      className="flex items-center gap-1 px-3 py-2 text-sm font-bold text-slate-700 bg-white border-2 border-amber-300 hover:border-orange-400 hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200" style={{borderRadius: '15px 10px 20px 15px'}}
                     >
                       Next
                       <ChevronRight className="h-4 w-4" />
                     </button>
                   </div>
-                  <div className="text-sm text-slate-400">
+                  <div className="text-sm text-slate-600 font-medium">
                     Showing {startIndex + 1} to {Math.min(endIndex, websites.length)} of {websites.length} websites
                   </div>
                 </div>
@@ -716,11 +804,10 @@ const Dashboard = () => {
 
 
       <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .sm .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: ${'#1e293b'}; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: ${'#4f46e5'}; border-radius: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: ${'#6366f1'}; }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: ${'#fef3c7'}; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: ${'#f59e0b'}; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: ${'#d97706'}; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .animate-fadeIn { animation: fadeIn 0.5s ease-in-out forwards; }
@@ -730,6 +817,9 @@ const Dashboard = () => {
         
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fadeInUp { animation: fadeInUp 0.5s ease-out forwards; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-10px) rotate(5deg); } }
+        .animate-float { animation: float 6s ease-in-out infinite; }
 
         .animate-enter { animation: fadeInUp 0.3s cubic-bezier(0.21, 1.02, 0.73, 1) forwards; }
         .animate-leave { animation: fadeOutDown 0.4s cubic-bezier(0.06, 0.71, 0.55, 1) forwards; }

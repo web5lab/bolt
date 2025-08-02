@@ -40,14 +40,32 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-slate-800 rounded-xl max-w-lg w-full border border-slate-700 shadow-2xl animate-fadeInScaleUp">
-        <div className="p-6">
+    <div className="fixed inset-0 bg-amber-900/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
+      <div className="bg-white/95 backdrop-blur-sm max-w-lg w-full border-3 border-amber-400 shadow-2xl animate-fadeInScaleUp relative" style={{
+        borderRadius: '30px 20px 35px 25px',
+        boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
+      }}>
+        {/* Paper texture overlay */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        
+        {/* Decorative elements */}
+        <div className="absolute top-2 right-2 w-4 h-4 bg-yellow-400 opacity-60 rounded-full"></div>
+        <div className="absolute top-4 left-4 w-3 h-3 border-2 border-orange-400 opacity-50 transform rotate-45"></div>
+        <div className="absolute bottom-4 right-6 w-2 h-2 bg-amber-400 opacity-70 transform rotate-12" style={{borderRadius: '30% 70%'}}></div>
+
+        <div className="p-6 relative z-10">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl font-bold text-white">Share Design with Community</h3>
+            <h3 className="text-xl font-bold text-slate-800 relative">
+              Share Design with Community
+              <svg className="absolute -bottom-1 left-0 w-full h-2" viewBox="0 0 200 8" fill="none">
+                <path d="M2 6 Q100 2 198 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.4"/>
+              </svg>
+            </h3>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-white p-1 rounded-full hover:bg-slate-700 transition-colors"
+              className="text-slate-600 hover:text-slate-800 p-2 hover:bg-amber-200 border-2 border-amber-300 hover:border-orange-400 transition-colors" style={{borderRadius: '12px 8px 15px 10px'}}
             >
               <X className="h-5 w-5" />
             </button>
@@ -55,7 +73,7 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
 
           <div >
             <div className="mb-6">
-              <label className="block text-white font-medium mb-2">
+              <label className="block text-slate-800 font-bold mb-2">
                 Select Design
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -63,10 +81,11 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
                   <div
                     key={design._id}
                     onClick={() => setSelectedDesign(design)}
-                    className={`relative rounded-lg overflow-hidden cursor-pointer border-2 transition-all ${selectedDesign?.id === design.id
-                      ? 'border-indigo-500 shadow-lg shadow-indigo-500/20'
-                      : 'border-slate-700 hover:border-slate-600'
+                    className={`relative overflow-hidden cursor-pointer border-2 transition-all ${selectedDesign?.id === design.id
+                      ? 'border-amber-500 shadow-lg shadow-amber-500/20'
+                      : 'border-amber-300 hover:border-orange-400'
                       }`}
+                    style={{borderRadius: '15px 10px 20px 15px'}}
                   >
                     <div className="aspect-video">
                       <img
@@ -77,7 +96,9 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
                     </div>
                     {selectedDesign?._id === design._id && (
                       <div className="absolute top-2 right-2 bg-indigo-500 rounded-full p-1">
-                        <Check className="h-3 w-3 text-white" />
+                        <div className="absolute top-2 right-2 bg-gradient-to-r from-amber-400 to-orange-500 p-1" style={{borderRadius: '8px 12px 8px 12px'}}>
+                          <Check className="h-3 w-3 text-white" />
+                        </div>
                       </div>
                     )}
                   </div>
@@ -89,7 +110,7 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
                 <button
                   onClick={() => goToPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="px-3 py-1 rounded-md bg-slate-700 text-white hover:bg-slate-600 disabled:opacity-50"
+                  className="px-3 py-1 bg-white border-2 border-amber-300 text-slate-700 hover:border-orange-400 hover:bg-amber-50 disabled:opacity-50 font-bold" style={{borderRadius: '12px 8px 15px 10px'}}
                 >
                   Prev
                 </button>
@@ -97,17 +118,18 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
                 {/* First page */}
                 <button
                   onClick={() => goToPage(1)}
-                  className={`px-3 py-1 rounded-md ${currentPage === 1
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  className={`px-3 py-1 font-bold ${currentPage === 1
+                    ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-lg'
+                    : 'bg-white border-2 border-amber-300 text-slate-700 hover:border-orange-400 hover:bg-amber-50'
                     }`}
+                  style={{borderRadius: '12px 8px 15px 10px'}}
                 >
                   1
                 </button>
 
                 {/* Second page if needed */}
                 {totalPages > 1 && currentPage > 3 && (
-                  <span className="px-2 text-slate-400">...</span>
+                  <span className="px-2 text-slate-600">...</span>
                 )}
 
                 {/* Nearby pages */}
@@ -122,10 +144,11 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
                     <button
                       key={p}
                       onClick={() => goToPage(p)}
-                      className={`px-3 py-1 rounded-md ${currentPage === p
-                        ? 'bg-indigo-600 text-white'
-                        : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                      className={`px-3 py-1 font-bold ${currentPage === p
+                        ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-lg'
+                        : 'bg-white border-2 border-amber-300 text-slate-700 hover:border-orange-400 hover:bg-amber-50'
                         }`}
+                      style={{borderRadius: '12px 8px 15px 10px'}}
                     >
                       {p}
                     </button>
@@ -133,15 +156,16 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
 
                 {/* Last page */}
                 {totalPages > 2 && currentPage < totalPages - 2 && (
-                  <span className="px-2 text-slate-400">...</span>
+                  <span className="px-2 text-slate-600">...</span>
                 )}
                 {totalPages > 1 && (
                   <button
                     onClick={() => goToPage(totalPages)}
-                    className={`px-3 py-1 rounded-md ${currentPage === totalPages
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                    className={`px-3 py-1 font-bold ${currentPage === totalPages
+                      ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-lg'
+                      : 'bg-white border-2 border-amber-300 text-slate-700 hover:border-orange-400 hover:bg-amber-50'
                       }`}
+                    style={{borderRadius: '12px 8px 15px 10px'}}
                   >
                     {totalPages}
                   </button>
@@ -150,7 +174,7 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
                 <button
                   onClick={() => goToPage(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className="px-3 py-1 rounded-md bg-slate-700 text-white hover:bg-slate-600 disabled:opacity-50"
+                  className="px-3 py-1 bg-white border-2 border-amber-300 text-slate-700 hover:border-orange-400 hover:bg-amber-50 disabled:opacity-50 font-bold" style={{borderRadius: '12px 8px 15px 10px'}}
                 >
                   Next
                 </button>
@@ -159,8 +183,8 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
             </div>
 
             <div className="mb-6">
-              <label htmlFor="design-description" className="block text-white font-medium mb-2">
-                text Message (Optional)
+              <label htmlFor="design-description" className="block text-slate-800 font-bold mb-2">
+                Text Message (Optional)
               </label>
               <textarea
                 id="design-description"
@@ -168,7 +192,7 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Tell the community about your design..."
                 rows={3}
-                className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="w-full bg-white border-2 border-amber-300 px-4 py-2 text-slate-700 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" style={{borderRadius: '15px 20px 15px 20px'}}
               />
             </div>
 
@@ -176,7 +200,7 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-white border-2 border-amber-300 hover:border-orange-400 text-slate-700 hover:text-amber-700 hover:bg-amber-50 transition-all duration-300 font-bold" style={{borderRadius: '15px 20px 15px 20px'}}
               >
                 Cancel
               </button>
@@ -184,7 +208,10 @@ const ShareDesignModal = ({ isOpen, onClose, onShare }) => {
                 onClick={() => {
                   handleSubmit()
                 }}
-                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white transition-all duration-300 font-bold transform hover:scale-105 shadow-lg" style={{
+                  borderRadius: '20px 15px 25px 10px',
+                  boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.4)'
+                }}
               >
                 Share with Community
               </button>

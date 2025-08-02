@@ -69,10 +69,39 @@ const CommunityChat = ({ mainContentAnimation, setShowBilling }) => {
   };
 
   return (
-    <div className={`${mainContentAnimation}`} style={{ animationDelay: '0.5s' }}>
+    <div className={`${mainContentAnimation} relative`} style={{ animationDelay: '0.5s' }}>
+      {/* Paper background with texture */}
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 opacity-50" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+      }}></div>
+      
+      {/* Decorative elements */}
+      <div className="absolute top-10 right-10 w-12 h-12 border-2 border-amber-400 opacity-30 transform rotate-12" style={{
+        borderRadius: '60% 40% 70% 30%',
+        borderStyle: 'dashed'
+      }}></div>
+      <div className="absolute bottom-20 left-10 w-8 h-8 border-2 border-orange-400 opacity-25 transform -rotate-12" style={{
+        borderRadius: '40% 60% 30% 70%',
+        borderStyle: 'dotted'
+      }}></div>
 
       {/* Chat Messages */}
-      <div className="bg-slate-800/30 border min-h-[90vh] border-slate-700/50 rounded-lg mb-4">
+      <div className="bg-white/90 backdrop-blur-sm border-3 border-amber-300 min-h-[90vh] mb-4 relative z-10 shadow-lg" style={{
+        borderRadius: '30px 20px 35px 25px',
+        boxShadow: '6px 6px 0px rgba(245, 158, 11, 0.3)',
+        borderStyle: 'dashed'
+      }}>
+        {/* Chat header */}
+        <div className="p-4 border-b-2 border-amber-200 bg-gradient-to-r from-amber-100 to-orange-100" style={{
+          borderRadius: '27px 17px 0 0',
+          borderBottomStyle: 'dashed'
+        }}>
+          <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+            💬 Community Chat
+            <span className="text-sm font-normal text-slate-600">- Connect & Share! ✨</span>
+          </h2>
+        </div>
+        
         <MessageList
           messages={chatHistory}
           isLoading={isLoading}
@@ -89,8 +118,11 @@ const CommunityChat = ({ mainContentAnimation, setShowBilling }) => {
         />
       </div>
 
-      <div className="text-xs text-slate-500 text-center">
-        Messages are public and visible to all redesignr members.
+      <div className="text-xs text-slate-600 text-center bg-white/80 backdrop-blur-sm border-2 border-amber-200 p-3 relative z-10" style={{
+        borderRadius: '20px 15px 25px 10px',
+        borderStyle: 'dashed'
+      }}>
+        📢 Messages are public and visible to all redesignr members. Be kind and creative! 🎨
       </div>
 
 

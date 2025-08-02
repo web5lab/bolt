@@ -109,10 +109,18 @@ const DashboardTour = ({ isOpen, onClose }) => {
   const currentStepData = steps[currentStep - 1];
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
-      <div className="bg-slate-800 rounded-xl max-w-3xl w-full border border-slate-700 shadow-2xl animate-fadeInScaleUp overflow-hidden">
+    <div className="fixed inset-0 bg-amber-900/70 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
+      <div className="bg-white/95 backdrop-blur-sm max-w-3xl w-full border-3 border-amber-400 shadow-2xl animate-fadeInScaleUp overflow-hidden relative" style={{
+        borderRadius: '30px 20px 35px 25px',
+        boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
+      }}>
+        {/* Paper texture overlay */}
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        
         {/* Progress bar */}
-        <div className="h-1.5 bg-slate-700 overflow-hidden">
+        <div className="h-1.5 bg-amber-200 overflow-hidden">
           <div 
             className={`h-full bg-gradient-to-r ${currentStepData.gradient} transition-all duration-300`}
             style={{ width: `${(currentStep / totalSteps) * 100}%` }}
@@ -127,32 +135,34 @@ const DashboardTour = ({ isOpen, onClose }) => {
               alt={currentStepData.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-900/80 to-transparent"></div>
             
             {/* Step number */}
-            <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium text-white border border-white/20">
-              Step {currentStep} of {totalSteps}
+            <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-sm font-bold text-amber-700 border-2 border-amber-400" style={{borderRadius: '15px 10px 20px 15px'}}>
+              ✨ Step {currentStep} of {totalSteps}
             </div>
             
             {/* Close button */}
             <button 
               onClick={handleClose}
-              className="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors"
+              className="absolute top-4 right-4 text-white/90 hover:text-white p-1 hover:bg-white/20 transition-colors border-2 border-white/30"
+              style={{borderRadius: '12px 8px 15px 10px'}}
             >
               <X className="h-5 w-5" />
             </button>
           </div>
           
           {/* Content Section */}
-          <div className="p-6 md:p-8">
+          <div className="p-6 md:p-8 relative z-10">
             {/* Mobile-only header */}
             <div className="flex justify-between items-center mb-4 md:hidden">
-              <div className="bg-white/10 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium text-white border border-white/20">
-                Step {currentStep} of {totalSteps}
+              <div className="bg-amber-100 backdrop-blur-sm px-3 py-1 text-sm font-bold text-amber-700 border-2 border-amber-400" style={{borderRadius: '15px 10px 20px 15px'}}>
+                ✨ Step {currentStep} of {totalSteps}
               </div>
               <button 
                 onClick={handleClose}
-                className="text-slate-400 hover:text-white p-1 rounded-full hover:bg-slate-700/50 transition-colors"
+                className="text-slate-600 hover:text-slate-800 p-1 hover:bg-amber-200 transition-colors border-2 border-amber-300"
+                style={{borderRadius: '12px 8px 15px 10px'}}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -161,14 +171,17 @@ const DashboardTour = ({ isOpen, onClose }) => {
             {/* Step content */}
             <div className="text-center mb-8">
               <div className="flex justify-center mb-4">
-                <div className={`p-3 bg-gradient-to-r ${currentStepData.gradient} rounded-full`}>
+                <div className={`p-3 bg-gradient-to-r ${currentStepData.gradient} border-2 border-amber-400`} style={{borderRadius: '50% 40% 60% 50%'}}>
                   {currentStepData.icon}
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">
+              <h3 className="text-2xl font-bold text-slate-800 mb-3 relative">
                 {currentStepData.title}
+                <svg className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-48 h-2" viewBox="0 0 192 8" fill="none">
+                  <path d="M2 6 Q96 2 190 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
+                </svg>
               </h3>
-              <p className="text-slate-300">
+              <p className="text-slate-700 leading-relaxed">
                 {currentStepData.description}
               </p>
             </div>
@@ -177,25 +190,25 @@ const DashboardTour = ({ isOpen, onClose }) => {
             <div className="mb-8">
               {currentStep === 1 && (
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3 bg-slate-700/30 p-3 rounded-lg">
-                    <Palette className="h-5 w-5 text-indigo-400 flex-shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 bg-amber-100 p-3 border-2 border-amber-300" style={{borderRadius: '15px 10px 20px 15px'}}>
+                    <Palette className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="font-medium text-white text-sm">AI-Powered Design</h4>
-                      <p className="text-slate-400 text-xs">Create stunning websites with our advanced AI technology</p>
+                      <h4 className="font-bold text-slate-800 text-sm">🎨 AI-Powered Design</h4>
+                      <p className="text-slate-700 text-xs">Create stunning websites with our advanced AI technology</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3 bg-slate-700/30 p-3 rounded-lg">
-                    <Layers className="h-5 w-5 text-purple-400 flex-shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 bg-orange-100 p-3 border-2 border-orange-300" style={{borderRadius: '20px 15px 15px 20px'}}>
+                    <Layers className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="font-medium text-white text-sm">1600+ Templates</h4>
-                      <p className="text-slate-400 text-xs">Choose from our vast library of professional templates</p>
+                      <h4 className="font-bold text-slate-800 text-sm">🚀 1600+ Templates</h4>
+                      <p className="text-slate-700 text-xs">Choose from our vast library of professional templates</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3 bg-slate-700/30 p-3 rounded-lg">
-                    <Code className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 bg-yellow-100 p-3 border-2 border-yellow-300" style={{borderRadius: '10px 20px 15px 25px'}}>
+                    <Code className="h-5 w-5 text-yellow-600 flex-shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="font-medium text-white text-sm">Clean Code Export</h4>
-                      <p className="text-slate-400 text-xs">Get production-ready HTML/CSS code for your projects</p>
+                      <h4 className="font-bold text-slate-800 text-sm">💻 Clean Code Export</h4>
+                      <p className="text-slate-700 text-xs">Get production-ready HTML/CSS code for your projects</p>
                     </div>
                   </div>
                 </div>
@@ -386,14 +399,14 @@ const DashboardTour = ({ isOpen, onClose }) => {
             
             {/* Show again checkbox */}
             <div className="flex items-center justify-center mb-6">
-              <label className="flex items-center text-sm text-slate-400 cursor-pointer">
+              <label className="flex items-center text-sm text-slate-700 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={showAgain}
                   onChange={() => setShowAgain(!showAgain)}
-                  className="mr-2 h-4 w-4 rounded border-slate-500 text-indigo-500 focus:ring-indigo-500 focus:ring-offset-slate-800"
+                  className="mr-2 h-4 w-4 rounded border-amber-400 text-amber-500 focus:ring-amber-500 focus:ring-offset-white"
                 />
-                Show this tour next time
+                ✨ Show this tour next time
               </label>
             </div>
             
@@ -404,30 +417,35 @@ const DashboardTour = ({ isOpen, onClose }) => {
                 disabled={currentStep === 1}
                 className={`flex items-center gap-1 px-4 py-2 rounded-lg transition-colors ${
                   currentStep === 1
-                    ? 'text-slate-500 cursor-not-allowed'
-                    : 'text-slate-300 hover:bg-slate-700'
+                    ? 'text-slate-400 cursor-not-allowed'
+                    : 'text-slate-700 hover:bg-amber-100 border-2 border-amber-300'
                 }`}
+                style={{borderRadius: '15px 10px 20px 15px'}}
               >
                 <ChevronLeft className="h-4 w-4" />
-                Previous
+                ⬅️ Previous
               </button>
               
               <button
                 onClick={handleNext}
-                className={`flex items-center gap-1 px-4 py-2 rounded-lg transition-all ${
+                className={`flex items-center gap-1 px-4 py-2 transition-all transform hover:scale-105 shadow-lg ${
                   currentStep === totalSteps
-                    ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600'
-                    : 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600'
+                    ? 'bg-gradient-to-r from-green-400 to-emerald-500 text-white hover:from-green-500 hover:to-emerald-600'
+                    : 'bg-gradient-to-r from-amber-400 to-orange-500 text-white hover:from-amber-500 hover:to-orange-600'
                 }`}
+                style={{
+                  borderRadius: '20px 15px 25px 10px',
+                  boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.4)'
+                }}
               >
                 {currentStep === totalSteps ? (
                   <>
                     <Check className="h-4 w-4" />
-                    Get Started
+                    ✅ Get Started
                   </>
                 ) : (
                   <>
-                    Next
+                    Next ➡️
                     <ChevronRight className="h-4 w-4" />
                   </>
                 )}

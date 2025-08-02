@@ -17,26 +17,31 @@ const SharePopup = ({ isOpen, onClose, website }) => {
   };
 
   return (
-    <StyledModal isOpen={isOpen} onClose={onClose} title={`Share "${website.source || website.url}"`} maxWidth="max-w-lg">
-      <p className="text-slate-300 text-sm mb-4">Share this redesigned masterpiece:</p>
+    <StyledModal isOpen={isOpen} onClose={onClose} title={`🎨 Share "${website.source || website.url}"`} maxWidth="max-w-lg">
+      <p className="text-slate-700 text-sm mb-4">✨ Share this redesigned masterpiece:</p>
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6">
         <input
           type="text"
           value={shareUrl}
           readOnly
-          className="w-full bg-slate-900/70 border border-slate-700 rounded-lg px-4 py-3 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 caret-indigo-500"
+          className="w-full bg-white/90 border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 caret-amber-500"
+          style={{borderRadius: '20px 10px 25px 15px'}}
         />
         <button
           onClick={handleCopy}
-          className={`p-3 rounded-lg transition-all duration-200 ${copied ? 'bg-green-500 text-white' : 'bg-indigo-600 text-white hover:bg-indigo-500'} whitespace-nowrap sm:w-auto w-full`}
+          className={`p-3 transition-all duration-200 transform hover:scale-105 ${copied ? 'bg-green-400 text-white' : 'bg-gradient-to-r from-amber-400 to-orange-500 text-white hover:from-amber-500 hover:to-orange-600'} whitespace-nowrap sm:w-auto w-full shadow-lg`}
+          style={{
+            borderRadius: '15px 20px 10px 25px',
+            boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.4)'
+          }}
           title={copied ? "Copied!" : "Copy link"}
         >
-          <span className="sm:hidden">{copied ? "Copied!" : "Copy Link"}</span>
+          <span className="sm:hidden">{copied ? "✅ Copied!" : "📋 Copy Link"}</span>
           <Copy className="h-5 w-5 sm:inline hidden" />
         </button>
       </div>
 
-      <p className="text-slate-300 text-sm mb-3">Or share on social media:</p>
+      <p className="text-slate-700 text-sm mb-3">🌐 Or share on social media:</p>
       <div className="flex items-center gap-3 flex-wrap">
         {[
           { Icon: Twitter, href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=Check out this website redesign I made with redesignr.ai!`, label: "Twitter" },
@@ -48,7 +53,8 @@ const SharePopup = ({ isOpen, onClose, website }) => {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-slate-700 hover:bg-slate-600 p-3 rounded-lg text-slate-300 hover:text-white transition-colors"
+            className="bg-white border-2 border-amber-300 hover:border-orange-400 p-3 text-slate-700 hover:text-amber-700 transition-colors hover:bg-amber-50 transform hover:scale-105"
+            style={{borderRadius: '12px 8px 15px 10px'}}
             aria-label={`Share on ${label}`}
           >
             <Icon className="h-5 w-5" />

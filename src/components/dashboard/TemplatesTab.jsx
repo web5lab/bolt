@@ -173,24 +173,35 @@ const TemplatesTab = ({ user, setShowBilling, mainContentAnimation ,onRemixTempl
         onRemix={onRemixTemplate}
       />
       {selectedTemplate && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-slate-800 border border-slate-700 rounded-xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
+        <div className="fixed inset-0 bg-amber-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white/95 backdrop-blur-sm border-3 border-amber-400 max-w-6xl w-full max-h-[90vh] overflow-hidden shadow-2xl" style={{
+            borderRadius: '30px 20px 35px 25px',
+            boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
+          }}>
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700">
+            <div className="flex items-center justify-between px-6 py-4 border-b-2 border-amber-300 bg-gradient-to-r from-amber-100 to-orange-100" style={{
+              borderBottomStyle: 'dashed',
+              borderRadius: '27px 17px 0 0'
+            }}>
               <div className="flex-1 min-w-0">
                 <button
                   onClick={() => remixFunction(selectedTemplate)}
-                  className="w-full max-w-80  flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 px-6 rounded-lg font-medium hover:from-indigo-600 hover:to-purple-600 transition-all duration-200"
+                  className="w-full max-w-80 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-orange-500 text-white py-3 px-6 font-bold hover:from-amber-500 hover:to-orange-600 transition-all duration-200 transform hover:scale-105 shadow-lg"
+                  style={{
+                    borderRadius: '25px 15px 30px 20px',
+                    boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.4)'
+                  }}
                 >
                   <Zap className="h-5 w-5" />
-                  Use This Template
+                  ✨ Use This Template
                 </button>
               </div>
               <button
                 onClick={() => setSelectedTemplate(null)}
-                className="p-2 hover:bg-slate-700 rounded-lg transition-colors flex-shrink-0 ml-4"
+                className="p-2 hover:bg-amber-200 transition-colors flex-shrink-0 ml-4 border-2 border-amber-300 hover:border-orange-400"
+                style={{borderRadius: '12px 8px 15px 10px'}}
               >
-                <X className="h-6 w-6 text-slate-400" />
+                <X className="h-6 w-6 text-slate-600" />
               </button>
             </div>
             {/* Modal Content */}
@@ -198,7 +209,9 @@ const TemplatesTab = ({ user, setShowBilling, mainContentAnimation ,onRemixTempl
               <div className="grid grid-cols-1  gap-8">
                 {/* Preview Image */}
                 <div className="lg:col-">
-                  <div className="aspect-[16/10] rounded-lg overflow-hidden bg-slate-700/50 border border-slate-600">
+                  <div className="aspect-[16/10] overflow-hidden bg-white border-2 border-amber-300 m-4" style={{
+                    borderRadius: '20px 15px 25px 10px'
+                  }}>
                     <iframe
                       src={selectedTemplate?.previewUrl}
                       className="w-full h-full"
@@ -210,28 +223,52 @@ const TemplatesTab = ({ user, setShowBilling, mainContentAnimation ,onRemixTempl
           </div>
         </div>
       )}
-      <div className={`${mainContentAnimation}`} style={{ animationDelay: '0.5s' }}>
+      <div className={`${mainContentAnimation} relative`} style={{ animationDelay: '0.5s' }}>
+        {/* Paper background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 opacity-50" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        
+        {/* Decorative elements */}
+        <div className="absolute top-10 right-10 w-12 h-12 border-2 border-amber-400 opacity-30 transform rotate-12" style={{
+          borderRadius: '60% 40% 70% 30%',
+          borderStyle: 'dashed'
+        }}></div>
+        
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-white">Template Categories</h2>
-            <div className="text-sm text-slate-400">
-              Your plan: <span className="text-indigo-400 font-medium">{user?.currentPlan || 'Free'}</span>
+            <h2 className="text-xl font-semibold text-slate-800 relative z-10">
+              🎨 Template Categories
+              <svg className="absolute -bottom-1 left-0 w-32 h-2" viewBox="0 0 128 8" fill="none">
+                <path d="M2 6 Q64 2 126 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
+              </svg>
+            </h2>
+            <div className="text-sm text-slate-700 bg-white/80 backdrop-blur-sm border-2 border-amber-300 px-3 py-1 relative z-10" style={{
+              borderRadius: '15px 10px 20px 15px'
+            }}>
+              Your plan: <span className="text-amber-600 font-bold">💎 {user?.currentPlan || 'Free'}</span>
             </div>
           </div>
-          <p className="text-slate-400 text-sm">
-            Browse our collection of professionally designed templates. Click "Remix" to customize any template with your own content and branding.
+          <p className="text-slate-700 text-sm leading-relaxed relative z-10">
+            🚀 Browse our collection of professionally designed templates. Click "Remix" to customize any template with your own content and branding! ✨
           </p>
         </div>
 
         {/* Top Pagination Controls */}
-        <PaginationControls className="mb-6" />
+        <div className="relative z-10">
+          <PaginationControls className="mb-6" />
+        </div>
 
         <div className="flex-1 overflow-y-auto">
-          <div className="templates-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div className="templates-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 relative z-10">
             {templates.map((template) => (
               <div
                 key={template.id}
-                className="group bg-slate-700/50 rounded-lg overflow-hidden border border-slate-600/50 hover:border-indigo-500/50 transition-all"
+                className="group bg-white/90 backdrop-blur-sm overflow-hidden border-2 border-amber-300 hover:border-orange-400 transition-all transform hover:scale-105 shadow-lg"
+                style={{
+                  borderRadius: '20px 15px 25px 10px',
+                  boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.3)'
+                }}
               >
                 <div className="aspect-[2/1] relative overflow-hidden">
                   <img
@@ -240,36 +277,42 @@ const TemplatesTab = ({ user, setShowBilling, mainContentAnimation ,onRemixTempl
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   {template.isPremium && (
-                    <div className="absolute top-2 right-2 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full">
-                      PRO
+                    <div className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1" style={{borderRadius: '12px 8px 15px 10px'}}>
+                      ⭐ PRO
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-amber-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <button
                       onClick={() => handlePreviewTemplate(template)}
-                      className="bg-white/20 backdrop-blur-sm rounded-lg p-2 hover:bg-white/30 transition-colors"
+                      className="bg-white/90 backdrop-blur-sm p-2 hover:bg-white transition-colors border-2 border-amber-400"
+                      style={{borderRadius: '12px 8px 15px 10px'}}
                       title="Preview template"
                     >
-                      <ExternalLink className="h-5 w-5 text-white" />
+                      <ExternalLink className="h-5 w-5 text-amber-600" />
                     </button>
                   </div>
                 </div>
                 <div className="p-4">
-                  <h4 className="font-medium text-white mb-2 truncate">{template.name}</h4>
-                  <p className="text-xs text-slate-400 mb-3 line-clamp-2">{template.description}</p>
+                  <h4 className="font-bold text-slate-800 mb-2 truncate">{template.name}</h4>
+                  <p className="text-xs text-slate-600 mb-3 line-clamp-2">{template.description}</p>
                   <div className="flex gap-2">
                     <button
                       onClick={() => handlePreviewTemplate(template)}
-                      className="flex-1 bg-slate-600 hover:bg-slate-500 text-white py-2 px-3 rounded-lg text-sm font-medium transition-colors"
+                      className="flex-1 bg-white border-2 border-amber-300 hover:border-orange-400 text-slate-700 hover:text-amber-700 py-2 px-3 text-sm font-medium transition-colors hover:bg-amber-50 transform hover:scale-105"
+                      style={{borderRadius: '15px 10px 20px 15px'}}
                     >
-                      Preview
+                      👁️ Preview
                     </button>
                     <button
                       onClick={() => remixFunction(template)}
-                      className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white py-2 px-3 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1"
+                      className="flex-1 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white py-2 px-3 text-sm font-bold transition-colors flex items-center justify-center gap-1 transform hover:scale-105 shadow-md"
+                      style={{
+                        borderRadius: '20px 15px 25px 10px',
+                        boxShadow: '2px 2px 0px rgba(245, 158, 11, 0.3)'
+                      }}
                     >
                       <Wand2 className="h-3 w-3" />
-                      Remix
+                      ✨ Remix
                     </button>
                   </div>
                 </div>
@@ -281,16 +324,24 @@ const TemplatesTab = ({ user, setShowBilling, mainContentAnimation ,onRemixTempl
 
         {/* Plan upgrade prompt for free users */}
         {(!user?.currentPlan || user.currentPlan.toLowerCase() === 'free') && (
-          <div className="mt-8 p-6 bg-gradient-to-r from-indigo-900/50 to-purple-900/50 border border-indigo-700/30 rounded-xl">
-            <h3 className="text-lg font-semibold text-white mb-2">Unlock Premium Templates</h3>
-            <p className="text-indigo-200 mb-4">
-              Upgrade your plan to access our full collection of professionally designed templates and remix them with AI.
+          <div className="mt-8 p-6 bg-gradient-to-r from-amber-100 to-orange-100 border-3 border-amber-400 relative z-10 shadow-lg" style={{
+            borderRadius: '30px 20px 35px 25px',
+            borderStyle: 'dashed',
+            boxShadow: '6px 6px 0px rgba(245, 158, 11, 0.3)'
+          }}>
+            <h3 className="text-lg font-bold text-slate-800 mb-2">🔓 Unlock Premium Templates</h3>
+            <p className="text-slate-700 mb-4 leading-relaxed">
+              ⚡ Upgrade your plan to access our full collection of professionally designed templates and remix them with AI magic! ✨
             </p>
             <button
               onClick={() => setShowBilling(true)}
-              className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-2 rounded-lg font-medium hover:from-indigo-600 hover:to-purple-600 transition-all"
+              className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-6 py-2 font-bold hover:from-amber-500 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg"
+              style={{
+                borderRadius: '20px 15px 25px 10px',
+                boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.4)'
+              }}
             >
-              View Plans
+              🚀 View Plans
             </button>
           </div>
         )}

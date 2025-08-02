@@ -49,31 +49,37 @@ const MessageItem = ({ message }) => {
         <img
           src={message.user.avatar}
           alt={message.user.name}
-          className="w-10 h-10 rounded-full object-cover cursor-pointer hover:ring-2 hover:ring-indigo-500 transition-all"
+          className="w-10 h-10 object-cover cursor-pointer hover:ring-2 hover:ring-amber-500 transition-all border-2 border-amber-300"
+          style={{borderRadius: '50% 40% 60% 50%'}}
         />
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1 flex-wrap">
-            <span className="font-medium text-white cursor-pointer hover:text-indigo-300 transition-colors">
+            <span className="font-medium text-slate-800 cursor-pointer hover:text-amber-700 transition-colors">
               {message.user.name}
             </span>
 
             {message.user.tag && (
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-600 text-white uppercase tracking-wide">
+              <span className="text-[10px] px-2 py-0.5 bg-gradient-to-r from-amber-400 to-orange-500 text-white uppercase tracking-wide font-bold" style={{borderRadius: '12px 8px 15px 10px'}}>
                 {message.user.tag}
               </span>
             )}
 
-            <span className="text-xs text-slate-500 flex items-center">
+            <span className="text-xs text-slate-600 flex items-center">
               <Clock className="inline h-3 w-3 mr-1" />
               {formatTime(message.createdAt)}
             </span>
           </div>
 
 
-          <div className="bg-slate-700/50 max-w-xl rounded-lg p-3 text-slate-300">
+          <div className="bg-white/90 backdrop-blur-sm max-w-xl p-3 text-slate-700 border-2 border-amber-200 shadow-lg" style={{
+            borderRadius: '20px 15px 25px 10px',
+            boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.2)'
+          }}>
             {/* Shared Design Preview */}
             {message.messageType === 'website' && message.website.uuid && (
-              <div className="mt-3 bg-slate-800/70 rounded-lg overflow-hidden border border-slate-600/50">
+              <div className="mt-3 bg-white/80 overflow-hidden border-2 border-amber-300 shadow-md" style={{
+                borderRadius: '15px 20px 10px 25px'
+              }}>
                 <div className="relative aspect-video">
                   <img
                     src={`${import.meta.env.VITE_FILE_SERVER_URL}/saved-pages/${message.website.uuid}/screenshot-cropped.png`}
@@ -88,33 +94,37 @@ const MessageItem = ({ message }) => {
                       href={`${import.meta.env.VITE_FILE_SERVER_URL}/saved-pages/${message.website.uuid}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1"
+                      className="text-xs text-amber-600 hover:text-orange-600 transition-colors flex items-center gap-1 font-medium"
                     >
                       <ExternalLink className="h-3 w-3" />
-                      View Full Design
+                      🔗 View Full Design
                     </a>
                     <button
                       onClick={() => copyLink(message.website.uuid)}
-                      className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1"
+                      className="text-xs text-amber-600 hover:text-orange-600 transition-colors flex items-center gap-1 font-medium"
                     >
                       <LinkIcon className="h-3 w-3" />
-                      Copy Link
+                      📋 Copy Link
                     </button>
                   </div>
 
                   <div className="mt-3">
                     <button
                       onClick={() => handleUseDesign(message.website)}
-                      className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1 rounded flex items-center gap-1 transition"
+                      className="text-xs bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white px-3 py-1 flex items-center gap-1 transition font-medium transform hover:scale-105 shadow-md"
+                      style={{
+                        borderRadius: '15px 10px 20px 15px',
+                        boxShadow: '2px 2px 0px rgba(245, 158, 11, 0.3)'
+                      }}
                     >
                       <Sparkles className="h-4 w-4" />
-                      Remix This Design
+                      ✨ Remix This Design
                     </button>
                   </div>
                 </div>
               </div>
             )}
-            <p>{message.content}</p>
+            <p className="leading-relaxed">{message.content}</p>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { Calendar, Clock, User, Tag, ArrowLeft, Share2, BookOpen, ExternalLink, Star, Heart, MessageCircle, Bookmark, Eye, ThumbsUp, Copy, CheckCircle } from 'lucide-react';
+import { Calendar, Clock, User, Tag, ArrowLeft, Share2, BookOpen, ExternalLink, Star, Heart, MessageCircle, Bookmark, Eye, ThumbsUp, Copy, CheckCircle, PenTool, Sparkles } from 'lucide-react';
 import { blogs } from './blogs'; // Assuming you have a blogs data file
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -69,55 +69,84 @@ const BlogPost = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 relative overflow-hidden">
+      {/* Paper texture overlay */}
+      <div className="absolute inset-0 opacity-20" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+      }}></div>
+
+      {/* Hand-drawn decorative elements */}
+      <div className="absolute top-1/4 right-1/4 w-24 h-24 border-2 border-amber-400 opacity-30 transform rotate-12" style={{
+        borderRadius: '60% 40% 70% 30%',
+        borderStyle: 'dashed'
+      }}></div>
+      <div className="absolute bottom-1/3 left-1/4 w-20 h-20 border-2 border-orange-400 opacity-25 transform -rotate-12" style={{
+        borderRadius: '40% 60% 30% 70%',
+        borderStyle: 'dotted'
+      }}></div>
+
       <Navbar />
      
-      <main className="pt-8">
+      <main className="pt-8 relative z-10">
+        {/* Back to Blog Link */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="max-w-4xl mx-auto">
+            <Link 
+              to="/blog" 
+              className="inline-flex items-center gap-2 text-amber-600 hover:text-orange-600 font-bold transition-colors mb-8 group"
+            >
+              <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+              ← Back to Blog
+            </Link>
+          </div>
+        </div>
+
         {/* Hero Section */}
         <div className="relative overflow-hidden">
-          {/* Background Effects */}
-
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12">
             <div className="max-w-4xl mx-auto">
               {/* Article Header */}
               <header className="mb-12">
                 <div className="flex flex-wrap items-center gap-4 mb-6">
-                  <span className="bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 text-indigo-300 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                  <span className="bg-white/80 backdrop-blur-sm border-2 border-amber-300 text-amber-700 px-4 py-2 text-sm font-bold shadow-lg" style={{borderRadius: '20px 15px 25px 10px'}}>
                     {blog.category}
                   </span>
-                  <div className="flex items-center text-slate-400 text-sm">
+                  <div className="flex items-center text-slate-600 text-sm font-medium">
                     <Calendar className="h-4 w-4 mr-1" />
                     {formatDate(blog.date)}
                   </div>
-                  <div className="flex items-center text-slate-400 text-sm">
+                  <div className="flex items-center text-slate-600 text-sm font-medium">
                     <Clock className="h-4 w-4 mr-1" />
                     {blog.readTime}
                   </div>
-                  <div className="flex items-center text-slate-400 text-sm">
+                  <div className="flex items-center text-slate-600 text-sm font-medium">
                     <Eye className="h-4 w-4 mr-1" />
                     {blog.views.toLocaleString()} views
                   </div>
                 </div>
 
                 <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-white via-indigo-100 to-purple-100 bg-clip-text text-transparent">
+                  <span className="text-slate-800 relative">
                     {blog.title}
+                    <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 400 12" fill="none">
+                      <path d="M5 8 Q200 2 395 8" stroke="#f59e0b" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.6"/>
+                    </svg>
                   </span>
                 </h1>
 
-                <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light">
+                <p className="text-xl text-slate-600 mb-8 leading-relaxed">
                   {blog.excerpt}
                 </p>
 
                 {/* Author and Actions */}
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                    <div className="w-14 h-14 bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center shadow-lg" style={{borderRadius: '20px 15px 25px 10px'}}>
                       <User className="h-7 w-7 text-white" />
                     </div>
                     <div>
-                      <p className="text-white font-medium text-lg">{blog.author}</p>
-                      <p className="text-slate-400 text-sm">AI Content Specialist</p>
+                      <p className="text-slate-800 font-bold text-lg">{blog.author}</p>
+                      <p className="text-slate-600 text-sm font-medium">✨ AI Content Specialist</p>
                     </div>
                   </div>
 
@@ -125,9 +154,9 @@ const BlogPost = () => {
                     <button
                       onClick={() => setIsLiked(!isLiked)}
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${isLiked
-                          ? 'bg-red-500/20 text-red-400 border border-red-500/30'
-                          : 'bg-slate-800/50 text-slate-300 border border-slate-700/50 hover:bg-slate-700/50'
-                        }`}
+                          ? 'bg-red-100 text-red-600 border-2 border-red-300'
+                          : 'bg-white/80 text-slate-700 border-2 border-slate-300 hover:bg-amber-50 hover:border-amber-400'
+                        }`} style={{borderRadius: '15px 10px 20px 15px'}}
                     >
                       <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
                       {blog.likes + (isLiked ? 1 : 0)}
@@ -136,9 +165,9 @@ const BlogPost = () => {
                     <button
                       onClick={() => setIsBookmarked(!isBookmarked)}
                       className={`p-2 rounded-lg transition-all ${isBookmarked
-                          ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-                          : 'bg-slate-800/50 text-slate-300 border border-slate-700/50 hover:bg-slate-700/50'
-                        }`}
+                          ? 'bg-yellow-100 text-yellow-600 border-2 border-yellow-300'
+                          : 'bg-white/80 text-slate-700 border-2 border-slate-300 hover:bg-amber-50 hover:border-amber-400'
+                        }`} style={{borderRadius: '12px 8px 15px 10px'}}
                     >
                       <Bookmark className={`h-4 w-4 ${isBookmarked ? 'fill-current' : ''}`} />
                     </button>
@@ -146,18 +175,18 @@ const BlogPost = () => {
                     <div className="relative">
                       <button
                         onClick={handleShare}
-                        className="flex items-center gap-2 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white px-4 py-2 rounded-lg border border-slate-700/50 transition-all"
+                        className="flex items-center gap-2 bg-white/80 hover:bg-amber-50 text-slate-700 hover:text-amber-700 px-4 py-2 border-2 border-slate-300 hover:border-amber-400 transition-all transform hover:scale-105" style={{borderRadius: '15px 10px 20px 15px'}}
                       >
                         <Share2 className="h-4 w-4" />
                         Share
                       </button>
 
                       {showShareMenu && (
-                        <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-xl z-10">
+                        <div className="absolute right-0 mt-2 w-48 bg-white border-2 border-amber-300 shadow-xl z-10" style={{borderRadius: '20px 15px 25px 10px'}}>
                           <div className="p-2">
                             <button
                               onClick={copyToClipboard}
-                              className="w-full flex items-center gap-2 px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                              className="w-full flex items-center gap-2 px-3 py-2 text-slate-700 hover:text-amber-700 hover:bg-amber-50 transition-colors font-medium" style={{borderRadius: '15px 10px 20px 15px'}}
                             >
                               {copySuccess ? <CheckCircle className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                               {copySuccess ? 'Copied!' : 'Copy Link'}
@@ -176,9 +205,12 @@ const BlogPost = () => {
                   <img
                     src={blog.image}
                     alt={blog.title}
-                    className="w-full h-64 md:h-96 object-cover rounded-2xl shadow-2xl transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="w-full h-64 md:h-96 object-cover shadow-2xl transition-transform duration-300 group-hover:scale-[1.02] border-3 border-amber-300" style={{
+                      borderRadius: '30px 20px 35px 25px',
+                      boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" style={{borderRadius: '30px 20px 35px 25px'}} />
                 </div>
               </div>
             </div>
@@ -186,7 +218,7 @@ const BlogPost = () => {
         </div>
 
         {/* Article Content */}
-        <div className="">
+        <div className="bg-white/80 backdrop-blur-sm">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div className="max-w-4xl mx-auto">
               <article className="article-content">
@@ -197,28 +229,31 @@ const BlogPost = () => {
               </article>
 
               {/* Engagement Section */}
-              <div className="mt-16 p-8">
+              <div className="mt-16 p-8 bg-gradient-to-r from-amber-50 to-orange-50 border-3 border-amber-300" style={{
+                borderRadius: '30px 20px 35px 25px',
+                borderStyle: 'dashed'
+              }}>
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold text-white">Enjoyed this article?</h3>
+                  <h3 className="text-2xl font-bold text-slate-800">Enjoyed this article? 💖</h3>
                   <div className="flex items-center gap-2">
-                    <MessageCircle className="h-5 w-5 text-slate-400" />
-                    <span className="text-slate-400">{blog.comments} comments</span>
+                    <MessageCircle className="h-5 w-5 text-slate-600" />
+                    <span className="text-slate-600 font-medium">{blog.comments} comments</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => setIsLiked(!isLiked)}
                     className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${isLiked
-                        ? 'bg-red-500/20 text-red-400 border border-red-500/30'
-                        : 'bg-slate-700/50 text-slate-300 border border-slate-600/50 hover:bg-slate-600/50'
-                      }`}
+                        ? 'bg-red-100 text-red-600 border-2 border-red-300'
+                        : 'bg-white text-slate-700 border-2 border-slate-300 hover:bg-amber-50 hover:border-amber-400'
+                      }`} style={{borderRadius: '20px 15px 25px 10px'}}
                   >
                     <Heart className={`h-5 w-5 ${isLiked ? 'fill-current' : ''}`} />
                     {isLiked ? 'Liked' : 'Like'}
                   </button>
                   <button
                     onClick={handleShare}
-                    className="flex items-center gap-2 bg-slate-700/50 hover:bg-slate-600/50 text-slate-300 hover:text-white px-6 py-3 rounded-lg border border-slate-600/50 transition-all"
+                    className="flex items-center gap-2 bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-700 px-6 py-3 border-2 border-slate-300 hover:border-amber-400 transition-all transform hover:scale-105" style={{borderRadius: '15px 25px 10px 20px'}}
                   >
                     <Share2 className="h-5 w-5" />
                     Share
@@ -227,16 +262,16 @@ const BlogPost = () => {
               </div>
 
               {/* Tags */}
-              <div className="mt-12 pt-8 border-t border-slate-700/50">
+              <div className="mt-12 pt-8 border-t-2 border-amber-200" style={{borderStyle: 'dashed'}}>
                 <div className="flex items-center gap-2 mb-4">
-                  <Tag className="h-5 w-5 text-slate-400" />
-                  <span className="text-slate-300 font-medium">Tags:</span>
+                  <Tag className="h-5 w-5 text-amber-600" />
+                  <span className="text-slate-800 font-bold">🏷️ Tags:</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {blog.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white px-4 py-2 rounded-full text-sm transition-all cursor-pointer border border-slate-700/50"
+                      className="bg-amber-100 hover:bg-amber-200 text-amber-700 hover:text-amber-800 px-4 py-2 text-sm transition-all cursor-pointer border-2 border-amber-300 hover:border-amber-400 font-medium transform hover:scale-105" style={{borderRadius: '15px 10px 20px 15px'}}
                     >
                       #{tag}
                     </span>
@@ -245,19 +280,34 @@ const BlogPost = () => {
               </div>
 
               {/* Call to Action */}
-              <div className="mt-16 p-8 bg-gradient-to-r from-indigo-900/30 to-purple-900/30 border border-indigo-500/20 rounded-2xl text-center backdrop-blur-sm">
-                <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="mt-16 p-8 bg-gradient-to-r from-amber-100 to-orange-100 border-3 border-amber-400 text-center backdrop-blur-sm relative" style={{
+                borderRadius: '30px 20px 35px 25px',
+                borderStyle: 'dashed'
+              }}>
+                {/* Decorative elements */}
+                <div className="absolute top-2 right-2 w-4 h-4 bg-yellow-400 opacity-50 rounded-full"></div>
+                <div className="absolute bottom-2 left-2 w-3 h-3 border-2 border-orange-400 opacity-40 transform rotate-45"></div>
+                
+                <div className="w-16 h-16 bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center mx-auto mb-6 shadow-lg" style={{borderRadius: '20px 15px 25px 10px'}}>
                   <BookOpen className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-4">Ready to Build Your Website?</h3>
-                <p className="text-slate-300 mb-8 text-lg leading-relaxed max-w-2xl mx-auto">
+                <h3 className="text-3xl font-bold text-slate-800 mb-4 relative">
+                  Ready to Build Your Website? 🚀
+                  <svg className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-64 h-2" viewBox="0 0 256 8" fill="none">
+                    <path d="M2 6 Q128 2 254 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
+                  </svg>
+                </h3>
+                <p className="text-slate-600 mb-8 text-lg leading-relaxed max-w-2xl mx-auto">
                   Put these insights into practice with our AI-powered website builder. Create stunning, SEO-optimized websites in minutes.
                 </p>
                 <Link
                   to="/dashboard"
-                  className="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white px-8 py-4 font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style={{
+                    borderRadius: '25px 15px 30px 20px',
+                    boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.4)'
+                  }}
                 >
-                  Start Building Now
+                  ✨ Start Building Now
                   <ArrowLeft className="h-5 w-5 rotate-180" />
                 </Link>
               </div>
@@ -269,14 +319,14 @@ const BlogPost = () => {
       <style jsx>{`
         /* Base Typography */
         .prose {
-          color: #cbd5e1;
+          color: #64748b;
           line-height: 1.75;
         }
 
         .prose .lead {
           font-size: 1.25rem;
           font-weight: 300;
-          color: #e2e8f0;
+          color: #475569;
           margin-bottom: 2rem;
           line-height: 1.6;
         }
@@ -285,13 +335,13 @@ const BlogPost = () => {
           margin-bottom: 1.5rem;
           font-size: 1.125rem;
           line-height: 1.7;
-          color: #cbd5e1;
+          color: #64748b;
         }
 
         .prose h2 {
           font-size: 2.25rem;
           font-weight: 700;
-          color: #ffffff;
+          color: #1e293b;
           margin-top: 3rem;
           margin-bottom: 1.5rem;
           position: relative;
@@ -305,14 +355,14 @@ const BlogPost = () => {
           left: 0;
           width: 60px;
           height: 3px;
-          background: linear-gradient(to right, #6366f1, #8b5cf6);
+          background: linear-gradient(to right, #f59e0b, #f97316);
           border-radius: 2px;
         }
 
         .prose h3 {
           font-size: 1.5rem;
           font-weight: 600;
-          color: #ffffff;
+          color: #1e293b;
           margin-top: 2rem;
           margin-bottom: 1rem;
         }
@@ -320,17 +370,17 @@ const BlogPost = () => {
         .prose h4 {
           font-size: 1.25rem;
           font-weight: 600;
-          color: #ffffff;
+          color: #1e293b;
           margin-bottom: 0.5rem;
         }
 
         .prose strong {
-          color: #ffffff;
+          color: #1e293b;
           font-weight: 600;
         }
 
         .prose em {
-          color: #a5b4fc;
+          color: #f59e0b;
           font-style: italic;
         }
 
@@ -343,14 +393,15 @@ const BlogPost = () => {
         }
 
         .tool-card {
-          background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6));
-          border: 1px solid rgba(148, 163, 184, 0.1);
-          border-radius: 1rem;
+          background: rgba(255, 255, 255, 0.9);
+          border: 3px solid #fbbf24;
+          border-radius: 25px 15px 30px 20px;
           padding: 2rem;
           transition: all 0.3s ease;
           backdrop-filter: blur(10px);
           position: relative;
           overflow: hidden;
+          box-shadow: 4px 4px 0px rgba(245, 158, 11, 0.3);
         }
 
         .tool-card::before {
@@ -360,7 +411,7 @@ const BlogPost = () => {
           left: 0;
           right: 0;
           height: 3px;
-          background: linear-gradient(to right, #6366f1, #8b5cf6);
+          background: linear-gradient(to right, #f59e0b, #f97316);
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.3s ease;
@@ -372,27 +423,27 @@ const BlogPost = () => {
 
         .tool-card:hover {
           transform: translateY(-4px);
-          border-color: rgba(99, 102, 241, 0.3);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          border-color: #f97316;
+          box-shadow: 6px 6px 0px rgba(245, 158, 11, 0.4);
         }
 
         .tool-header h3 {
           font-size: 1.5rem;
           font-weight: 700;
-          color: #ffffff;
+          color: #1e293b;
           margin: 0 0 0.5rem 0;
         }
 
         .tool-category {
           font-size: 0.875rem;
-          color: #a5b4fc;
+          color: #f59e0b;
           font-weight: 500;
           display: block;
           margin-bottom: 1rem;
         }
 
         .tool-card p {
-          color: #cbd5e1;
+          color: #64748b;
           line-height: 1.6;
           margin-bottom: 1.5rem;
         }
@@ -404,13 +455,13 @@ const BlogPost = () => {
         }
 
         .tool-badge {
-          background: rgba(99, 102, 241, 0.1);
-          color: #a5b4fc;
+          background: rgba(245, 158, 11, 0.1);
+          color: #f59e0b;
           padding: 0.25rem 0.75rem;
-          border-radius: 9999px;
+          border-radius: 15px 10px 20px 15px;
           font-size: 0.75rem;
           font-weight: 500;
-          border: 1px solid rgba(99, 102, 241, 0.2);
+          border: 2px solid rgba(245, 158, 11, 0.2);
         }
 
         /* Insight Cards */
@@ -422,19 +473,20 @@ const BlogPost = () => {
         }
 
         .insight-card {
-          background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.4));
-          border: 1px solid rgba(148, 163, 184, 0.1);
-          border-radius: 1rem;
+          background: rgba(255, 255, 255, 0.9);
+          border: 3px solid #fbbf24;
+          border-radius: 20px 15px 25px 10px;
           padding: 2rem;
           text-align: center;
           transition: all 0.3s ease;
           backdrop-filter: blur(10px);
+          box-shadow: 4px 4px 0px rgba(245, 158, 11, 0.3);
         }
 
         .insight-card:hover {
           transform: translateY(-2px);
-          border-color: rgba(99, 102, 241, 0.3);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          border-color: #f97316;
+          box-shadow: 6px 6px 0px rgba(245, 158, 11, 0.4);
         }
 
         .insight-icon {
@@ -444,28 +496,28 @@ const BlogPost = () => {
         }
 
         .insight-card h4 {
-          color: #ffffff;
+          color: #1e293b;
           font-size: 1.25rem;
           font-weight: 600;
           margin-bottom: 0.5rem;
         }
 
         .insight-card p {
-          color: #94a3b8;
+          color: #64748b;
           font-size: 0.875rem;
           margin: 0;
         }
 
         /* Conclusion Highlight */
         .conclusion-highlight {
-          background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
-          border: 1px solid rgba(99, 102, 241, 0.2);
-          border-radius: 1rem;
+          background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(249, 115, 22, 0.1));
+          border: 3px dashed #fbbf24;
+          border-radius: 25px 15px 30px 20px;
           padding: 2rem;
           margin: 2rem 0;
           text-align: center;
           font-size: 1.25rem;
-          color: #e2e8f0;
+          color: #475569;
           backdrop-filter: blur(10px);
         }
 
@@ -480,7 +532,7 @@ const BlogPost = () => {
           position: relative;
           padding-left: 2rem;
           margin-bottom: 1rem;
-          color: #cbd5e1;
+          color: #64748b;
           line-height: 1.6;
         }
 
@@ -488,7 +540,7 @@ const BlogPost = () => {
           content: '→';
           position: absolute;
           left: 0;
-          color: #6366f1;
+          color: #f59e0b;
           font-weight: bold;
           font-size: 1.2rem;
         }
@@ -504,7 +556,7 @@ const BlogPost = () => {
           position: relative;
           padding-left: 3rem;
           margin-bottom: 2rem;
-          color: #cbd5e1;
+          color: #64748b;
           line-height: 1.6;
           counter-increment: item;
         }
@@ -514,7 +566,7 @@ const BlogPost = () => {
           position: absolute;
           left: 0;
           top: 0;
-          background: linear-gradient(135deg, #6366f1, #8b5cf6);
+          background: linear-gradient(135deg, #f59e0b, #f97316);
           color: white;
           width: 2rem;
           height: 2rem;
@@ -528,42 +580,42 @@ const BlogPost = () => {
 
         /* Blockquotes */
         .prose blockquote {
-          border-left: 4px solid #6366f1;
+          border-left: 4px solid #f59e0b;
           padding-left: 2rem;
           margin: 2rem 0;
-          background: rgba(15, 23, 42, 0.5);
-          border-radius: 0 1rem 1rem 0;
+          background: rgba(255, 255, 255, 0.8);
+          border-radius: 0 20px 15px 0;
           padding: 1.5rem 2rem;
           font-style: italic;
-          color: #e2e8f0;
+          color: #475569;
           backdrop-filter: blur(10px);
         }
 
         /* Code */
         .prose code {
-          background: rgba(15, 23, 42, 0.8);
-          color: #a5b4fc;
+          background: rgba(245, 158, 11, 0.1);
+          color: #f59e0b;
           padding: 0.25rem 0.5rem;
-          border-radius: 0.375rem;
+          border-radius: 8px 12px 8px 12px;
           font-family: 'Monaco', 'Menlo', monospace;
           font-size: 0.875rem;
-          border: 1px solid rgba(99, 102, 241, 0.2);
+          border: 2px solid rgba(245, 158, 11, 0.2);
         }
 
         .prose pre {
-          background: rgba(15, 23, 42, 0.9);
-          color: #cbd5e1;
+          background: rgba(255, 255, 255, 0.9);
+          color: #64748b;
           padding: 1.5rem;
-          border-radius: 1rem;
+          border-radius: 20px 15px 25px 10px;
           overflow-x: auto;
           margin: 2rem 0;
-          border: 1px solid rgba(148, 163, 184, 0.1);
+          border: 3px solid #fbbf24;
           backdrop-filter: blur(10px);
         }
 
         /* Links */
         .prose a {
-          color: #6366f1;
+          color: #f59e0b;
           text-decoration: none;
           font-weight: 500;
           transition: all 0.2s ease;
@@ -571,7 +623,7 @@ const BlogPost = () => {
         }
 
         .prose a:hover {
-          color: #8b5cf6;
+          color: #f97316;
         }
 
         .prose a::after {
@@ -581,7 +633,7 @@ const BlogPost = () => {
           height: 2px;
           bottom: -2px;
           left: 0;
-          background: linear-gradient(to right, #6366f1, #8b5cf6);
+          background: linear-gradient(to right, #f59e0b, #f97316);
           transition: width 0.3s ease;
         }
 
@@ -594,27 +646,27 @@ const BlogPost = () => {
           width: 100%;
           border-collapse: collapse;
           margin: 2rem 0;
-          background: rgba(15, 23, 42, 0.5);
-          border-radius: 1rem;
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: 20px 15px 25px 10px;
           overflow: hidden;
-          border: 1px solid rgba(148, 163, 184, 0.1);
+          border: 3px solid #fbbf24;
         }
 
         .prose th,
         .prose td {
           padding: 1rem;
           text-align: left;
-          border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+          border-bottom: 2px solid rgba(245, 158, 11, 0.2);
         }
 
         .prose th {
-          background: rgba(99, 102, 241, 0.1);
-          color: #ffffff;
+          background: rgba(245, 158, 11, 0.1);
+          color: #1e293b;
           font-weight: 600;
         }
 
         .prose td {
-          color: #cbd5e1;
+          color: #64748b;
         }
 
         /* Responsive Design */
@@ -662,14 +714,14 @@ const BlogPost = () => {
 
         /* Selection */
         ::selection {
-          background: rgba(99, 102, 241, 0.3);
-          color: #ffffff;
+          background: rgba(245, 158, 11, 0.3);
+          color: #1e293b;
         }
 
         /* Focus States */
         button:focus,
         a:focus {
-          outline: 2px solid #6366f1;
+          outline: 2px solid #f59e0b;
           outline-offset: 2px;
         }
 
@@ -711,16 +763,16 @@ const BlogPost = () => {
         }
 
         ::-webkit-scrollbar-track {
-          background: rgba(15, 23, 42, 0.5);
+          background: rgba(245, 158, 11, 0.1);
         }
 
         ::-webkit-scrollbar-thumb {
-          background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+          background: linear-gradient(to bottom, #f59e0b, #f97316);
           border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(to bottom, #4f46e5, #7c3aed);
+          background: linear-gradient(to bottom, #d97706, #ea580c);
         }
       `}</style>
       <Footer />

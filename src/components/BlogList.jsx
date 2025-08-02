@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, User, ArrowRight, Search, Filter } from 'lucide-react';
+import { Calendar, Clock, User, ArrowRight, Search, Filter, PenTool, Sparkles } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -112,18 +112,89 @@ const BlogList = () => {
   const categories = [...new Set(blogs.map(blog => blog.category))];
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-200">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 relative overflow-hidden">
+      {/* Paper texture overlay */}
+      <div className="absolute inset-0 opacity-20" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+      }}></div>
+
+      {/* Hand-drawn decorative elements */}
+      <div className="absolute top-1/4 right-1/4 w-24 h-24 border-2 border-amber-400 opacity-30 transform rotate-12" style={{
+        borderRadius: '60% 40% 70% 30%',
+        borderStyle: 'dashed'
+      }}></div>
+      <div className="absolute bottom-1/3 left-1/4 w-20 h-20 border-2 border-orange-400 opacity-25 transform -rotate-12" style={{
+        borderRadius: '40% 60% 30% 70%',
+        borderStyle: 'dotted'
+      }}></div>
+      <div className="absolute top-1/2 right-1/2 w-16 h-16 border-3 border-yellow-400 opacity-20 transform rotate-45" style={{
+        borderRadius: '50% 30% 60% 40%',
+        borderStyle: 'dashed'
+      }}></div>
+
       <Navbar />
       
-      <main className="pt-20">
+      <main className="pt-20 relative z-10">
+        {/* Header Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto text-center">
+              {/* Hand-drawn badge */}
+              <div className="inline-block px-6 py-2 mb-6 bg-white/80 backdrop-blur-sm border-2 border-amber-300 shadow-lg" style={{
+                borderRadius: '25px 15px 30px 20px'
+              }}>
+                <span className="text-amber-700 text-sm font-semibold flex items-center gap-2">
+                  <PenTool className="h-4 w-4" />
+                  ✨ AI Design Insights & Tutorials
+                </span>
+              </div>
+
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-slate-800">
+                <span className="relative inline-block">
+                  Design Blog
+                  <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 200 12" fill="none">
+                    <path d="M5 8 Q100 4 195 8" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.6"/>
+                  </svg>
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+                  & Insights
+                </span>
+              </h1>
+              <p className="text-slate-600 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
+                Discover the latest insights, tutorials, and best practices in{' '}
+                <span className="text-amber-600 font-semibold relative">
+                  AI-powered web design
+                  <svg className="absolute -bottom-1 left-0 w-full h-2" viewBox="0 0 200 8" fill="none">
+                    <path d="M2 6 Q100 2 198 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.4"/>
+                  </svg>
+                </span>
+                , development, and digital strategy. 🎨
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Featured Blog */}
         {featuredBlog && (
-          <section className="pb-16">
+          <section className="pb-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-6xl mx-auto">
-                <h2 className="text-2xl font-bold text-white mb-8">Featured Article</h2>
+                <h2 className="text-2xl font-bold text-slate-800 mb-8 relative">
+                  📌 Featured Article
+                  <svg className="absolute -bottom-1 left-0 w-32 h-2" viewBox="0 0 128 8" fill="none">
+                    <path d="M2 6 Q64 2 126 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
+                  </svg>
+                </h2>
                 <Link to={`/blog/${featuredBlog.slug}`} className="block group">
-                  <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/30 rounded-2xl overflow-hidden shadow-2xl hover:shadow-purple-500/20 transition-all duration-300">
+                  <div className="bg-white/90 backdrop-blur-sm border-3 border-amber-300 overflow-hidden shadow-2xl hover:shadow-amber-500/20 transition-all duration-300 transform hover:scale-105" style={{
+                    borderRadius: '30px 20px 35px 25px',
+                    boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
+                  }}>
+                    {/* Decorative corner elements */}
+                    <div className="absolute top-2 right-2 w-4 h-4 bg-yellow-400 rounded-full opacity-60"></div>
+                    <div className="absolute top-4 left-4 w-3 h-3 border-2 border-orange-400 opacity-50 transform rotate-45"></div>
+                    
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                       <div className="relative overflow-hidden">
                         <img
@@ -132,41 +203,41 @@ const BlogList = () => {
                           className="w-full h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                         <div className="absolute top-4 left-4">
-                          <span className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                          <span className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-3 py-1 text-sm font-bold shadow-lg" style={{borderRadius: '15px 10px 20px 15px'}}>
                             Featured
                           </span>
                         </div>
                       </div>
                       <div className="p-8 lg:p-12 flex flex-col justify-center">
                         <div className="flex items-center gap-4 mb-4">
-                          <span className="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm font-medium">
+                          <span className="bg-amber-100 text-amber-700 px-3 py-1 text-sm font-bold border-2 border-amber-300" style={{borderRadius: '15px 10px 20px 15px'}}>
                             {featuredBlog.category}
                           </span>
-                          <div className="flex items-center text-slate-400 text-sm">
+                          <div className="flex items-center text-slate-600 text-sm font-medium">
                             <Calendar className="h-4 w-4 mr-1" />
                             {formatDate(featuredBlog.date)}
                           </div>
                         </div>
-                        <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors">
+                        <h3 className="text-2xl lg:text-3xl font-bold text-slate-800 mb-4 group-hover:text-amber-700 transition-colors">
                           {featuredBlog.title}
                         </h3>
-                        <p className="text-slate-300 mb-6 leading-relaxed">
+                        <p className="text-slate-600 mb-6 leading-relaxed">
                           {featuredBlog.excerpt}
                         </p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center">
+                            <div className="w-10 h-10 bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center shadow-lg" style={{borderRadius: '15px 10px 20px 15px'}}>
                               <User className="h-5 w-5 text-white" />
                             </div>
                             <div>
-                              <p className="text-white font-medium">{featuredBlog.author}</p>
-                              <div className="flex items-center text-slate-400 text-sm">
+                              <p className="text-slate-800 font-bold">{featuredBlog.author}</p>
+                              <div className="flex items-center text-slate-600 text-sm">
                                 <Clock className="h-3 w-3 mr-1" />
                                 {featuredBlog.readTime}
                               </div>
                             </div>
                           </div>
-                          <div className="flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium transition-colors">
+                          <div className="flex items-center gap-2 text-amber-600 hover:text-orange-600 font-bold transition-colors">
                             Read More
                             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                           </div>
@@ -184,11 +255,23 @@ const BlogList = () => {
         <section className="pb-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-2xl font-bold text-white mb-8">Latest Articles</h2>
+              <h2 className="text-2xl font-bold text-slate-800 mb-8 relative">
+                📚 Latest Articles
+                <svg className="absolute -bottom-1 left-0 w-32 h-2" viewBox="0 0 128 8" fill="none">
+                  <path d="M2 6 Q64 2 126 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
+                </svg>
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {regularBlogs.map((blog) => (
                   <Link key={blog.id} to={`/blog/${blog.slug}`} className="block group">
-                    <article className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/30 rounded-xl overflow-hidden shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 hover:transform hover:scale-105 h-full">
+                    <article className="bg-white/90 backdrop-blur-sm border-3 border-amber-300 overflow-hidden shadow-lg hover:shadow-amber-500/20 transition-all duration-300 hover:transform hover:scale-105 h-full relative" style={{
+                      borderRadius: '25px 15px 30px 20px',
+                      boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.3)'
+                    }}>
+                      {/* Decorative corner elements */}
+                      <div className="absolute top-2 left-2 w-3 h-3 bg-amber-400 opacity-40 rounded-full"></div>
+                      <div className="absolute top-2 right-2 w-2 h-2 bg-orange-400 opacity-50 transform rotate-45"></div>
+                      
                       <div className="relative overflow-hidden">
                         <img
                           src={blog.image}
@@ -196,14 +279,14 @@ const BlogList = () => {
                           className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                         <div className="absolute top-3 left-3">
-                          <span className="bg-slate-900/80 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-medium">
+                          <span className="bg-white/90 backdrop-blur-sm text-amber-700 px-2 py-1 text-xs font-bold border border-amber-300" style={{borderRadius: '12px 8px 15px 10px'}}>
                             {blog.category}
                           </span>
                         </div>
                       </div>
                       
                       <div className="p-6 flex flex-col h-full">
-                        <div className="flex items-center gap-3 mb-3 text-xs text-slate-400">
+                        <div className="flex items-center gap-3 mb-3 text-xs text-slate-600 font-medium">
                           <div className="flex items-center">
                             <Calendar className="h-3 w-3 mr-1" />
                             {formatDate(blog.date)}
@@ -214,23 +297,23 @@ const BlogList = () => {
                           </div>
                         </div>
                         
-                        <h3 className="text-lg font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors line-clamp-2 flex-grow">
+                        <h3 className="text-lg font-bold text-slate-800 mb-3 group-hover:text-amber-700 transition-colors line-clamp-2 flex-grow">
                           {blog.title}
                         </h3>
                         
-                        <p className="text-slate-300 text-sm mb-4 line-clamp-3 flex-grow">
+                        <p className="text-slate-600 text-sm mb-4 line-clamp-3 flex-grow">
                           {blog.excerpt}
                         </p>
                         
                         <div className="flex items-center justify-between mt-auto">
                           <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+                            <div className="w-6 h-6 bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center" style={{borderRadius: '8px 12px 8px 12px'}}>
                               <User className="h-3 w-3 text-white" />
                             </div>
-                            <span className="text-slate-400 text-xs">{blog.author}</span>
+                            <span className="text-slate-600 text-xs font-medium">{blog.author}</span>
                           </div>
                           
-                          <div className="flex items-center gap-1 text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">
+                          <div className="flex items-center gap-1 text-amber-600 hover:text-orange-600 text-sm font-bold transition-colors">
                             Read
                             <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
                           </div>
@@ -241,7 +324,7 @@ const BlogList = () => {
                           {blog.tags.slice(0, 3).map((tag) => (
                             <span
                               key={tag}
-                              className="bg-slate-700/50 text-slate-400 px-2 py-1 rounded text-xs"
+                              className="bg-amber-100 text-amber-700 px-2 py-1 text-xs font-medium border border-amber-300" style={{borderRadius: '8px 12px 8px 12px'}}
                             >
                               #{tag}
                             </span>
@@ -256,6 +339,16 @@ const BlogList = () => {
           </div>
         </section>
       </main>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
 
       <Footer />
     </div>

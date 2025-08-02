@@ -302,30 +302,38 @@ const DesignChat = ({ website, onClose }) => {
   const buttonGroupClasses = darkMode ? 'bg-slate-800' : 'bg-slate-200';
 
   return (
-    <div className={`fixed inset-0 max-h-screen ${themeClasses} backdrop-blur-sm z-50 flex flex-col transition-all duration-300`}>
-      <div className={`${cardClasses} border flex flex-col h-full overflow-hidden shadow-2xl transition-all duration-300`}>
+    <div className={`fixed inset-0 max-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 backdrop-blur-sm z-50 flex flex-col transition-all duration-300`}>
+      <div className={`bg-white/95 border-3 border-amber-300 flex flex-col h-full overflow-hidden shadow-2xl transition-all duration-300`} style={{
+        borderRadius: '30px 20px 35px 25px',
+        boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
+      }}>
+        {/* Hand-drawn decorative elements */}
+        <div className="absolute top-2 right-2 w-4 h-4 bg-yellow-400 rounded-full opacity-60 pointer-events-none"></div>
+        <div className="absolute top-4 left-4 w-3 h-3 border-2 border-orange-400 opacity-50 transform rotate-45 pointer-events-none"></div>
+        <div className="absolute bottom-4 right-6 w-2 h-2 bg-amber-400 opacity-70 transform rotate-12 pointer-events-none" style={{borderRadius: '30% 70%'}}></div>
+
         {/* Header */}
-        {!fullScreenPreview && <header className={`flex items-center justify-between p-2 border-b shrink-0 ${chatPanelClasses}`}>
+        {!fullScreenPreview && <header className={`flex items-center justify-between p-2 border-b-2 border-amber-300 shrink-0 bg-gradient-to-r from-amber-50 to-orange-50`} style={{borderBottomStyle: 'dashed'}}>
           <div className="flex items-center gap-3">
             <img src={logo} className="h-9 w-9" alt="Redesignr Logo" />
             <div>
-              <h1 className="font-bold text-base">AI Website Editor</h1>
-              <p className="text-xs text-slate-400">{website?.source || 'Untitled Project'}</p>
+              <h1 className="font-bold text-base text-slate-800">🤖 AI Website Editor</h1>
+              <p className="text-xs text-slate-600">{website?.source || 'Untitled Project'}</p>
             </div>
           </div>
 
           {/* Device Toggles */}
-          {!codeEdit && <div className={`flex items-center gap-1 p-1 rounded-lg ${buttonGroupClasses}`}>
-            <button onClick={() => setPreviewMode('desktop')} className={buttonClasses(previewMode === 'desktop')} title="Desktop View"><Monitor className="h-5 w-5" /></button>
-            <button onClick={() => setPreviewMode('tablet')} className={buttonClasses(previewMode === 'tablet')} title="Tablet View"><Tablet className="h-5 w-5" /></button>
-            <button onClick={() => setPreviewMode('mobile')} className={buttonClasses(previewMode === 'mobile')} title="Mobile View"><Smartphone className="h-5 w-5" /></button>
+          {!codeEdit && <div className={`flex items-center gap-1 p-1 bg-amber-200/50 border-2 border-amber-300`} style={{borderRadius: '15px 10px 20px 15px'}}>
+            <button onClick={() => setPreviewMode('desktop')} className={`p-2 transition-all duration-200 ${previewMode === 'desktop' ? 'bg-amber-400 text-white shadow-lg' : 'text-slate-600 hover:bg-amber-100 hover:text-amber-700'}`} style={{borderRadius: '12px 8px 15px 10px'}} title="Desktop View"><Monitor className="h-5 w-5" /></button>
+            <button onClick={() => setPreviewMode('tablet')} className={`p-2 transition-all duration-200 ${previewMode === 'tablet' ? 'bg-amber-400 text-white shadow-lg' : 'text-slate-600 hover:bg-amber-100 hover:text-amber-700'}`} style={{borderRadius: '10px 15px 8px 12px'}} title="Tablet View"><Tablet className="h-5 w-5" /></button>
+            <button onClick={() => setPreviewMode('mobile')} className={`p-2 transition-all duration-200 ${previewMode === 'mobile' ? 'bg-amber-400 text-white shadow-lg' : 'text-slate-600 hover:bg-amber-100 hover:text-amber-700'}`} style={{borderRadius: '8px 12px 15px 10px'}} title="Mobile View"><Smartphone className="h-5 w-5" /></button>
           </div>}
 
 
           <div className="flex items-center gap-2">
             {
-              !codeEdit && !editMannually && <div className="text-xs text-center p-2 rounded-lg bg-yellow-400/10 text-yellow-400 font-mono">
-                {user?.aiToken} <span className='opacity-70'>Tokens</span>
+              !codeEdit && !editMannually && <div className="text-xs text-center p-2 bg-amber-100 text-amber-700 font-mono border-2 border-amber-300" style={{borderRadius: '12px 8px 15px 10px'}}>
+                {user?.aiToken} <span className='opacity-70'>✨ Tokens</span>
               </div>
             }
 
@@ -353,16 +361,20 @@ const DesignChat = ({ website, onClose }) => {
                 setcodeEdit(!codeEdit);
               }}
               // disabled={isDeploying}
-              className={`px-4 py-2 rounded-md flex items-center text-xs text-white
-                      bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600
-                      transition-all duration-150 `}
+              className={`px-4 py-2 flex items-center text-xs text-white
+                      bg-gradient-to-r from-blue-400 to-indigo-500 hover:from-blue-500 hover:to-indigo-600
+                      transition-all duration-150 shadow-lg transform hover:scale-105`}
+              style={{
+                borderRadius: '15px 10px 20px 15px',
+                boxShadow: '3px 3px 0px rgba(59, 130, 246, 0.4)'
+              }}
               title="Deploy to Netlify"
             >
               <Code2Icon className="w-3 h-3 mr-1.5" />
               {codeEdit ? (
-                <span>Close Code Editor</span>
+                <span>❌ Close Code Editor</span>
               ) : (
-                <span>Open Code Editor</span>
+                <span>💻 Open Code Editor</span>
               )}
             </button>
             {!codeEdit && <button
@@ -389,20 +401,24 @@ const DesignChat = ({ website, onClose }) => {
                 seteditMannually(!editMannually);
               }}
               // disabled={isDeploying}
-              className={`px-4 py-2 rounded-md flex items-center text-xs text-white
-                      bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600
-                      transition-all duration-150 `}
+              className={`px-4 py-2 flex items-center text-xs text-white
+                      bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600
+                      transition-all duration-150 shadow-lg transform hover:scale-105`}
+              style={{
+                borderRadius: '20px 15px 10px 25px',
+                boxShadow: '3px 3px 0px rgba(147, 51, 234, 0.4)'
+              }}
               title="Deploy to Netlify"
             >{
                 editMannually ? (
                   <>
                     <BotIcon className="w-3 h-3 mr-1.5" />
-                    <span>Edit with AI</span>
+                    <span>🤖 Edit with AI</span>
                   </>
                 ) : (
                   <>
                     <Expand className="w-3 h-3 mr-1.5" />
-                    <span>Edit Manually</span>
+                    <span>✏️ Edit Manually</span>
                   </>
                 )
               }
@@ -432,20 +448,26 @@ const DesignChat = ({ website, onClose }) => {
                   }
                 }}
                 // disabled={isDeploying}
-                className={`px-4 py-2 rounded-md flex items-center text-xs text-white
-                    bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600
-                    transition-all duration-150 `}
+                className={`px-4 py-2 flex items-center text-xs text-white transition-all duration-150 shadow-lg transform hover:scale-105 ${
+                  editMannually 
+                    ? 'bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-500 hover:to-green-600' 
+                    : 'bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600'
+                }`}
+                style={{
+                  borderRadius: '10px 25px 10px 25px',
+                  boxShadow: editMannually ? '3px 3px 0px rgba(16, 185, 129, 0.4)' : '3px 3px 0px rgba(239, 68, 68, 0.4)'
+                }}
                 title="Deploy to Netlify"
               >{
                   editMannually ? (
                     <>
                       <SaveIcon className="w-3 h-3 mr-1.5" />
-                      <span>Save</span>
+                      <span>💾 Save</span>
                     </>
                   ) : (
                     <>
                       <Trash2Icon className="w-3 h-3 mr-1.5" />
-                      <span>Clear Chat</span>
+                      <span>🗑️ Clear Chat</span>
                     </>
                   )
                 }
@@ -472,26 +494,30 @@ const DesignChat = ({ website, onClose }) => {
                   });
                 }}
                 // disabled={isDeploying}
-                className={`px-4 py-2 rounded-md flex items-center text-xs text-white
+                className={`px-4 py-2 flex items-center text-xs text-white
                     bg-gradient-to-r from-green-500 to-green-500 hover:from-green-600 hover:to-green-600
-                    transition-all duration-150 `}
+                    transition-all duration-150 shadow-lg transform hover:scale-105`}
+                style={{
+                  borderRadius: '25px 15px 30px 20px',
+                  boxShadow: '3px 3px 0px rgba(34, 197, 94, 0.4)'
+                }}
                 title="Deploy to Netlify"
               >
 
                 <Code2Icon className="w-3 h-3 mr-1.5" />
-                <span>Save Code</span>
+                <span>💾 Save Code</span>
               </button>
             }
-            {!codeEdit && <button onClick={handleRefreshPreview} className={buttonClasses()} title="Refresh Preview"><RefreshCw className="h-5 w-5" /></button>}
-            {!codeEdit && <button onClick={handleDownload} className={buttonClasses()} title="Download Code"><Download className="h-5 w-5" /></button>}
-            {!codeEdit && <button onClick={() => dispatch(setFullScrrenPreview(true))} className={buttonClasses()} title="Fullscreen"><Maximize className="h-5 w-5" /></button>}
-            {!codeEdit && <div className={`w-px h-6 mx-1 ${darkMode ? 'bg-slate-700' : 'bg-slate-200'}`}></div>}
-            <button onClick={onClose} className="p-2 text-slate-400 hover:text-white hover:bg-red-500 rounded-md transition-all" title="Close"><X className="h-5 w-5" /></button>
+            {!codeEdit && <button onClick={handleRefreshPreview} className="p-2 text-slate-600 hover:text-amber-700 hover:bg-amber-100 transition-all" style={{borderRadius: '12px 8px 15px 10px'}} title="Refresh Preview"><RefreshCw className="h-5 w-5" /></button>}
+            {!codeEdit && <button onClick={handleDownload} className="p-2 text-slate-600 hover:text-amber-700 hover:bg-amber-100 transition-all" style={{borderRadius: '10px 15px 8px 12px'}} title="Download Code"><Download className="h-5 w-5" /></button>}
+            {!codeEdit && <button onClick={() => dispatch(setFullScrrenPreview(true))} className="p-2 text-slate-600 hover:text-amber-700 hover:bg-amber-100 transition-all" style={{borderRadius: '8px 12px 15px 10px'}} title="Fullscreen"><Maximize className="h-5 w-5" /></button>}
+            {!codeEdit && <div className={`w-px h-6 mx-1 bg-amber-300`}></div>}
+            <button onClick={onClose} className="p-2 text-slate-600 hover:text-white hover:bg-red-400 transition-all shadow-lg transform hover:scale-105" style={{borderRadius: '15px 10px 20px 15px', boxShadow: '2px 2px 0px rgba(239, 68, 68, 0.3)'}} title="Close"><X className="h-5 w-5" /></button>
           </div>
         </header>}
 
         {editMannually && !codeEdit &&
-          <div className="min-h-screen bg-gray-50">
+          <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
             <EditorLayoutV2 viewport={previewMode} />
           </div>
         }
@@ -521,7 +547,7 @@ const DesignChat = ({ website, onClose }) => {
         />}
         {
           codeEdit &&
-          <Suspense fallback={<div className="text-white">Loading Editor...</div>}>
+          <Suspense fallback={<div className="text-slate-800 p-8 text-center">🔄 Loading Editor...</div>}>
             <CodeEditor />
           </Suspense>
 

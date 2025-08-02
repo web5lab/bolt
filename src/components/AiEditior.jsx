@@ -61,33 +61,36 @@ function AiEditior({ fullScreenPreview,handleHtmlPreview, handleFullScreenHtml,i
             return (
                 <div className="space-y-3">
                     {textContent && (
-                        <p className="text-sm leading-relaxed">{textContent}</p>
+                        <p className="text-sm leading-relaxed">✨ {textContent}</p>
                     )}
 
-                    <div className={`border rounded-lg overflow-hidden w-full ${darkMode ? 'border-slate-600' : 'border-slate-300'}`}>
-                        <div className={`flex items-center justify-between p-2 ${darkMode ? 'bg-slate-800/50' : 'bg-slate-100'} border-b ${darkMode ? 'border-slate-600' : 'border-slate-300'}`}>
+                    <div className={`border-2 border-amber-300 overflow-hidden w-full shadow-lg`} style={{borderRadius: '15px 20px 15px 20px', boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'}}>
+                        <div className={`flex items-center justify-between p-2 bg-amber-100 border-b-2 border-amber-300`} style={{borderBottomStyle: 'dashed'}}>
                             <div className="flex items-center gap-2">
-                                <Code className="h-4 w-4 text-blue-500" />
-                                <span className="text-xs font-medium">HTML Preview</span>
+                                <Code className="h-4 w-4 text-amber-600" />
+                                <span className="text-xs font-medium text-slate-700">💻 HTML Preview</span>
                             </div>
                             <div className="flex items-center gap-1">
                                 <button
                                     onClick={() => handleCopyHtml(htmlContent)}
-                                    className={`p-1 hover:${darkMode ? 'bg-slate-700' : 'bg-slate-200'} rounded text-xs transition-colors`}
+                                    className={`p-1 hover:bg-amber-200 text-xs transition-colors`}
+                                    style={{borderRadius: '8px'}}
                                     title="Copy HTML"
                                 >
                                     {copiedMessageId === 'html-copied' ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                                 </button>
                                 <button
                                     onClick={() => handleHtmlPreview(htmlContent)}
-                                    className={`p-1 hover:${darkMode ? 'bg-slate-700' : 'bg-slate-200'} rounded text-xs transition-colors`}
+                                    className={`p-1 hover:bg-amber-200 text-xs transition-colors`}
+                                    style={{borderRadius: '8px'}}
                                     title="Preview HTML"
                                 >
                                     <Eye className="h-3 w-3" />
                                 </button>
                                 <button
                                     onClick={() => handleFullScreenHtml(htmlContent)}
-                                    className={`p-1 hover:${darkMode ? 'bg-slate-700' : 'bg-slate-200'} rounded text-xs transition-colors`}
+                                    className={`p-1 hover:bg-amber-200 text-xs transition-colors`}
+                                    style={{borderRadius: '8px'}}
                                     title="Full Screen Preview"
                                 >
                                     <ExternalLink className="h-3 w-3" />
@@ -97,7 +100,8 @@ function AiEditior({ fullScreenPreview,handleHtmlPreview, handleFullScreenHtml,i
 
                         <div className="p-3 w-full max-h-80 overflow-y-auto">
                             <iframe
-                                className="w-full h-80 block border rounded"
+                                className="w-full h-80 block border-2 border-amber-200"
+                                style={{borderRadius: '12px 8px 15px 10px'}}
                                 srcDoc={htmlContent}
                                 sandbox="allow-scripts allow-same-origin"
                                 title="HTML Preview"
@@ -108,18 +112,22 @@ function AiEditior({ fullScreenPreview,handleHtmlPreview, handleFullScreenHtml,i
                     <button
                         onClick={() => handleApplyChanges(htmlContent)}
                         disabled={isApplying}
-                        className="px-3 w-full py-2 bg-green-500 hover:bg-green-600 rounded-md text-white text-sm transition-colors flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-3 w-full py-2 bg-emerald-400 hover:bg-emerald-500 text-white text-sm transition-colors flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg transform hover:scale-105"
+                        style={{
+                            borderRadius: '15px 10px 20px 15px',
+                            boxShadow: '3px 3px 0px rgba(16, 185, 129, 0.4)'
+                        }}
                         title="Apply HTML Changes"
                     >
                         {isApplying ? (
                             <>
                                 <Loader2 className="h-3 w-3 animate-spin" />
-                                Applying...
+                                🔄 Applying...
                             </>
                         ) : (
                             <>
                                 <Edit className="h-3 w-3" />
-                                Apply
+                                ✅ Apply Changes
                             </>
                         )}
                     </button>
@@ -127,7 +135,7 @@ function AiEditior({ fullScreenPreview,handleHtmlPreview, handleFullScreenHtml,i
             );
         }
 
-        return <p className="text-sm leading-relaxed">{message.content}</p>;
+        return <p className="text-sm leading-relaxed">💬 {message.content}</p>;
     };
 
     const handleSendMessage = async (e) => {
@@ -268,42 +276,45 @@ function AiEditior({ fullScreenPreview,handleHtmlPreview, handleFullScreenHtml,i
         }
       };
     return (
-        <div className={cn("flex flex-1 overflow-hidden", fullScreenPreview && "p-8")}>
+        <div className={cn("flex flex-1 overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50", fullScreenPreview && "p-8")}>
             {/* Chat Panel */}
-            <div className={`min-w-96 ${showPreview ? "w-96" : (showHistory ? 'flex-1' : 'w-96')} flex flex-col ${showPreview ? 'border-r' : ''} ${darkMode ? 'border-slate-700' : 'border-slate-200'}`}>
-                <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+            <div className={`min-w-96 ${showPreview ? "w-96" : (showHistory ? 'flex-1' : 'w-96')} flex flex-col ${showPreview ? 'border-r-2 border-amber-300' : ''}`} style={{borderRightStyle: 'dashed'}}>
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar bg-white/50">
                     {messages?.map((message) => (
                         <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} max-w-80`}>
                             <div className={`flex items-start gap-3  ${message.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                                <div className={`p-2 rounded-full ${message.role === 'user'
-                                    ? 'bg-gradient-to-r from-indigo-500 to-purple-500'
+                                <div className={`p-2 ${message.role === 'user'
+                                    ? 'bg-gradient-to-r from-blue-400 to-indigo-500'
                                     : message.isError
-                                        ? 'bg-red-500'
-                                        : 'bg-gradient-to-r from-blue-500 to-cyan-500'
-                                    }`}>
+                                        ? 'bg-red-400'
+                                        : 'bg-gradient-to-r from-emerald-400 to-teal-500'
+                                    } shadow-lg border-2 ${message.role === 'user' ? 'border-blue-500' : message.isError ? 'border-red-500' : 'border-emerald-500'}`} style={{borderRadius: '50%', boxShadow: '2px 2px 0px rgba(0,0,0,0.1)'}}>
                                     {message.role === 'user' ? <User className="h-4 w-4 text-white" /> : <Bot className="h-4 w-4 text-white" />}
                                 </div>
-                                <div className={`rounded-xl p-4 relative group ${message.role === 'user'
-                                    ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white'
+                                <div className={`p-4 relative group border-2 shadow-lg ${message.role === 'user'
+                                    ? 'bg-gradient-to-r from-blue-400 to-indigo-500 text-white border-blue-500'
                                     : message.isError
-                                        ? (darkMode ? 'bg-red-500/20 text-red-300 border border-red-500/30' : 'bg-red-50 text-red-700 border border-red-200')
-                                        : (darkMode ? 'bg-slate-700/70 text-slate-200 border border-slate-600/50' : 'bg-slate-50 text-slate-700 border border-slate-200')
-                                    }`}>
+                                        ? 'bg-red-100 text-red-700 border-red-300'
+                                        : 'bg-white text-slate-700 border-amber-300'
+                                    }`} style={{
+                                        borderRadius: message.role === 'user' ? '20px 15px 5px 20px' : '15px 20px 20px 5px',
+                                        boxShadow: '3px 3px 0px rgba(0,0,0,0.1)'
+                                    }}>
                                     {message.role === 'model' && !message.content && isLoading ? (
                                         <div className="flex items-center gap-1 mt-1">
-                                            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                                            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                                            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                                            <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                                            <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                                            <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                                         </div>
                                     ) : (
                                         renderMessageContent(message)
                                     )}
                                     <div className="flex items-center justify-between mt-2">
-                                        <p className="text-xs opacity-70">{formatTime(message.timestamp)}</p>
+                                        <p className="text-xs opacity-70">🕐 {formatTime(message.timestamp)}</p>
                                         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <button
                                                 onClick={() => handleCopyMessage(message)}
-                                                className="p-1 hover:bg-white/10 rounded transition-colors"
+                                                className="p-1 hover:bg-white/20 transition-colors" style={{borderRadius: '8px'}}
                                             >
                                                 {copiedMessageId === message.id ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                                             </button>
@@ -317,19 +328,21 @@ function AiEditior({ fullScreenPreview,handleHtmlPreview, handleFullScreenHtml,i
                 </div>
 
                 {/* Input */}
-                <div className={`p-4 border-t ${darkMode ? 'border-slate-700' : 'border-slate-200'}`}>
+                <div className={`p-4 border-t-2 border-amber-300 bg-white/80`} style={{borderTopStyle: 'dashed'}}>
                     {/* 🟢 Toggle: Discussion Mode */}
                     <div className="flex items-center justify-between mb-3">
-                        <label className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300">
-                            <span>Discussion Mode</span>
+                        <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+                            <span>💬 Discussion Mode</span>
                             <button
                                 onClick={() => setDiscussionMode(!discussionMode)}
-                                className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${discussionMode ? 'bg-indigo-600' : 'bg-gray-300'
+                                className={`w-11 h-6 flex items-center p-1 transition-colors duration-300 border-2 ${discussionMode ? 'bg-amber-400 border-amber-500' : 'bg-slate-300 border-slate-400'
                                     }`}
+                                style={{borderRadius: '15px'}}
                             >
                                 <div
-                                    className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${discussionMode ? 'translate-x-5' : 'translate-x-0'
+                                    className={`w-4 h-4 bg-white shadow-md transform transition-transform duration-300 ${discussionMode ? 'translate-x-5' : 'translate-x-0'
                                         }`}
+                                    style={{borderRadius: '50%'}}
                                 />
                             </button>
                         </label>
@@ -342,14 +355,22 @@ function AiEditior({ fullScreenPreview,handleHtmlPreview, handleFullScreenHtml,i
                             type="text"
                             value={inputMessage}
                             onChange={(e) => setInputMessage(e.target.value)}
-                            placeholder="Describe your vision... (e.g., 'Make the hero section more vibrant')"
+                            placeholder="✨ Describe your vision... (e.g., 'Make the hero section more vibrant')"
                             disabled={isLoading}
-                            className={`flex-1 ${inputClasses} rounded-xl px-4 py-3 placeholder-opacity-60 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 disabled:opacity-50 transition-all duration-200`}
+                            className={`flex-1 bg-white border-2 border-amber-300 text-slate-800 px-4 py-3 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 disabled:opacity-50 transition-all duration-200 shadow-lg`}
+                            style={{
+                                borderRadius: '20px 15px 25px 10px',
+                                boxShadow: '2px 2px 0px rgba(245, 158, 11, 0.3)'
+                            }}
                         />
                         <button
                             type="submit"
                             disabled={!inputMessage?.trim() || isLoading}
-                            className={`px-4 py-3 rounded-xl text-white hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600`}
+                            className={`px-4 py-3 text-white hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 shadow-lg`}
+                            style={{
+                                borderRadius: '15px 20px 10px 25px',
+                                boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.4)'
+                            }}
                         >
                             {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
                         </button>
@@ -359,14 +380,19 @@ function AiEditior({ fullScreenPreview,handleHtmlPreview, handleFullScreenHtml,i
 
             {/* Preview Panel */}
             {showPreview && (
-                <div className={`w-full flex flex-col ${darkMode ? 'bg-slate-900' : 'bg-slate-50'}`}>
+                <div className={`w-full flex flex-col bg-gradient-to-br from-white to-amber-50/30`}>
 
                     <div className="flex-1 relative flex items-center justify-center p-4">
-                        <div className={`relative rounded-lg overflow-hidden shadow-2xl transition-all duration-300 ${previewMode === 'mobile' ? 'border-8 border-slate-800' : ''}`} style={getPreviewDimensions()}>
+                        <div className={`relative overflow-hidden shadow-2xl transition-all duration-300 border-3 border-amber-300 ${previewMode === 'mobile' ? 'border-8 border-amber-400' : ''}`} style={{
+                            ...getPreviewDimensions(),
+                            borderRadius: '20px 15px 25px 10px',
+                            boxShadow: '6px 6px 0px rgba(245, 158, 11, 0.3)'
+                        }}>
                             {htmlPreview ? (
                                 <iframe
                                     srcDoc={htmlPreview}
                                     className="w-full h-full border-none"
+                                    style={{borderRadius: '17px 12px 22px 7px'}}
                                     title="HTML Preview"
                                     sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
                                 />
@@ -375,6 +401,7 @@ function AiEditior({ fullScreenPreview,handleHtmlPreview, handleFullScreenHtml,i
                                     key={`${website.uuid}-${previewKey}`}
                                     src={`${import.meta.env.VITE_FILE_SERVER_URL}/saved-pages/${website.uuid}`}
                                     className="w-full h-full border-none"
+                                    style={{borderRadius: '17px 12px 22px 7px'}}
                                     title="Website Preview"
                                     sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
                                 />

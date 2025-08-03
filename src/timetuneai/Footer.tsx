@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bell } from 'lucide-react';
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.png';
 
 const Footer: React.FC = () => {
   return (
@@ -62,36 +62,6 @@ const Footer: React.FC = () => {
               <span className="text-slate-600 font-medium">📧 GDPR Compliant</span>
               <span className="text-slate-400">•</span>
               <span className="text-slate-600 font-medium">🛡️ Secure by design</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-export default Footer;
-            TimeTuneAI
-          </a>
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-            <a href="/privacy" className="text-gray-300 hover:text-white transition duration-200">Privacy Policy</a>
-            <a href="#" className="text-gray-300 hover:text-white transition duration-200">Terms of Service</a>
-            <a href="/request-data" className="text-gray-300 hover:text-white transition duration-200">Request Data</a>
-            <a href="/request-delete" className="text-gray-300 hover:text-white transition duration-200">Delete Account</a>
-            <a href="mailto:support@timetuneai.com" className="text-gray-300 hover:text-white transition duration-200">Contact Us</a>
-          </div>
-        </div>
-        <div className="border-t border-yellow-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
-            <div className="mb-4 md:mb-0">
-              &copy; 2025 TimeTuneAI. All rights reserved.
-            </div>
-            <div className="flex flex-wrap justify-center gap-4 text-xs">
-              <span>🔒 Your privacy is protected</span>
-              <span>•</span>
-              <span>📧 GDPR Compliant</span>
-              <span>•</span>
-              <span>🛡️ Secure by design</span>
             </div>
           </div>
         </div>

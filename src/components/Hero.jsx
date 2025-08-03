@@ -68,7 +68,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="pt-28 pb-20 min-h-[100vh] md:pt-32 md:pb-24 relative overflow-hidden bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50">
+    <section className="pt-20 pb-12 min-h-[100vh] md:pt-24 md:pb-16 relative overflow-hidden bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50">
       {/* Paper texture overlay */}
       <div className="absolute inset-0 opacity-30" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a574' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='53' cy='53' r='1'/%3E%3Ccircle cx='13' cy='43' r='1'/%3E%3Ccircle cx='47' cy='17' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
@@ -102,10 +102,379 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center md:mb-12">
+        <div className="max-w-7xl mx-auto">
+          {/* Main Grid Layout */}
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[80vh]">
+            
+            {/* Left Content */}
+            <div className="space-y-8">
+              {/* Hand-drawn badge */}
+              <div className="inline-block px-6 py-2 bg-white/80 backdrop-blur-sm border-2 border-amber-300 shadow-lg transition-all duration-300 transform hover:scale-105" style={{
+                borderRadius: '25px 20px 30px 15px',
+                boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
+              }}>
+                <span className="text-amber-700 text-sm font-medium flex items-center gap-2">
+                  <PenTool className="h-4 w-4" />
+                  ✨ Hand-Crafted AI Web Creation
+                </span>
+              </div>
+
+              {/* Main Heading */}
+              <div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-slate-800">
+                  <span className="relative inline-block">
+                    Create Beautiful
+                    <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 300 12" fill="none">
+                      <path d="M5 8 Q150 2 295 8" stroke="#f59e0b" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.6"/>
+                    </svg>
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-amber-600 via-orange-500 to-red-500 bg-clip-text text-transparent relative">
+                    Landing Pages
+                    <svg className="absolute -top-8 -right-8 w-16 h-16 text-yellow-400 opacity-60" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M32 8 L40 24 L56 24 L44 36 L48 52 L32 44 L16 52 L20 36 L8 24 L24 24 Z" strokeDasharray="2,2"/>
+                    </svg>
+                  </span>,
+                  <br />
+                  <span className="bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
+                    Redesign Websites
+                  </span>,
+                  <br />
+                  <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
+                    GitHub Docs
+                  </span> &{' '}
+                  <span className="bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">
+                    More
+                  </span>
+                  <br />
+                  <span className="text-slate-700">— in Minutes</span>
+                </h1>
+
+                <p className="text-slate-600 text-lg md:text-xl mb-8 leading-relaxed">
+                  Whether you're starting fresh or transforming existing content — our{' '}
+                  <span className="text-amber-600 font-semibold relative">
+                    AI Frontend Engineer
+                    <svg className="absolute -bottom-1 left-0 w-full h-2" viewBox="0 0 200 8" fill="none">
+                      <path d="M2 6 Q100 2 198 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.4"/>
+                    </svg>
+                  </span>{' '}
+                  turns your ideas, links, or repos into polished, high-converting pages. No code. Just launch.
+                </p>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={() => navigate('/dashboard')}
+                  className="group relative px-8 py-4 bg-gradient-to-r from-amber-400 to-orange-500 text-white font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 overflow-hidden"
+                  style={{
+                    borderRadius: '25px 15px 20px 30px',
+                    boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.4)'
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative z-10 flex items-center gap-2">
+                    🚀 Go to Dashboard
+                    <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => setShowVideo(true)}
+                  className="group px-8 py-4 border-3 border-slate-400 text-slate-700 font-bold text-lg hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50 transition-all duration-300"
+                  style={{
+                    borderRadius: '20px 30px 15px 25px',
+                    borderStyle: 'dashed'
+                  }}
+                >
+                  <span className="flex items-center gap-2">
+                    📖 View Demo
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+
+              {/* Features Info */}
+              <div className="p-6 bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200" style={{
+                borderRadius: '20px 30px 15px 25px',
+                borderStyle: 'dashed'
+              }}>
+                <div className="flex items-start gap-3">
+                  <Sparkles className="h-6 w-6 text-amber-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-slate-800 font-bold mb-2 text-lg">What you'll get: ✨</h3>
+                    <ul className="text-slate-700 space-y-2">
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-amber-400 rounded-full"></span>
+                        Production-ready HTML/CSS code
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-orange-400 rounded-full"></span>
+                        Responsive design for all devices
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                        SEO-optimized structure
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
+                        Clean, maintainable code
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Form */}
+            <div className="lg:sticky lg:top-24">
+              <div className="bg-white/90 backdrop-blur-sm border-3 border-amber-300 p-6 md:p-8 shadow-2xl relative" style={{
+                borderRadius: '30px 20px 35px 25px',
+                boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.2)'
+              }}>
+                {/* Decorative corner doodles */}
+                <div className="absolute top-2 left-2 w-6 h-6 border-2 border-amber-400 rounded-full opacity-40"></div>
+                <div className="absolute top-2 right-2 w-4 h-4 bg-orange-300 opacity-40 transform rotate-45"></div>
+                <div className="absolute bottom-2 left-2 w-5 h-5 bg-yellow-300 opacity-40 rounded-full"></div>
+                <div className="absolute bottom-2 right-2 w-6 h-6 border-2 border-red-400 opacity-40 transform rotate-12" style={{borderRadius: '30% 70% 70% 30%'}}></div>
+
+                <div className="text-center mb-6">
+                  <h2 className="text-2xl font-bold text-slate-800 mb-2 relative">
+                    Start Creating Now
+                    <svg className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-32 h-2" viewBox="0 0 128 8" fill="none">
+                      <path d="M2 6 Q64 2 126 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
+                    </svg>
+                  </h2>
+                  <p className="text-slate-600">Choose your creation mode and let AI do the magic ✨</p>
+                </div>
+
+                {/* Tabs */}
+                <div className="hidden md:flex flex-wrap justify-center gap-3 mb-6">
+                  {tabs.map((tab, index) => (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`flex items-center gap-2 px-4 py-2 font-semibold transition-all duration-300 transform hover:scale-105 ${
+                        activeTab === tab.id
+                          ? 'bg-gradient-to-r from-amber-400 to-orange-400 text-white shadow-lg'
+                          : 'bg-white border-2 border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-amber-50'
+                      }`}
+                      style={{
+                        borderRadius: index % 2 === 0 ? '20px 10px 25px 15px' : '15px 25px 10px 20px',
+                        boxShadow: activeTab === tab.id ? '3px 3px 0px rgba(245, 158, 11, 0.3)' : '2px 2px 0px rgba(148, 163, 184, 0.2)'
+                      }}
+                    >
+                      {tab.icon}
+                      <span className="text-sm">{tab.label}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="md:hidden mb-6">
+                  <select
+                    value={activeTab}
+                    onChange={(e) => setActiveTab(e.target.value)}
+                    className="w-full bg-white text-slate-700 border-2 border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    style={{borderRadius: '15px 25px 15px 25px'}}
+                  >
+                    {tabs.map((tab) => (
+                      <option key={tab.id} value={tab.id}>
+                        {tab.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Form */}
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Redesign Tab */}
+                  {activeTab === 'redesign' && (
+                    <div className="space-y-4">
+                      <div>
+                        <label htmlFor="url" className="block text-slate-800 font-semibold mb-2">
+                          Website URL to Redesign 🎨
+                        </label>
+                        <input
+                          type="url"
+                          id="url"
+                          value={formData.url}
+                          onChange={(e) => handleInputChange('url', e.target.value)}
+                          placeholder="https://example.com"
+                          className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                          style={{borderRadius: '15px 20px 15px 20px'}}
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="redesignInstructions" className="block text-slate-800 font-semibold mb-2">
+                          Special Instructions (Optional) ✏️
+                        </label>
+                        <input
+                          type="text"
+                          id="redesignInstructions"
+                          value={formData.instructions}
+                          onChange={(e) => handleInputChange('instructions', e.target.value)}
+                          placeholder="e.g., Make it more modern, improve mobile design"
+                          className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                          style={{borderRadius: '20px 15px 20px 15px'}}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* GitHub Docs Tab */}
+                  {activeTab === 'docs' && (
+                    <div className="space-y-4">
+                      {/* Source Selection */}
+                      <div className="flex bg-amber-50 p-2 mb-4" style={{borderRadius: '20px 15px 25px 10px', border: '2px dashed #f59e0b'}}>
+                        <button
+                          type="button"
+                          onClick={() => handleInputChange('docsSource', 'repo')}
+                          className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold transition-all ${
+                            (formData.docsSource || 'repo') === 'repo'
+                              ? 'bg-amber-400 text-white shadow-lg'
+                              : 'text-slate-700 hover:bg-white hover:text-amber-700'
+                          }`}
+                          style={{borderRadius: '15px 10px 20px 15px'}}
+                        >
+                          <Github className="h-4 w-4" />
+                          From Repository
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleInputChange('docsSource', 'readme')}
+                          className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold transition-all ${
+                            formData.docsSource === 'readme'
+                              ? 'bg-amber-400 text-white shadow-lg'
+                              : 'text-slate-700 hover:bg-white hover:text-amber-700'
+                          }`}
+                          style={{borderRadius: '10px 15px 15px 20px'}}
+                        >
+                          <FileText className="h-4 w-4" />
+                          From README
+                        </button>
+                      </div>
+
+                      {/* Repository URL Input */}
+                      {(formData.docsSource || 'repo') === 'repo' && (
+                        <div>
+                          <label htmlFor="repoUrl" className="block text-slate-800 font-semibold mb-2">
+                            GitHub Repository URL 📚
+                          </label>
+                          <input
+                            type="url"
+                            id="repoUrl"
+                            value={formData.repoUrl}
+                            onChange={(e) => handleInputChange('repoUrl', e.target.value)}
+                            placeholder="https://github.com/username/repository"
+                            className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            style={{borderRadius: '15px 20px 15px 20px'}}
+                          />
+                          <p className="text-slate-600 text-sm mt-2">
+                            We'll analyze your repository and create beautiful documentation ✨
+                          </p>
+                        </div>
+                      )}
+
+                      {/* README Content Input */}
+                      {formData.docsSource === 'readme' && (
+                        <div>
+                          <label htmlFor="readmeContent" className="block text-slate-800 font-semibold mb-2">
+                            README Content 📝
+                          </label>
+                          <textarea
+                            id="readmeContent"
+                            value={formData.readmeContent}
+                            onChange={(e) => handleInputChange('readmeContent', e.target.value)}
+                            rows={6}
+                            placeholder="Paste your README.md content here..."
+                            className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 font-mono text-sm"
+                            style={{borderRadius: '20px 15px 25px 10px'}}
+                          />
+                          <p className="text-slate-600 text-sm mt-2">
+                            Paste your README.md content and we'll transform it into beautiful documentation 🎨
+                          </p>
+                        </div>
+                      )}
+
+                      <div>
+                        <label htmlFor="docsInstructions" className="block text-slate-800 font-semibold mb-2">
+                          Documentation Focus (Optional) 🎯
+                        </label>
+                        <textarea
+                          id="docsInstructions"
+                          value={formData.instructions}
+                          onChange={(e) => handleInputChange('instructions', e.target.value)}
+                          rows={3}
+                          placeholder="e.g., Focus on API documentation, include installation guide, highlight key features"
+                          className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                          style={{borderRadius: '15px 25px 15px 25px'}}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Create Tab */}
+                  {activeTab === 'create' && (
+                    <div className="space-y-4">
+                      <div>
+                        <label htmlFor="createInstructions" className="block text-slate-800 font-semibold mb-2">
+                          Describe Your Website 💭
+                        </label>
+                        <textarea
+                          id="createInstructions"
+                          value={formData.instructions}
+                          onChange={(e) => handleInputChange('instructions', e.target.value)}
+                          rows={4}
+                          placeholder="e.g., A landing page for a SaaS product with pricing, testimonials, and signup form"
+                          className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                          style={{borderRadius: '20px 15px 25px 10px'}}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Submit Button */}
+                  <div className="flex justify-center pt-4">
+                    <button
+                      type="submit"
+                      disabled={!isFormValid() || isSubmitting}
+                      className={`flex items-center gap-3 px-10 py-4 font-bold text-lg transition-all duration-300 transform hover:scale-105 w-full justify-center ${
+                        isFormValid() && !isSubmitting
+                          ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white hover:from-amber-500 hover:to-orange-600 shadow-lg'
+                          : 'bg-slate-300 text-slate-500 cursor-not-allowed'
+                      }`}
+                      style={{
+                        borderRadius: '25px 15px 30px 20px',
+                        boxShadow: isFormValid() && !isSubmitting ? '4px 4px 0px rgba(245, 158, 11, 0.4)' : 'none'
+                      }}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          Creating Magic...
+                        </>
+                      ) : (
+                        <>
+                          <Zap className="h-5 w-5" />
+                          {activeTab === 'redesign' ? 'Redesign Website' :
+                            activeTab === 'docs' ? 'Generate Docs' :
+                              activeTab === 'blog' ? 'Generate Blog' : 'Create Website'}
+                          <ArrowRight className="h-5 w-5" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile-only content for smaller screens */}
+          <div className="lg:hidden text-center mt-12">
             {/* Hand-drawn badge */}
-            <div className="md:inline-block hidden px-6 py-2 mb-6 bg-white/80 backdrop-blur-sm border-2 border-amber-300 shadow-lg transition-all duration-300 transform hover:scale-105" style={{
+            <div className="inline-block px-6 py-2 mb-6 bg-white/80 backdrop-blur-sm border-2 border-amber-300 shadow-lg transition-all duration-300 transform hover:scale-105" style={{
               borderRadius: '25px 20px 30px 15px',
               boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
             }}>
@@ -116,7 +485,7 @@ const Hero = () => {
             </div>
 
             {/* Hand-drawn heading */}
-            <h1 className="text-4xl hidden md:block md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-slate-800">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-slate-800">
               <span className="relative inline-block">
                 Create Beautiful
                 <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 300 12" fill="none">
@@ -145,7 +514,7 @@ const Hero = () => {
               <span className="text-slate-700">— in Minutes</span>
             </h1>
 
-            <p className="text-slate-600 hidden md:block text-lg md:text-xl mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-slate-600 text-lg mb-8 leading-relaxed max-w-3xl mx-auto">
               Whether you're starting fresh or transforming existing content — our{' '}
               <span className="text-amber-600 font-semibold relative">
                 AI Frontend Engineer
@@ -155,325 +524,6 @@ const Hero = () => {
               </span>{' '}
               turns your ideas, links, or repos into polished, high-converting pages. No code. Just launch.
             </p>
-          </div>
-
-          {/* Hand-drawn CTA buttons */}
-          <div className="md:flex hidden mb-6 flex-col sm:flex-row gap-4 justify-center items-center">
-            <button
-              onClick={() => navigate('/dashboard')}
-              className="group relative px-8 py-4 bg-gradient-to-r from-amber-400 to-orange-500 text-white font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 overflow-hidden"
-              style={{
-                borderRadius: '25px 15px 20px 30px',
-                boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.4)'
-              }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative z-10 flex items-center gap-2">
-                🚀 Go to Dashboard
-                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </span>
-            </button>
-
-            <button
-              onClick={() => setShowVideo(true)}
-              className="group px-8 py-4 border-3 border-slate-400 text-slate-700 font-bold text-lg hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50 transition-all duration-300"
-              style={{
-                borderRadius: '20px 30px 15px 25px',
-                borderStyle: 'dashed'
-              }}
-            >
-              <span className="flex items-center gap-2">
-                📖 View Demo
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </span>
-            </button>
-          </div>
-
-          {/* Hand-drawn form container */}
-          <div className="max-w-4xl mx-auto mb-12">
-            <div className="bg-white/90 backdrop-blur-sm border-3 border-amber-300 p-6 md:p-8 shadow-2xl relative" style={{
-              borderRadius: '30px 20px 35px 25px',
-              boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.2)'
-            }}>
-              {/* Decorative corner doodles */}
-              <div className="absolute top-2 left-2 w-6 h-6 border-2 border-amber-400 rounded-full opacity-40"></div>
-              <div className="absolute top-2 right-2 w-4 h-4 bg-orange-300 opacity-40 transform rotate-45"></div>
-              <div className="absolute bottom-2 left-2 w-5 h-5 bg-yellow-300 opacity-40 rounded-full"></div>
-              <div className="absolute bottom-2 right-2 w-6 h-6 border-2 border-red-400 opacity-40 transform rotate-12" style={{borderRadius: '30% 70% 70% 30%'}}></div>
-
-              <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-slate-800 mb-2 relative">
-                  Start Creating Now
-                  <svg className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-32 h-2" viewBox="0 0 128 8" fill="none">
-                    <path d="M2 6 Q64 2 126 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
-                  </svg>
-                </h2>
-                <p className="text-slate-600">Choose your creation mode and let AI do the magic ✨</p>
-              </div>
-
-              {/* Hand-drawn tabs */}
-              <div className="md:flex hidden flex-wrap justify-center gap-3 mb-6">
-                {tabs.map((tab, index) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-2 px-6 py-3 font-semibold transition-all duration-300 transform hover:scale-105 ${
-                      activeTab === tab.id
-                        ? 'bg-gradient-to-r from-amber-400 to-orange-400 text-white shadow-lg'
-                        : 'bg-white border-2 border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-amber-50'
-                    }`}
-                    style={{
-                      borderRadius: index % 2 === 0 ? '20px 10px 25px 15px' : '15px 25px 10px 20px',
-                      boxShadow: activeTab === tab.id ? '3px 3px 0px rgba(245, 158, 11, 0.3)' : '2px 2px 0px rgba(148, 163, 184, 0.2)'
-                    }}
-                  >
-                    {tab.icon}
-                    <span className="text-sm">{tab.label}</span>
-                  </button>
-                ))}
-              </div>
-
-              <div className="md:hidden mb-6">
-                <select
-                  value={activeTab}
-                  onChange={(e) => setActiveTab(e.target.value)}
-                  className="w-full bg-white text-slate-700 border-2 border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                  style={{borderRadius: '15px 25px 15px 25px'}}
-                >
-                  {tabs.map((tab) => (
-                    <option key={tab.id} value={tab.id}>
-                      {tab.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Redesign Tab */}
-                {activeTab === 'redesign' && (
-                  <div className="space-y-4">
-                    <div>
-                      <label htmlFor="url" className="block text-slate-800 font-semibold mb-2">
-                        Website URL to Redesign 🎨
-                      </label>
-                      <input
-                        type="url"
-                        id="url"
-                        value={formData.url}
-                        onChange={(e) => handleInputChange('url', e.target.value)}
-                        placeholder="https://example.com"
-                        className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                        style={{borderRadius: '15px 20px 15px 20px'}}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="redesignInstructions" className="block text-slate-800 font-semibold mb-2">
-                        Special Instructions (Optional) ✏️
-                      </label>
-                      <input
-                        type="text"
-                        id="redesignInstructions"
-                        value={formData.instructions}
-                        onChange={(e) => handleInputChange('instructions', e.target.value)}
-                        placeholder="e.g., Make it more modern, improve mobile design"
-                        className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                        style={{borderRadius: '20px 15px 20px 15px'}}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* GitHub Docs Tab */}
-                {activeTab === 'docs' && (
-                  <div className="space-y-4">
-                    {/* Source Selection */}
-                    <div className="flex bg-amber-50 p-2 mb-4" style={{borderRadius: '20px 15px 25px 10px', border: '2px dashed #f59e0b'}}>
-                      <button
-                        type="button"
-                        onClick={() => handleInputChange('docsSource', 'repo')}
-                        className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold transition-all ${
-                          (formData.docsSource || 'repo') === 'repo'
-                            ? 'bg-amber-400 text-white shadow-lg'
-                            : 'text-slate-700 hover:bg-white hover:text-amber-700'
-                        }`}
-                        style={{borderRadius: '15px 10px 20px 15px'}}
-                      >
-                        <Github className="h-4 w-4" />
-                        From Repository
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleInputChange('docsSource', 'readme')}
-                        className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold transition-all ${
-                          formData.docsSource === 'readme'
-                            ? 'bg-amber-400 text-white shadow-lg'
-                            : 'text-slate-700 hover:bg-white hover:text-amber-700'
-                        }`}
-                        style={{borderRadius: '10px 15px 15px 20px'}}
-                      >
-                        <FileText className="h-4 w-4" />
-                        From README
-                      </button>
-                    </div>
-
-                    {/* Repository URL Input */}
-                    {(formData.docsSource || 'repo') === 'repo' && (
-                      <div>
-                        <label htmlFor="repoUrl" className="block text-slate-800 font-semibold mb-2">
-                          GitHub Repository URL 📚
-                        </label>
-                        <input
-                          type="url"
-                          id="repoUrl"
-                          value={formData.repoUrl}
-                          onChange={(e) => handleInputChange('repoUrl', e.target.value)}
-                          placeholder="https://github.com/username/repository"
-                          className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                          style={{borderRadius: '15px 20px 15px 20px'}}
-                        />
-                        <p className="text-slate-600 text-sm mt-2">
-                          We'll analyze your repository and create beautiful documentation ✨
-                        </p>
-                      </div>
-                    )}
-
-                    {/* README Content Input */}
-                    {formData.docsSource === 'readme' && (
-                      <div>
-                        <label htmlFor="readmeContent" className="block text-slate-800 font-semibold mb-2">
-                          README Content 📝
-                        </label>
-                        <textarea
-                          id="readmeContent"
-                          value={formData.readmeContent}
-                          onChange={(e) => handleInputChange('readmeContent', e.target.value)}
-                          rows={8}
-                          placeholder="Paste your README.md content here..."
-                          className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 font-mono text-sm"
-                          style={{borderRadius: '20px 15px 25px 10px'}}
-                        />
-                        <p className="text-slate-600 text-sm mt-2">
-                          Paste your README.md content and we'll transform it into beautiful documentation 🎨
-                        </p>
-                      </div>
-                    )}
-
-                    <div>
-                      <label htmlFor="docsInstructions" className="block text-slate-800 font-semibold mb-2">
-                        Documentation Focus (Optional) 🎯
-                      </label>
-                      <textarea
-                        id="docsInstructions"
-                        value={formData.instructions}
-                        onChange={(e) => handleInputChange('instructions', e.target.value)}
-                        rows={3}
-                        placeholder="e.g., Focus on API documentation, include installation guide, highlight key features"
-                        className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                        style={{borderRadius: '15px 25px 15px 25px'}}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* Create Tab */}
-                {activeTab === 'create' && (
-                  <div className="space-y-4">
-                    <div>
-                      <label htmlFor="createInstructions" className="block text-slate-800 font-semibold mb-2">
-                        Describe Your Website 💭
-                      </label>
-                      <textarea
-                        id="createInstructions"
-                        value={formData.instructions}
-                        onChange={(e) => handleInputChange('instructions', e.target.value)}
-                        rows={4}
-                        placeholder="e.g., A landing page for a SaaS product with pricing, testimonials, and signup form"
-                        className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                        style={{borderRadius: '20px 15px 25px 10px'}}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* Submit Button */}
-                <div className="flex justify-center pt-4">
-                  <button
-                    type="submit"
-                    disabled={!isFormValid() || isSubmitting}
-                    className={`flex items-center gap-3 px-10 py-4 font-bold text-lg transition-all duration-300 transform hover:scale-105 ${
-                      isFormValid() && !isSubmitting
-                        ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white hover:from-amber-500 hover:to-orange-600 shadow-lg'
-                        : 'bg-slate-300 text-slate-500 cursor-not-allowed'
-                    }`}
-                    style={{
-                      borderRadius: '25px 15px 30px 20px',
-                      boxShadow: isFormValid() && !isSubmitting ? '4px 4px 0px rgba(245, 158, 11, 0.4)' : 'none'
-                    }}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                        Creating Magic...
-                      </>
-                    ) : (
-                      <>
-                        <Zap className="h-5 w-5" />
-                        {activeTab === 'redesign' ? 'Redesign Website' :
-                          activeTab === 'docs' ? 'Generate Docs' :
-                            activeTab === 'blog' ? 'Generate Blog' : 'Create Website'}
-                        <ArrowRight className="h-5 w-5" />
-                      </>
-                    )}
-                  </button>
-                </div>
-              </form>
-
-              {/* Features Info */}
-              <div className="mt-8 p-6 bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200" style={{
-                borderRadius: '20px 30px 15px 25px',
-                borderStyle: 'dashed'
-              }}>
-                <div className="flex items-start gap-3">
-                  <Sparkles className="h-6 w-6 text-amber-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="text-slate-800 font-bold mb-2 text-lg">What you'll get: ✨</h3>
-                    <ul className="text-slate-700 space-y-2">
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-amber-400 rounded-full"></span>
-                        Production-ready HTML/CSS code
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-orange-400 rounded-full"></span>
-                        Responsive design for all devices
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
-                        SEO-optimized structure
-                      </li>
-                      {activeTab === 'docs' && (
-                        <>
-                          <li className="flex items-center gap-2">
-                            <span className="w-2 h-2 bg-emerald-400 rounded-full"></span>
-                            Interactive documentation with search
-                          </li>
-                          <li className="flex items-center gap-2">
-                            <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                            Code syntax highlighting
-                          </li>
-                        </>
-                      )}
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                        Clean, maintainable code
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

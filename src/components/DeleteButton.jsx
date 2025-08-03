@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trash2 } from 'lucide-react';
-import { useEditor } from '../context/EditorContext'; // Assuming this path is correct
-import { removeElement } from '../utils/domUtils'; // Assuming this path is correct
+import { useEditor } from '../context/EditorContext';
+import { removeElement } from '../utils/domUtils';
 
 const DeleteButton = () => {
   const { selectedElement, html, setHtml, iframeRef, addToHistory, setSelectedElement } = useEditor();
@@ -12,7 +12,6 @@ const DeleteButton = () => {
     // Don't allow deleting the body or html elements
     if (selectedElement.tagName.toLowerCase() === 'body' || 
         selectedElement.tagName.toLowerCase() === 'html') {
-      // Optionally, provide feedback to the user here (e.g., a toast notification)
       console.warn("Cannot delete <body> or <html> elements.");
       return;
     }
@@ -41,13 +40,14 @@ const DeleteButton = () => {
     <button
       onClick={handleDelete}
       aria-label="Delete selected element"
-      // Theme Change: Adjusted red shades for a slightly deeper, more "slate-like" feel,
-      // while maintaining strong visual cue for a destructive action.
-      // It will fit well on a bg-slate-800 (PropertiesPanel background) or similar dark surface.
-      className="flex items-center justify-center w-full px-4 py-2 bg-red-700 hover:bg-red-800 text-white rounded-md text-sm font-medium transition-colors duration-200 mb-4 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75"
+      className="flex items-center justify-center w-full px-4 py-3 bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white font-bold text-sm transition-all duration-300 mb-4 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 transform hover:scale-105 shadow-lg"
+      style={{
+        borderRadius: '20px 15px 25px 10px',
+        boxShadow: '3px 3px 0px rgba(239, 68, 68, 0.3)'
+      }}
     >
       <Trash2 className="w-4 h-4 mr-2 flex-shrink-0" />
-      Delete Element
+      🗑️ Delete Element
     </button>
   );
 };

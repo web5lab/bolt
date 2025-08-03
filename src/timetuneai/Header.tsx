@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Bell, X } from 'lucide-react';
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.png';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -30,6 +30,7 @@ const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex space-x-6 xl:space-x-8">
             <a href="#features" className="text-gray-600 dark:text-gray-300 hover:text-primary-500 transition duration-200 font-medium">
+            </a>
             <a href="#features" className="text-slate-700 hover:text-blue-600 transition-colors font-medium relative group">
               Features
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>

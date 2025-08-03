@@ -28,30 +28,77 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-20 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50">
+    <section id="faq" className="py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 relative overflow-hidden">
+      {/* Paper texture overlay */}
+      <div className="absolute inset-0 opacity-20" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234f46e5' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+      }}></div>
+
+      {/* Hand-drawn decorative elements */}
+      <div className="absolute top-1/4 right-1/6 w-24 h-24 border-2 border-blue-400 opacity-30 transform rotate-12" style={{
+        borderRadius: '60% 40% 70% 30%',
+        borderStyle: 'dashed'
+      }}></div>
+      <div className="absolute bottom-1/3 left-1/6 w-20 h-20 border-2 border-indigo-400 opacity-25 transform -rotate-12" style={{
+        borderRadius: '40% 60% 30% 70%',
+        borderStyle: 'dotted'
+      }}></div>
+      <div className="absolute top-1/2 right-1/2 w-16 h-16 border-3 border-cyan-400 opacity-20 transform rotate-45" style={{
+        borderRadius: '50% 30% 60% 40%',
+        borderStyle: 'dashed'
+      }}></div>
+
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
-        <p className="text-xl text-gray-700 mb-16 max-w-3xl mx-auto">
-          Find quick answers to the most common questions about TimeTuneAI.
-        </p>
+        <div className="mb-16">
+          {/* Badge */}
+          <div className="inline-block px-6 py-2 mb-6 bg-white/80 backdrop-blur-sm border-2 border-blue-300 shadow-lg" style={{
+            borderRadius: '25px 15px 30px 20px',
+            boxShadow: '3px 3px 0px rgba(59, 130, 246, 0.3)'
+          }}>
+            <span className="text-blue-700 text-sm font-semibold">❓ Frequently Asked Questions</span>
+          </div>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6 relative">
+            Got{' '}
+            <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent relative">
+              Questions?
+              <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 200 12" fill="none">
+                <path d="M5 8 Q100 4 195 8" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.6"/>
+              </svg>
+            </span>{' '}
+            We've Got Answers! ✨
+          </h2>
+          <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Find quick answers to the most common questions about{' '}
+            <span className="text-blue-600 font-semibold">TimeTuneAI</span>. 
+            Still have questions? We're here to help! 🤝
+          </p>
+        </div>
 
         <div className="max-w-3xl mx-auto space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-md border border-yellow-100 overflow-hidden transform hover:scale-[1.005] transition duration-200">
+            <div key={index} className="bg-white/90 backdrop-blur-sm shadow-lg border-2 border-blue-200 overflow-hidden transform hover:scale-[1.005] transition-all duration-300 hover:shadow-xl" style={{
+              borderRadius: index % 2 === 0 ? '25px 15px 30px 20px' : '20px 30px 15px 25px',
+              boxShadow: '4px 4px 0px rgba(59, 130, 246, 0.2)'
+            }}>
+              {/* Decorative corner elements */}
+              <div className="absolute top-2 left-2 w-2 h-2 bg-blue-400 opacity-40 rounded-full"></div>
+              <div className="absolute top-2 right-2 w-3 h-3 border border-indigo-400 opacity-30 transform rotate-45"></div>
+
               <button 
                 onClick={() => toggleFAQ(index)}
-                className="flex justify-between items-center w-full text-left p-6 font-semibold text-lg text-gray-900 hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="flex justify-between items-center w-full text-left p-6 font-bold text-lg text-slate-800 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
               >
-                <span>{faq.question}</span>
+                <span className="pr-4">{faq.question}</span>
                 <ChevronDown 
-                  className={`w-6 h-6 transform transition-transform duration-300 ${
+                  className={`w-6 h-6 text-blue-500 transform transition-transform duration-300 flex-shrink-0 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`} 
                 />
               </button>
               {openIndex === index && (
-                <div className="px-6 pb-6 text-gray-700 leading-relaxed border-t border-yellow-200">
-                  <p className="pt-4">{faq.answer}</p>
+                <div className="px-6 pb-6 text-slate-700 leading-relaxed border-t-2 border-blue-200 animate-fadeIn" style={{borderStyle: 'dashed'}}>
+                  <p className="pt-4 font-medium">{faq.answer}</p>
                 </div>
               )}
             </div>

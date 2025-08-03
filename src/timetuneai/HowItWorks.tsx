@@ -101,7 +101,6 @@ const HowItWorks: React.FC = () => {
               return (
                 <div key={index} className="group">
                   {/* Step Card */}
-                  <div className={`relative bg-gradient-to-br ${step.bgColor} rounded-3xl p-8 shadow-xl border border-white/50 hover:shadow-2xl transition-all duration-500 hover:scale-105 overflow-hidden`}>
                   <div className={`relative bg-gradient-to-br ${step.bgColor} p-8 shadow-xl border-2 border-blue-200 hover:shadow-2xl transition-all duration-500 hover:scale-105 overflow-hidden`} style={{
                     borderRadius: index % 2 === 0 ? '30px 20px 35px 25px' : '25px 35px 20px 30px',
                     boxShadow: '6px 6px 0px rgba(59, 130, 246, 0.2)'

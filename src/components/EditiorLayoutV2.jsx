@@ -58,6 +58,7 @@ function EditorLayoutV2 ({ viewport = "desktop" }) {
                                                 🎯 Click on any element in the preview canvas to see and edit its properties.
                                                 Start creating your masterpiece! 🎨
                                             </p>
+                                        </div>
                                     </div>
                                 </div>
                             )}
@@ -70,6 +71,6 @@ function EditorLayoutV2 ({ viewport = "desktop" }) {
             </div>
         </div>
     );
-};
+}
 
 export default EditorLayoutV2;

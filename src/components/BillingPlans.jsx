@@ -436,6 +436,41 @@ const BillingPlans = ({ isOpen, onClose }) => {
               </div>
             </div>
           </div>
+
+          {/* Cancel Subscription Section */}
+          <div className="bg-white/80 backdrop-blur-sm border-3 border-red-300 p-6 mt-6 relative" style={{
+            borderRadius: '30px 20px 35px 25px',
+            borderStyle: 'dashed'
+          }}>
+            {/* Decorative elements */}
+            <div className="absolute top-2 left-2 w-3 h-3 bg-red-400 opacity-40 rounded-full"></div>
+            <div className="absolute top-3 right-3 w-2 h-2 border-2 border-red-400 opacity-50 transform rotate-45"></div>
+            
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-red-100 border-2 border-red-400" style={{borderRadius: '15px 10px 20px 15px'}}>
+                <X className="h-6 w-6 text-red-600" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-red-800 mb-2">
+                  Need to Cancel Your Subscription? 
+                </h3>
+                <p className="text-slate-600 leading-relaxed mb-4">
+                  We're sorry to see you go! If you need to cancel your subscription, please contact our support team and we'll help you right away.
+                </p>
+                <a
+                  href="mailto:shiva@redesignr.ai?subject=Cancel Subscription Request&body=Hi, I would like to cancel my subscription. Please process this request and confirm the cancellation. Thank you."
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-bold transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  style={{
+                    borderRadius: '20px 15px 25px 10px',
+                    boxShadow: '3px 3px 0px rgba(239, 68, 68, 0.4)'
+                  }}
+                >
+                  <X className="h-4 w-4" />
+                  Cancel Subscription
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

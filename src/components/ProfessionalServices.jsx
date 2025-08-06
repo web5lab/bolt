@@ -8,12 +8,12 @@ const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon
     <div
       className={`relative flex flex-col h-full group transition-all duration-500 transform hover:scale-105 ${
         isPopular
-          ? 'bg-gradient-to-br from-blue-100 via-white to-indigo-100 border-3 border-blue-400 shadow-2xl'
-          : 'bg-white border-2 border-slate-300 hover:border-blue-400 shadow-lg hover:shadow-xl'
+          ? 'bg-gradient-to-br from-amber-100 via-white to-orange-100 border-3 border-amber-400 shadow-2xl'
+          : 'bg-white border-2 border-slate-300 hover:border-amber-400 shadow-lg hover:shadow-xl'
       } overflow-hidden backdrop-blur-sm`}
       style={{
         borderRadius: index % 2 === 0 ? '30px 20px 35px 25px' : '25px 35px 20px 30px',
-        boxShadow: isPopular ? '8px 8px 0px rgba(59, 130, 246, 0.3)' : '4px 4px 0px rgba(148, 163, 184, 0.2)'
+        boxShadow: isPopular ? '8px 8px 0px rgba(245, 158, 11, 0.3)' : '4px 4px 0px rgba(148, 163, 184, 0.2)'
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -21,9 +21,9 @@ const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon
       {/* Hand-drawn decorative elements */}
       {isPopular && (
         <>
-          <div className="absolute top-2 right-2 w-4 h-4 bg-blue-400 rounded-full opacity-60"></div>
-          <div className="absolute top-4 left-4 w-3 h-3 border-2 border-indigo-400 opacity-50 transform rotate-45"></div>
-          <div className="absolute bottom-4 right-6 w-2 h-2 bg-blue-400 opacity-70 transform rotate-12" style={{borderRadius: '30% 70%'}}></div>
+          <div className="absolute top-2 right-2 w-4 h-4 bg-amber-400 rounded-full opacity-60"></div>
+          <div className="absolute top-4 left-4 w-3 h-3 border-2 border-orange-400 opacity-50 transform rotate-45"></div>
+          <div className="absolute bottom-4 right-6 w-2 h-2 bg-amber-400 opacity-70 transform rotate-12" style={{borderRadius: '30% 70%'}}></div>
         </>
       )}
 
@@ -31,7 +31,7 @@ const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon
       {isPopular && (
         <div className="absolute -top-2 -right-2 z-10">
           <div className="relative">
-            <div className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white text-xs font-bold px-4 py-2 shadow-lg" style={{
+            <div className="bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs font-bold px-4 py-2 shadow-lg" style={{
               borderRadius: '20px 15px 25px 10px'
             }}>
               ⭐ MOST POPULAR
@@ -40,15 +40,15 @@ const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon
         </div>
       )}
 
-      <div className="p-6 border-b-2 border-blue-200 relative z-10" style={{borderStyle: 'dashed'}}>
+      <div className="p-6 border-b-2 border-amber-200 relative z-10" style={{borderStyle: 'dashed'}}>
         {/* Icon and name */}
         <div className="flex items-center gap-3 mb-3">
           <div className={`p-3 transition-all duration-300 group-hover:scale-110 ${
-            isPopular ? 'bg-gradient-to-r from-blue-200 to-indigo-200' : 'bg-slate-100'
+            isPopular ? 'bg-gradient-to-r from-amber-200 to-orange-200' : 'bg-slate-100'
           }`} style={{borderRadius: '15px 10px 20px 15px'}}>
-            <Icon className={`h-6 w-6 ${isPopular ? 'text-blue-600' : 'text-slate-600'} group-hover:text-blue-600 transition-colors duration-300`} />
+            <Icon className={`h-6 w-6 ${isPopular ? 'text-amber-600' : 'text-slate-600'} group-hover:text-amber-600 transition-colors duration-300`} />
           </div>
-          <h3 className="text-xl font-bold text-slate-800 group-hover:text-blue-700 transition-colors duration-300">{name}</h3>
+          <h3 className="text-xl font-bold text-slate-800 group-hover:text-amber-700 transition-colors duration-300">{name}</h3>
         </div>
 
         <p className="text-slate-600 mb-4 group-hover:text-slate-700 transition-colors duration-300 leading-relaxed">{description}</p>
@@ -57,8 +57,8 @@ const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon
           <div className="flex items-baseline gap-1">
             <span className={`text-4xl font-bold transition-all duration-300 ${
               isPopular
-                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent'
-                : 'text-slate-800 group-hover:text-blue-600'
+                ? 'bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent'
+                : 'text-slate-800 group-hover:text-amber-600'
             }`}>
               {price}
             </span>
@@ -66,7 +66,7 @@ const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon
               <span className="text-slate-500 ml-1 group-hover:text-slate-600 transition-colors duration-300">+</span>
             )}
           </div>
-          <div className="text-blue-600 text-sm font-semibold mt-1 flex items-center gap-1">
+          <div className="text-amber-600 text-sm font-semibold mt-1 flex items-center gap-1">
             <Zap className="h-3 w-3" />
             Professional development ✨
           </div>
@@ -76,12 +76,12 @@ const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon
           onClick={() => onContact(name)}
           className={`w-full py-3 px-4 font-bold transition-all duration-300 transform hover:scale-105 shadow-lg relative overflow-hidden ${
             isPopular
-              ? 'bg-gradient-to-r from-blue-400 to-indigo-500 text-white hover:from-blue-500 hover:to-indigo-600'
-              : 'bg-white border-2 border-slate-300 text-slate-700 hover:bg-blue-50 hover:border-blue-400 hover:text-blue-700'
+              ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white hover:from-amber-500 hover:to-orange-600'
+              : 'bg-white border-2 border-slate-300 text-slate-700 hover:bg-amber-50 hover:border-amber-400 hover:text-amber-700'
           }`}
           style={{
             borderRadius: '20px 15px 25px 10px',
-            boxShadow: isPopular ? '3px 3px 0px rgba(59, 130, 246, 0.4)' : '2px 2px 0px rgba(148, 163, 184, 0.3)'
+            boxShadow: isPopular ? '3px 3px 0px rgba(245, 158, 11, 0.4)' : '2px 2px 0px rgba(148, 163, 184, 0.3)'
           }}
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
@@ -106,8 +106,8 @@ const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon
             <li key={featureIndex} className="flex items-start group/item">
               <div className="mr-3 mt-0.5 flex-shrink-0 transition-all duration-300 group-hover/item:scale-110">
                 <div className="relative">
-                  <div className="w-5 h-5 bg-blue-100 border-2 border-blue-400 flex items-center justify-center" style={{borderRadius: '8px 12px 8px 12px'}}>
-                    <Check className="h-3 w-3 text-blue-600" />
+                  <div className="w-5 h-5 bg-emerald-100 border-2 border-emerald-400 flex items-center justify-center" style={{borderRadius: '8px 12px 8px 12px'}}>
+                    <Check className="h-3 w-3 text-emerald-600" />
                   </div>
                 </div>
               </div>
@@ -125,15 +125,15 @@ const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon
 const ProjectCard = ({ title, description, tech, image, index, onViewDetails }) => {
   return (
     <div
-      className="bg-white/90 backdrop-blur-sm border-3 border-blue-300 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group relative"
+      className="bg-white/90 backdrop-blur-sm border-3 border-amber-300 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group relative"
       style={{
         borderRadius: index % 2 === 0 ? '25px 15px 30px 20px' : '20px 30px 15px 25px',
-        boxShadow: '4px 4px 0px rgba(59, 130, 246, 0.3)'
+        boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.3)'
       }}
     >
       {/* Decorative elements */}
-      <div className="absolute top-2 right-2 w-3 h-3 bg-blue-400 opacity-40 rounded-full"></div>
-      <div className="absolute top-3 left-3 w-2 h-2 border-2 border-indigo-400 opacity-50 transform rotate-45"></div>
+      <div className="absolute top-2 right-2 w-3 h-3 bg-amber-400 opacity-40 rounded-full"></div>
+      <div className="absolute top-3 left-3 w-2 h-2 border-2 border-orange-400 opacity-50 transform rotate-45"></div>
       
       <div className="relative overflow-hidden h-48">
         <img
@@ -141,11 +141,11 @@ const ProjectCard = ({ title, description, tech, image, index, onViewDetails }) 
           alt={title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-amber-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
       
       <div className="p-6">
-        <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-700 transition-colors duration-300">
+        <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-amber-700 transition-colors duration-300">
           {title}
         </h3>
         <p className="text-slate-600 mb-4 leading-relaxed">{description}</p>
@@ -154,7 +154,7 @@ const ProjectCard = ({ title, description, tech, image, index, onViewDetails }) 
           {tech.map((item, techIndex) => (
             <span
               key={techIndex}
-              className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium border-2 border-blue-200"
+              className="px-3 py-1 bg-amber-100 text-amber-700 text-sm font-medium border-2 border-amber-200"
               style={{borderRadius: '12px 8px 15px 10px'}}
             >
               {item}
@@ -164,10 +164,10 @@ const ProjectCard = ({ title, description, tech, image, index, onViewDetails }) 
         
         <button
           onClick={() => onViewDetails({ title, description, tech, image })}
-          className="mt-4 w-full bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-4 py-2 font-bold hover:from-blue-500 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+          className="mt-4 w-full bg-gradient-to-r from-amber-400 to-orange-500 text-white px-4 py-2 font-bold hover:from-amber-500 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
           style={{
             borderRadius: '15px 20px 15px 20px',
-            boxShadow: '3px 3px 0px rgba(59, 130, 246, 0.3)'
+            boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
           }}
         >
           <Eye className="h-4 w-4" />
@@ -246,21 +246,21 @@ const ProjectDetailModal = ({ project, isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 border-3 border-blue-400 max-w-4xl w-full max-h-[90vh] overflow-y-auto relative" style={{
+      <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border-3 border-amber-400 max-w-4xl w-full max-h-[90vh] overflow-y-auto relative" style={{
         borderRadius: '30px 20px 35px 25px',
-        boxShadow: '8px 8px 0px rgba(59, 130, 246, 0.3)'
+        boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
       }}>
         {/* Paper texture overlay */}
         <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2359a3f6' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
         }}></div>
 
         <div className="p-6 relative z-10">
           {/* Header */}
-          <div className="flex items-center justify-between mb-6 border-b-2 border-blue-300 pb-4" style={{borderStyle: 'dashed'}}>
+          <div className="flex items-center justify-between mb-6 border-b-2 border-amber-300 pb-4" style={{borderStyle: 'dashed'}}>
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-gradient-to-r from-blue-200 to-indigo-200 border-2 border-blue-400" style={{borderRadius: '15px 10px 20px 15px'}}>
-                <Eye className="h-6 w-6 text-blue-600" />
+              <div className="p-3 bg-gradient-to-r from-amber-200 to-orange-200 border-2 border-amber-400" style={{borderRadius: '15px 10px 20px 15px'}}>
+                <Eye className="h-6 w-6 text-amber-600" />
               </div>
               <h2 className="text-2xl font-bold text-slate-800">
                 {project.title} 🚀
@@ -268,7 +268,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }) => {
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-blue-100 border-2 border-blue-300 hover:border-indigo-400 transition-colors text-slate-600 hover:text-slate-800"
+              className="p-2 hover:bg-amber-100 border-2 border-amber-300 hover:border-orange-400 transition-colors text-slate-600 hover:text-slate-800"
               style={{borderRadius: '12px 8px 15px 10px'}}
             >
               <X className="h-5 w-5" />
@@ -291,10 +291,10 @@ const ProjectDetailModal = ({ project, isOpen, onClose }) => {
                   href={details.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-4 py-3 font-bold hover:from-blue-500 hover:to-indigo-600 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="flex-1 bg-gradient-to-r from-amber-400 to-orange-500 text-white px-4 py-3 font-bold hover:from-amber-500 hover:to-orange-600 transition-all duration-300 flex items-center justify-center gap-2"
                   style={{
                     borderRadius: '15px 20px 15px 20px',
-                    boxShadow: '3px 3px 0px rgba(59, 130, 246, 0.3)'
+                    boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
                   }}
                 >
                   <Play className="h-4 w-4" />
@@ -304,7 +304,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }) => {
                   href={details.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 bg-white border-2 border-blue-300 hover:border-indigo-400 text-slate-700 hover:text-blue-700 px-4 py-3 font-bold hover:bg-blue-50 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="flex-1 bg-white border-2 border-amber-300 hover:border-orange-400 text-slate-700 hover:text-amber-700 px-4 py-3 font-bold hover:bg-amber-50 transition-all duration-300 flex items-center justify-center gap-2"
                   style={{borderRadius: '20px 15px 20px 15px'}}
                 >
                   <Github className="h-4 w-4" />
@@ -312,18 +312,18 @@ const ProjectDetailModal = ({ project, isOpen, onClose }) => {
                 </a>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm border-2 border-blue-300 p-4" style={{
+              <div className="bg-white/80 backdrop-blur-sm border-2 border-amber-300 p-4" style={{
                 borderRadius: '20px 15px 25px 10px',
                 borderStyle: 'dashed'
               }}>
                 <h4 className="font-bold text-slate-800 mb-3">Project Stats 📊</h4>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-blue-600" />
+                    <Clock className="h-4 w-4 text-amber-600" />
                     <span className="text-sm text-slate-700">Timeline: {details.timeline}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4 text-blue-600" />
+                    <Users className="h-4 w-4 text-amber-600" />
                     <span className="text-sm text-slate-700">Team: {details.teamSize}</span>
                   </div>
                 </div>
@@ -339,8 +339,8 @@ const ProjectDetailModal = ({ project, isOpen, onClose }) => {
               <ul className="space-y-3 mb-6">
                 {details.features.map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-blue-100 border-2 border-blue-400 flex items-center justify-center mt-0.5" style={{borderRadius: '8px 12px 8px 12px'}}>
-                      <Check className="h-3 w-3 text-blue-600" />
+                    <div className="w-5 h-5 bg-emerald-100 border-2 border-emerald-400 flex items-center justify-center mt-0.5" style={{borderRadius: '8px 12px 8px 12px'}}>
+                      <Check className="h-3 w-3 text-emerald-600" />
                     </div>
                     <span className="text-slate-700 leading-relaxed">{feature}</span>
                   </li>
@@ -352,7 +352,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }) => {
                 {project.tech.map((tech, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium border-2 border-blue-200"
+                    className="px-3 py-1 bg-amber-100 text-amber-700 text-sm font-medium border-2 border-amber-200"
                     style={{borderRadius: '12px 8px 15px 10px'}}
                   >
                     {tech}
@@ -424,21 +424,21 @@ Please contact me to discuss this project further.
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 border-3 border-blue-400 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative" style={{
+      <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border-3 border-amber-400 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative" style={{
         borderRadius: '30px 20px 35px 25px',
-        boxShadow: '8px 8px 0px rgba(59, 130, 246, 0.3)'
+        boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
       }}>
         {/* Paper texture overlay */}
         <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2359a3f6' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
         }}></div>
 
         <div className="p-6 relative z-10">
           {/* Header */}
-          <div className="flex items-center justify-between mb-6 border-b-2 border-blue-300 pb-4" style={{borderStyle: 'dashed'}}>
+          <div className="flex items-center justify-between mb-6 border-b-2 border-amber-300 pb-4" style={{borderStyle: 'dashed'}}>
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-gradient-to-r from-blue-200 to-indigo-200 border-2 border-blue-400" style={{borderRadius: '15px 10px 20px 15px'}}>
-                <Send className="h-6 w-6 text-blue-600" />
+              <div className="p-3 bg-gradient-to-r from-amber-200 to-orange-200 border-2 border-amber-400" style={{borderRadius: '15px 10px 20px 15px'}}>
+                <Send className="h-6 w-6 text-amber-600" />
               </div>
               <h2 className="text-2xl font-bold text-slate-800">
                 Submit Your Project 📝
@@ -446,7 +446,7 @@ Please contact me to discuss this project further.
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-blue-100 border-2 border-blue-300 hover:border-indigo-400 transition-colors text-slate-600 hover:text-slate-800"
+              className="p-2 hover:bg-amber-100 border-2 border-amber-300 hover:border-orange-400 transition-colors text-slate-600 hover:text-slate-800"
               style={{borderRadius: '12px 8px 15px 10px'}}
             >
               <X className="h-5 w-5" />
@@ -455,12 +455,12 @@ Please contact me to discuss this project further.
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Contact Information */}
-            <div className="bg-white/80 backdrop-blur-sm border-2 border-blue-300 p-6" style={{
+            <div className="bg-white/80 backdrop-blur-sm border-2 border-amber-300 p-6" style={{
               borderRadius: '25px 15px 30px 20px',
               borderStyle: 'dashed'
             }}>
               <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                <User className="h-5 w-5 text-blue-600" />
+                <User className="h-5 w-5 text-amber-600" />
                 Contact Information
               </h3>
               <div className="grid md:grid-cols-2 gap-4">
@@ -471,7 +471,7 @@ Please contact me to discuss this project further.
                     required
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
-                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-white border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                     style={{borderRadius: '15px 20px 15px 20px'}}
                     placeholder="Your full name"
                   />
@@ -483,7 +483,7 @@ Please contact me to discuss this project further.
                     required
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-white border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                     style={{borderRadius: '20px 15px 20px 15px'}}
                     placeholder="your@email.com"
                   />
@@ -494,7 +494,7 @@ Please contact me to discuss this project further.
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
-                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-white border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                     style={{borderRadius: '15px 20px 15px 20px'}}
                     placeholder="+1 (555) 123-4567"
                   />
@@ -505,7 +505,7 @@ Please contact me to discuss this project further.
                     type="text"
                     value={formData.company}
                     onChange={(e) => handleInputChange('company', e.target.value)}
-                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-white border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                     style={{borderRadius: '20px 15px 20px 15px'}}
                     placeholder="Your company name"
                   />
@@ -514,12 +514,12 @@ Please contact me to discuss this project further.
             </div>
 
             {/* Project Details */}
-            <div className="bg-white/80 backdrop-blur-sm border-2 border-blue-300 p-6" style={{
+            <div className="bg-white/80 backdrop-blur-sm border-2 border-amber-300 p-6" style={{
               borderRadius: '25px 15px 30px 20px',
               borderStyle: 'dashed'
             }}>
               <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                <Code className="h-5 w-5 text-blue-600" />
+                <Code className="h-5 w-5 text-amber-600" />
                 Project Details
               </h3>
               <div className="grid md:grid-cols-2 gap-4 mb-4">
@@ -529,7 +529,7 @@ Please contact me to discuss this project further.
                     required
                     value={formData.projectType}
                     onChange={(e) => handleInputChange('projectType', e.target.value)}
-                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-white border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                     style={{borderRadius: '15px 20px 15px 20px'}}
                   >
                     <option value="">Select project type</option>
@@ -547,7 +547,7 @@ Please contact me to discuss this project further.
                     required
                     value={formData.budget}
                     onChange={(e) => handleInputChange('budget', e.target.value)}
-                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-white border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                     style={{borderRadius: '20px 15px 20px 15px'}}
                   >
                     <option value="">Select budget range</option>
@@ -564,7 +564,7 @@ Please contact me to discuss this project further.
                   required
                   value={formData.timeline}
                   onChange={(e) => handleInputChange('timeline', e.target.value)}
-                  className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full bg-white border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                   style={{borderRadius: '15px 20px 15px 20px'}}
                 >
                   <option value="">Select timeline</option>
@@ -582,7 +582,7 @@ Please contact me to discuss this project further.
                   rows={4}
                   value={formData.description}
                   onChange={(e) => handleInputChange('description', e.target.value)}
-                  className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full bg-white border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                   style={{borderRadius: '20px 15px 25px 10px'}}
                   placeholder="Describe your project in detail..."
                 />
@@ -593,7 +593,7 @@ Please contact me to discuss this project further.
                   rows={3}
                   value={formData.features}
                   onChange={(e) => handleInputChange('features', e.target.value)}
-                  className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full bg-white border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                   style={{borderRadius: '15px 25px 15px 25px'}}
                   placeholder="List the key features you need..."
                 />
@@ -604,7 +604,7 @@ Please contact me to discuss this project further.
                   rows={3}
                   value={formData.additionalInfo}
                   onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
-                  className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full bg-white border-2 border-amber-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                   style={{borderRadius: '20px 15px 25px 10px'}}
                   placeholder="Any additional requirements or questions..."
                 />
@@ -616,17 +616,17 @@ Please contact me to discuss this project further.
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-3 bg-white border-2 border-blue-300 hover:border-indigo-400 text-slate-700 hover:text-blue-700 font-bold hover:bg-blue-50 transition-all duration-300"
+                className="px-6 py-3 bg-white border-2 border-amber-300 hover:border-orange-400 text-slate-700 hover:text-amber-700 font-bold hover:bg-amber-50 transition-all duration-300"
                 style={{borderRadius: '15px 20px 15px 20px'}}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-8 py-3 bg-gradient-to-r from-blue-400 to-indigo-500 text-white font-bold hover:from-blue-500 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2"
+                className="px-8 py-3 bg-gradient-to-r from-amber-400 to-orange-500 text-white font-bold hover:from-amber-500 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2"
                 style={{
                   borderRadius: '20px 15px 25px 10px',
-                  boxShadow: '4px 4px 0px rgba(59, 130, 246, 0.4)'
+                  boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.4)'
                 }}
               >
                 <Send className="h-4 w-4" />
@@ -792,31 +792,31 @@ Looking forward to hearing from you!`);
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 border-3 border-blue-400 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto relative" style={{
+      <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border-3 border-amber-400 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto relative" style={{
         borderRadius: '30px 20px 35px 25px',
-        boxShadow: '8px 8px 0px rgba(59, 130, 246, 0.3)'
+        boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.3)'
       }}>
         {/* Paper texture overlay */}
         <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2359a3f6' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
         }}></div>
 
         {/* Hand-drawn decorative elements */}
-        <div className="absolute top-4 right-4 w-6 h-6 bg-blue-400 opacity-50 rounded-full"></div>
-        <div className="absolute top-6 left-6 w-4 h-4 border-2 border-indigo-400 opacity-40 transform rotate-45"></div>
-        <div className="absolute bottom-6 right-8 w-3 h-3 bg-blue-400 opacity-60 transform rotate-12" style={{borderRadius: '30% 70%'}}></div>
+        <div className="absolute top-4 right-4 w-6 h-6 bg-amber-400 opacity-50 rounded-full"></div>
+        <div className="absolute top-6 left-6 w-4 h-4 border-2 border-orange-400 opacity-40 transform rotate-45"></div>
+        <div className="absolute bottom-6 right-8 w-3 h-3 bg-amber-400 opacity-60 transform rotate-12" style={{borderRadius: '30% 70%'}}></div>
 
         <div className="p-6 relative z-10">
-          <div className="flex items-center justify-between mb-8 border-b-2 border-blue-300 pb-6" style={{borderStyle: 'dashed'}}>
+          <div className="flex items-center justify-between mb-8 border-b-2 border-amber-300 pb-6" style={{borderStyle: 'dashed'}}>
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-gradient-to-r from-blue-200 to-indigo-200 border-2 border-blue-400" style={{borderRadius: '15px 10px 20px 15px'}}>
-                <Users className="h-6 w-6 text-blue-600" />
+              <div className="p-3 bg-gradient-to-r from-amber-200 to-orange-200 border-2 border-amber-400" style={{borderRadius: '15px 10px 20px 15px'}}>
+                <Users className="h-6 w-6 text-amber-600" />
               </div>
               <div>
                 <h2 className="text-3xl font-bold text-slate-800 relative">
                   Professional Development Services 💼
                   <svg className="absolute -bottom-1 left-0 w-full h-2 mt-1" viewBox="0 0 400 8" fill="none">
-                    <path d="M2 6 Q200 2 398 6" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
+                    <path d="M2 6 Q200 2 398 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
                   </svg>
                 </h2>
                 <p className="text-slate-600 mt-2">Hire the redesignr.ai team for your custom software requirements</p>
@@ -824,7 +824,7 @@ Looking forward to hearing from you!`);
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-blue-100 border-2 border-blue-300 hover:border-indigo-400 transition-colors text-slate-600 hover:text-slate-800"
+              className="p-2 hover:bg-amber-100 border-2 border-amber-300 hover:border-orange-400 transition-colors text-slate-600 hover:text-slate-800"
               style={{borderRadius: '12px 8px 15px 10px'}}
             >
               ✕
@@ -843,12 +843,12 @@ Looking forward to hearing from you!`);
                 onClick={() => setActiveSection(tab.id)}
                 className={`flex items-center gap-2 px-6 py-3 font-semibold transition-all duration-300 transform hover:scale-105 ${
                   activeSection === tab.id
-                    ? 'bg-gradient-to-r from-blue-400 to-indigo-500 text-white shadow-lg'
-                    : 'bg-white text-slate-700 hover:bg-blue-50 border-2 border-blue-300 hover:border-indigo-400'
+                    ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-lg'
+                    : 'bg-white text-slate-700 hover:bg-amber-50 border-2 border-amber-300 hover:border-orange-400'
                 }`}
                 style={{
                   borderRadius: index % 2 === 0 ? '20px 10px 25px 15px' : '15px 25px 10px 20px',
-                  boxShadow: activeSection === tab.id ? '4px 4px 0px rgba(59, 130, 246, 0.3)' : '2px 2px 0px rgba(59, 130, 246, 0.2)'
+                  boxShadow: activeSection === tab.id ? '4px 4px 0px rgba(245, 158, 11, 0.3)' : '2px 2px 0px rgba(245, 158, 11, 0.2)'
                 }}
               >
                 <tab.icon className="h-4 w-4" />
@@ -861,10 +861,10 @@ Looking forward to hearing from you!`);
           {activeSection === 'services' && (
           <div className="mb-8">
             <div className="text-center mb-8">
-              <div className="inline-block px-6 py-2 mb-4 bg-white/80 backdrop-blur-sm border-2 border-blue-300 shadow-lg" style={{
+              <div className="inline-block px-6 py-2 mb-4 bg-white/80 backdrop-blur-sm border-2 border-amber-300 shadow-lg" style={{
                 borderRadius: '25px 15px 30px 20px'
               }}>
-                <span className="text-blue-700 text-sm font-semibold flex items-center gap-2">
+                <span className="text-amber-700 text-sm font-semibold flex items-center gap-2">
                   <Code className="h-4 w-4" />
                   🚀 Development Services
                 </span>
@@ -898,10 +898,10 @@ Looking forward to hearing from you!`);
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={() => setShowProjectForm(true)}
-                  className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-8 py-4 font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-8 py-4 font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
                   style={{
                     borderRadius: '25px 15px 30px 20px',
-                    boxShadow: '4px 4px 0px rgba(59, 130, 246, 0.4)'
+                    boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.4)'
                   }}
                 >
                   <Send className="h-5 w-5" />
@@ -909,10 +909,10 @@ Looking forward to hearing from you!`);
                 </button>
                 <button
                   onClick={() => handleContact('Consultation')}
-                  className="bg-white border-2 border-blue-300 hover:border-indigo-400 text-slate-700 hover:text-blue-700 px-8 py-4 font-bold text-lg hover:bg-blue-50 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="bg-white border-2 border-amber-300 hover:border-orange-400 text-slate-700 hover:text-amber-700 px-8 py-4 font-bold text-lg hover:bg-amber-50 transition-all duration-300 flex items-center justify-center gap-2"
                   style={{
                     borderRadius: '20px 30px 15px 25px',
-                    boxShadow: '3px 3px 0px rgba(59, 130, 246, 0.3)'
+                    boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
                   }}
                 >
                   <Calendar className="h-5 w-5" />
@@ -927,10 +927,10 @@ Looking forward to hearing from you!`);
           {activeSection === 'projects' && (
           <div className="mb-8">
             <div className="text-center mb-8">
-              <div className="inline-block px-6 py-2 mb-4 bg-white/80 backdrop-blur-sm border-2 border-blue-300 shadow-lg" style={{
+              <div className="inline-block px-6 py-2 mb-4 bg-white/80 backdrop-blur-sm border-2 border-amber-300 shadow-lg" style={{
                 borderRadius: '25px 15px 30px 20px'
               }}>
-                <span className="text-blue-700 text-sm font-semibold flex items-center gap-2">
+                <span className="text-amber-700 text-sm font-semibold flex items-center gap-2">
                   <Palette className="h-4 w-4" />
                   🎨 Our Work
                 </span>
@@ -963,10 +963,10 @@ Looking forward to hearing from you!`);
           {activeSection === 'process' && (
           <div className="mb-8">
             <div className="text-center mb-8">
-              <div className="inline-block px-6 py-2 mb-4 bg-white/80 backdrop-blur-sm border-2 border-blue-300 shadow-lg" style={{
+              <div className="inline-block px-6 py-2 mb-4 bg-white/80 backdrop-blur-sm border-2 border-amber-300 shadow-lg" style={{
                 borderRadius: '25px 15px 30px 20px'
               }}>
-                <span className="text-blue-700 text-sm font-semibold flex items-center gap-2">
+                <span className="text-amber-700 text-sm font-semibold flex items-center gap-2">
                   <Code className="h-4 w-4" />
                   🔄 Our Process
                 </span>
@@ -983,16 +983,16 @@ Looking forward to hearing from you!`);
               {developmentProcess.map((phase, index) => (
                 <div
                   key={index}
-                  className="bg-white/90 backdrop-blur-sm border-3 border-blue-300 p-6 relative"
+                  className="bg-white/90 backdrop-blur-sm border-3 border-amber-300 p-6 relative"
                   style={{
                     borderRadius: index % 2 === 0 ? '30px 20px 35px 25px' : '25px 35px 20px 30px',
-                    boxShadow: '4px 4px 0px rgba(59, 130, 246, 0.3)'
+                    boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.3)'
                   }}
                 >
                   <div className="flex items-start gap-6">
                     {/* Step Number */}
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-indigo-500 text-white font-bold text-xl flex items-center justify-center border-3 border-blue-600" style={{
+                      <div className="w-16 h-16 bg-gradient-to-r from-amber-400 to-orange-500 text-white font-bold text-xl flex items-center justify-center border-3 border-amber-600" style={{
                         borderRadius: '50% 40% 60% 30%'
                       }}>
                         {phase.step}
@@ -1005,7 +1005,7 @@ Looking forward to hearing from you!`);
                         <h4 className="text-xl font-bold text-slate-800 mb-2 md:mb-0">
                           {phase.title}
                         </h4>
-                        <div className="flex items-center gap-2 text-blue-600 font-semibold">
+                        <div className="flex items-center gap-2 text-amber-600 font-semibold">
                           <Clock className="h-4 w-4" />
                           {phase.duration}
                         </div>
@@ -1021,7 +1021,7 @@ Looking forward to hearing from you!`);
                           {phase.deliverables.map((deliverable, dIndex) => (
                             <span
                               key={dIndex}
-                              className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium border-2 border-blue-200"
+                              className="px-3 py-1 bg-amber-100 text-amber-700 text-sm font-medium border-2 border-amber-200"
                               style={{borderRadius: '12px 8px 15px 10px'}}
                             >
                               {deliverable}
@@ -1038,20 +1038,20 @@ Looking forward to hearing from you!`);
           )}
 
           {/* Contact Section - Always visible */}
-          <div className="bg-white/80 backdrop-blur-sm border-3 border-blue-300 p-8 relative" style={{
+          <div className="bg-white/80 backdrop-blur-sm border-3 border-amber-300 p-8 relative" style={{
             borderRadius: '30px 20px 35px 25px',
             borderStyle: 'dashed'
           }}>
             {/* Decorative elements */}
-            <div className="absolute top-2 left-2 w-3 h-3 bg-blue-400 opacity-40 rounded-full"></div>
-            <div className="absolute top-3 right-3 w-2 h-2 border-2 border-indigo-400 opacity-50 transform rotate-45"></div>
+            <div className="absolute top-2 left-2 w-3 h-3 bg-amber-400 opacity-40 rounded-full"></div>
+            <div className="absolute top-3 right-3 w-2 h-2 border-2 border-orange-400 opacity-50 transform rotate-45"></div>
             
             <div className="text-center">
               <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="p-3 bg-blue-100 border-2 border-blue-400" style={{borderRadius: '15px 10px 20px 15px'}}>
-                  <Sparkles className="h-6 w-6 text-blue-600" />
+                <div className="p-3 bg-amber-100 border-2 border-amber-400" style={{borderRadius: '15px 10px 20px 15px'}}>
+                  <Sparkles className="h-6 w-6 text-amber-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-blue-800">
+                <h3 className="text-2xl font-bold text-amber-800">
                   Ready to Start Your Project?
                 </h3>
               </div>
@@ -1062,20 +1062,20 @@ Looking forward to hearing from you!`);
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={() => setShowProjectForm(true)}
-                  className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-8 py-4 font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300"
+                  className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-8 py-4 font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300"
                   style={{
                     borderRadius: '25px 15px 30px 20px',
-                    boxShadow: '4px 4px 0px rgba(59, 130, 246, 0.4)'
+                    boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.4)'
                   }}
                 >
                   🚀 Submit Your Project
                 </button>
                 <a
                   href="mailto:shiva@redesignr.ai"
-                  className="bg-white border-2 border-blue-300 hover:border-indigo-400 text-slate-700 hover:text-blue-700 px-8 py-4 font-bold text-lg hover:bg-blue-50 transition-all duration-300"
+                  className="bg-white border-2 border-amber-300 hover:border-orange-400 text-slate-700 hover:text-amber-700 px-8 py-4 font-bold text-lg hover:bg-amber-50 transition-all duration-300"
                   style={{
                     borderRadius: '20px 30px 15px 25px',
-                    boxShadow: '3px 3px 0px rgba(59, 130, 246, 0.3)'
+                    boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
                   }}
                 >
                   📧 Contact Us

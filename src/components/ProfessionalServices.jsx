@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, Star, Rocket, Crown, Code, Palette, Database, Smartphone, Globe, ExternalLink, PenTool, Sparkles, Users, Award, Zap } from 'lucide-react';
+import { Check, Star, Rocket, Crown, Code, Palette, Database, Smartphone, Globe, ExternalLink, PenTool, Sparkles, Users, Award, Zap, ArrowLeft, Calendar, DollarSign, Clock, User, Mail, Phone, MessageSquare, Send, Eye, Github, Play, X } from 'lucide-react';
 
 const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon, gradient, index, onContact }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -122,7 +122,7 @@ const ServiceTier = ({ name, price, description, features, isPopular, icon: Icon
   );
 };
 
-const ProjectCard = ({ title, description, tech, image, index }) => {
+const ProjectCard = ({ title, description, tech, image, index, onViewDetails }) => {
   return (
     <div
       className="bg-white/90 backdrop-blur-sm border-3 border-blue-300 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group relative"
@@ -161,12 +161,490 @@ const ProjectCard = ({ title, description, tech, image, index }) => {
             </span>
           ))}
         </div>
+        
+        <button
+          onClick={() => onViewDetails({ title, description, tech, image })}
+          className="mt-4 w-full bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-4 py-2 font-bold hover:from-blue-500 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+          style={{
+            borderRadius: '15px 20px 15px 20px',
+            boxShadow: '3px 3px 0px rgba(59, 130, 246, 0.3)'
+          }}
+        >
+          <Eye className="h-4 w-4" />
+          View Details
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const ProjectDetailModal = ({ project, isOpen, onClose }) => {
+  if (!isOpen || !project) return null;
+
+  const projectDetails = {
+    "E-commerce Platform": {
+      fullDescription: "A comprehensive e-commerce solution built with modern technologies. Features include advanced product catalog management, secure payment processing with Stripe integration, real-time inventory tracking, customer account management, order processing workflow, and detailed analytics dashboard for business insights.",
+      features: [
+        "Advanced product catalog with categories and filters",
+        "Secure payment processing with multiple gateways",
+        "Real-time inventory management",
+        "Customer account and order history",
+        "Admin dashboard with analytics",
+        "Mobile-responsive design",
+        "SEO optimization",
+        "Email notifications and marketing"
+      ],
+      timeline: "8-12 weeks",
+      teamSize: "4 developers",
+      liveUrl: "https://demo-ecommerce.redesignr.ai",
+      githubUrl: "https://github.com/redesignr/ecommerce-demo"
+    },
+    "SaaS Analytics Tool": {
+      fullDescription: "A powerful analytics platform that provides real-time data visualization and comprehensive reporting capabilities. Built for businesses to track KPIs, generate custom reports, and gain actionable insights from their data with interactive dashboards and automated reporting features.",
+      features: [
+        "Real-time data visualization with D3.js",
+        "Custom dashboard builder",
+        "Automated report generation",
+        "Multi-tenant architecture",
+        "API integrations for data sources",
+        "Role-based access control",
+        "Export capabilities (PDF, Excel)",
+        "Mobile analytics app"
+      ],
+      timeline: "10-14 weeks",
+      teamSize: "5 developers",
+      liveUrl: "https://demo-analytics.redesignr.ai",
+      githubUrl: "https://github.com/redesignr/analytics-demo"
+    },
+    "Healthcare Management": {
+      fullDescription: "A comprehensive healthcare management system designed for clinics and hospitals. Features patient record management, appointment scheduling, telemedicine capabilities, billing integration, and compliance with healthcare regulations including HIPAA standards.",
+      features: [
+        "Patient record management system",
+        "Appointment scheduling and calendar",
+        "Telemedicine video consultations",
+        "Prescription management",
+        "Billing and insurance integration",
+        "HIPAA compliant security",
+        "Medical history tracking",
+        "Staff management portal"
+      ],
+      timeline: "12-16 weeks",
+      teamSize: "6 developers",
+      liveUrl: "https://demo-healthcare.redesignr.ai",
+      githubUrl: "https://github.com/redesignr/healthcare-demo"
+    }
+  };
+
+  const details = projectDetails[project.title] || {
+    fullDescription: project.description,
+    features: ["Feature 1", "Feature 2", "Feature 3"],
+    timeline: "6-8 weeks",
+    teamSize: "3 developers",
+    liveUrl: "#",
+    githubUrl: "#"
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 border-3 border-blue-400 max-w-4xl w-full max-h-[90vh] overflow-y-auto relative" style={{
+        borderRadius: '30px 20px 35px 25px',
+        boxShadow: '8px 8px 0px rgba(59, 130, 246, 0.3)'
+      }}>
+        {/* Paper texture overlay */}
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2359a3f6' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+
+        <div className="p-6 relative z-10">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6 border-b-2 border-blue-300 pb-4" style={{borderStyle: 'dashed'}}>
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-gradient-to-r from-blue-200 to-indigo-200 border-2 border-blue-400" style={{borderRadius: '15px 10px 20px 15px'}}>
+                <Eye className="h-6 w-6 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-slate-800">
+                {project.title} 🚀
+              </h2>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-blue-100 border-2 border-blue-300 hover:border-indigo-400 transition-colors text-slate-600 hover:text-slate-800"
+              style={{borderRadius: '12px 8px 15px 10px'}}
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Left Column - Image and Links */}
+            <div>
+              <div className="relative overflow-hidden mb-6" style={{borderRadius: '20px 15px 25px 10px'}}>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+              
+              <div className="flex gap-4 mb-6">
+                <a
+                  href={details.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-4 py-3 font-bold hover:from-blue-500 hover:to-indigo-600 transition-all duration-300 flex items-center justify-center gap-2"
+                  style={{
+                    borderRadius: '15px 20px 15px 20px',
+                    boxShadow: '3px 3px 0px rgba(59, 130, 246, 0.3)'
+                  }}
+                >
+                  <Play className="h-4 w-4" />
+                  Live Demo
+                </a>
+                <a
+                  href={details.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 bg-white border-2 border-blue-300 hover:border-indigo-400 text-slate-700 hover:text-blue-700 px-4 py-3 font-bold hover:bg-blue-50 transition-all duration-300 flex items-center justify-center gap-2"
+                  style={{borderRadius: '20px 15px 20px 15px'}}
+                >
+                  <Github className="h-4 w-4" />
+                  Code
+                </a>
+              </div>
+
+              <div className="bg-white/80 backdrop-blur-sm border-2 border-blue-300 p-4" style={{
+                borderRadius: '20px 15px 25px 10px',
+                borderStyle: 'dashed'
+              }}>
+                <h4 className="font-bold text-slate-800 mb-3">Project Stats 📊</h4>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-blue-600" />
+                    <span className="text-sm text-slate-700">Timeline: {details.timeline}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-blue-600" />
+                    <span className="text-sm text-slate-700">Team: {details.teamSize}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Details */}
+            <div>
+              <h3 className="text-xl font-bold text-slate-800 mb-4">Project Overview ✨</h3>
+              <p className="text-slate-600 mb-6 leading-relaxed">{details.fullDescription}</p>
+
+              <h4 className="text-lg font-bold text-slate-800 mb-4">Key Features 🎯</h4>
+              <ul className="space-y-3 mb-6">
+                {details.features.map((feature, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <div className="w-5 h-5 bg-blue-100 border-2 border-blue-400 flex items-center justify-center mt-0.5" style={{borderRadius: '8px 12px 8px 12px'}}>
+                      <Check className="h-3 w-3 text-blue-600" />
+                    </div>
+                    <span className="text-slate-700 leading-relaxed">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <h4 className="text-lg font-bold text-slate-800 mb-4">Technologies Used 🛠️</h4>
+              <div className="flex flex-wrap gap-2">
+                {project.tech.map((tech, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium border-2 border-blue-200"
+                    style={{borderRadius: '12px 8px 15px 10px'}}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ProjectSubmissionForm = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    projectType: '',
+    budget: '',
+    timeline: '',
+    description: '',
+    features: '',
+    additionalInfo: ''
+  });
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Create email content
+    const subject = encodeURIComponent(`New Project Submission - ${formData.projectType || 'Custom Project'}`);
+    const body = encodeURIComponent(`
+Project Submission Details:
+
+Contact Information:
+- Name: ${formData.name}
+- Email: ${formData.email}
+- Phone: ${formData.phone}
+- Company: ${formData.company}
+
+Project Details:
+- Project Type: ${formData.projectType}
+- Budget Range: ${formData.budget}
+- Timeline: ${formData.timeline}
+
+Project Description:
+${formData.description}
+
+Required Features:
+${formData.features}
+
+Additional Information:
+${formData.additionalInfo}
+
+Please contact me to discuss this project further.
+    `);
+    
+    window.open(`mailto:shiva@redesignr.ai?subject=${subject}&body=${body}`, '_blank');
+    onClose();
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 border-3 border-blue-400 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative" style={{
+        borderRadius: '30px 20px 35px 25px',
+        boxShadow: '8px 8px 0px rgba(59, 130, 246, 0.3)'
+      }}>
+        {/* Paper texture overlay */}
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2359a3f6' fill-opacity='0.15'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+
+        <div className="p-6 relative z-10">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6 border-b-2 border-blue-300 pb-4" style={{borderStyle: 'dashed'}}>
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-gradient-to-r from-blue-200 to-indigo-200 border-2 border-blue-400" style={{borderRadius: '15px 10px 20px 15px'}}>
+                <Send className="h-6 w-6 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-slate-800">
+                Submit Your Project 📝
+              </h2>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-blue-100 border-2 border-blue-300 hover:border-indigo-400 transition-colors text-slate-600 hover:text-slate-800"
+              style={{borderRadius: '12px 8px 15px 10px'}}
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Contact Information */}
+            <div className="bg-white/80 backdrop-blur-sm border-2 border-blue-300 p-6" style={{
+              borderRadius: '25px 15px 30px 20px',
+              borderStyle: 'dashed'
+            }}>
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <User className="h-5 w-5 text-blue-600" />
+                Contact Information
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-slate-700 font-semibold mb-2">Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    style={{borderRadius: '15px 20px 15px 20px'}}
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-semibold mb-2">Email *</label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    style={{borderRadius: '20px 15px 20px 15px'}}
+                    placeholder="your@email.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-semibold mb-2">Phone</label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    style={{borderRadius: '15px 20px 15px 20px'}}
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-semibold mb-2">Company</label>
+                  <input
+                    type="text"
+                    value={formData.company}
+                    onChange={(e) => handleInputChange('company', e.target.value)}
+                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    style={{borderRadius: '20px 15px 20px 15px'}}
+                    placeholder="Your company name"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Project Details */}
+            <div className="bg-white/80 backdrop-blur-sm border-2 border-blue-300 p-6" style={{
+              borderRadius: '25px 15px 30px 20px',
+              borderStyle: 'dashed'
+            }}>
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <Code className="h-5 w-5 text-blue-600" />
+                Project Details
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-slate-700 font-semibold mb-2">Project Type *</label>
+                  <select
+                    required
+                    value={formData.projectType}
+                    onChange={(e) => handleInputChange('projectType', e.target.value)}
+                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    style={{borderRadius: '15px 20px 15px 20px'}}
+                  >
+                    <option value="">Select project type</option>
+                    <option value="Web Application">Web Application</option>
+                    <option value="E-commerce Platform">E-commerce Platform</option>
+                    <option value="SaaS Product">SaaS Product</option>
+                    <option value="Mobile App">Mobile App</option>
+                    <option value="API Development">API Development</option>
+                    <option value="Custom Software">Custom Software</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-semibold mb-2">Budget Range *</label>
+                  <select
+                    required
+                    value={formData.budget}
+                    onChange={(e) => handleInputChange('budget', e.target.value)}
+                    className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    style={{borderRadius: '20px 15px 20px 15px'}}
+                  >
+                    <option value="">Select budget range</option>
+                    <option value="$1,000 - $5,000">$1,000 - $5,000</option>
+                    <option value="$5,000 - $15,000">$5,000 - $15,000</option>
+                    <option value="$15,000 - $50,000">$15,000 - $50,000</option>
+                    <option value="$50,000+">$50,000+</option>
+                  </select>
+                </div>
+              </div>
+              <div className="mb-4">
+                <label className="block text-slate-700 font-semibold mb-2">Timeline *</label>
+                <select
+                  required
+                  value={formData.timeline}
+                  onChange={(e) => handleInputChange('timeline', e.target.value)}
+                  className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  style={{borderRadius: '15px 20px 15px 20px'}}
+                >
+                  <option value="">Select timeline</option>
+                  <option value="ASAP (Rush job)">ASAP (Rush job)</option>
+                  <option value="1-2 months">1-2 months</option>
+                  <option value="2-4 months">2-4 months</option>
+                  <option value="4-6 months">4-6 months</option>
+                  <option value="6+ months">6+ months</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label className="block text-slate-700 font-semibold mb-2">Project Description *</label>
+                <textarea
+                  required
+                  rows={4}
+                  value={formData.description}
+                  onChange={(e) => handleInputChange('description', e.target.value)}
+                  className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  style={{borderRadius: '20px 15px 25px 10px'}}
+                  placeholder="Describe your project in detail..."
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-slate-700 font-semibold mb-2">Required Features</label>
+                <textarea
+                  rows={3}
+                  value={formData.features}
+                  onChange={(e) => handleInputChange('features', e.target.value)}
+                  className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  style={{borderRadius: '15px 25px 15px 25px'}}
+                  placeholder="List the key features you need..."
+                />
+              </div>
+              <div>
+                <label className="block text-slate-700 font-semibold mb-2">Additional Information</label>
+                <textarea
+                  rows={3}
+                  value={formData.additionalInfo}
+                  onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
+                  className="w-full bg-white border-2 border-blue-300 px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  style={{borderRadius: '20px 15px 25px 10px'}}
+                  placeholder="Any additional requirements or questions..."
+                />
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex justify-end gap-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-6 py-3 bg-white border-2 border-blue-300 hover:border-indigo-400 text-slate-700 hover:text-blue-700 font-bold hover:bg-blue-50 transition-all duration-300"
+                style={{borderRadius: '15px 20px 15px 20px'}}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-8 py-3 bg-gradient-to-r from-blue-400 to-indigo-500 text-white font-bold hover:from-blue-500 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2"
+                style={{
+                  borderRadius: '20px 15px 25px 10px',
+                  boxShadow: '4px 4px 0px rgba(59, 130, 246, 0.4)'
+                }}
+              >
+                <Send className="h-4 w-4" />
+                Submit Project
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
 };
 
 const ProfessionalServices = ({ isOpen, onClose }) => {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [showProjectForm, setShowProjectForm] = useState(false);
+  const [activeSection, setActiveSection] = useState('services'); // 'services', 'projects', 'process'
+
   const handleContact = (serviceName) => {
     const subject = encodeURIComponent(`Professional Development Service Inquiry - ${serviceName}`);
     const body = encodeURIComponent(`Hi redesignr.ai team,
@@ -180,6 +658,10 @@ I'm interested in your ${serviceName} service. Please provide more details about
 Looking forward to hearing from you!`);
     
     window.open(`mailto:shiva@redesignr.ai?subject=${subject}&body=${body}`, '_blank');
+  };
+
+  const handleViewProjectDetails = (project) => {
+    setSelectedProject(project);
   };
 
   const services = [
@@ -275,6 +757,37 @@ Looking forward to hearing from you!`);
     }
   ];
 
+  const developmentProcess = [
+    {
+      step: 1,
+      title: "Discovery & Planning",
+      description: "We analyze your requirements, define project scope, and create detailed technical specifications.",
+      duration: "1-2 weeks",
+      deliverables: ["Project roadmap", "Technical specifications", "UI/UX wireframes", "Timeline & milestones"]
+    },
+    {
+      step: 2,
+      title: "Design & Architecture",
+      description: "Our team creates the system architecture and designs the user interface for optimal user experience.",
+      duration: "1-3 weeks",
+      deliverables: ["System architecture", "Database design", "UI/UX mockups", "Technical documentation"]
+    },
+    {
+      step: 3,
+      title: "Development & Testing",
+      description: "We build your application using modern technologies with continuous testing and quality assurance.",
+      duration: "4-12 weeks",
+      deliverables: ["Working application", "Test coverage", "Code documentation", "Performance optimization"]
+    },
+    {
+      step: 4,
+      title: "Deployment & Support",
+      description: "We deploy your application and provide ongoing support to ensure smooth operation.",
+      duration: "1-2 weeks + ongoing",
+      deliverables: ["Live deployment", "Monitoring setup", "User training", "Maintenance plan"]
+    }
+  ];
+
   if (!isOpen) return null;
 
   return (
@@ -318,8 +831,35 @@ Looking forward to hearing from you!`);
             </button>
           </div>
 
+          {/* Navigation Tabs */}
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            {[
+              { id: 'services', label: 'Our Services', icon: Rocket },
+              { id: 'projects', label: 'Portfolio', icon: Palette },
+              { id: 'process', label: 'Our Process', icon: Code }
+            ].map((tab, index) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveSection(tab.id)}
+                className={`flex items-center gap-2 px-6 py-3 font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  activeSection === tab.id
+                    ? 'bg-gradient-to-r from-blue-400 to-indigo-500 text-white shadow-lg'
+                    : 'bg-white text-slate-700 hover:bg-blue-50 border-2 border-blue-300 hover:border-indigo-400'
+                }`}
+                style={{
+                  borderRadius: index % 2 === 0 ? '20px 10px 25px 15px' : '15px 25px 10px 20px',
+                  boxShadow: activeSection === tab.id ? '4px 4px 0px rgba(59, 130, 246, 0.3)' : '2px 2px 0px rgba(59, 130, 246, 0.2)'
+                }}
+              >
+                <tab.icon className="h-4 w-4" />
+                <span>{tab.label}</span>
+              </button>
+            ))}
+          </div>
+
           {/* Services Section */}
-          <div className="mb-12">
+          {activeSection === 'services' && (
+          <div className="mb-8">
             <div className="text-center mb-8">
               <div className="inline-block px-6 py-2 mb-4 bg-white/80 backdrop-blur-sm border-2 border-blue-300 shadow-lg" style={{
                 borderRadius: '25px 15px 30px 20px'
@@ -352,9 +892,39 @@ Looking forward to hearing from you!`);
                 />
               ))}
             </div>
+            
+            {/* Quick Action Buttons */}
+            <div className="text-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={() => setShowProjectForm(true)}
+                  className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-8 py-4 font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+                  style={{
+                    borderRadius: '25px 15px 30px 20px',
+                    boxShadow: '4px 4px 0px rgba(59, 130, 246, 0.4)'
+                  }}
+                >
+                  <Send className="h-5 w-5" />
+                  Submit Your Project
+                </button>
+                <button
+                  onClick={() => handleContact('Consultation')}
+                  className="bg-white border-2 border-blue-300 hover:border-indigo-400 text-slate-700 hover:text-blue-700 px-8 py-4 font-bold text-lg hover:bg-blue-50 transition-all duration-300 flex items-center justify-center gap-2"
+                  style={{
+                    borderRadius: '20px 30px 15px 25px',
+                    boxShadow: '3px 3px 0px rgba(59, 130, 246, 0.3)'
+                  }}
+                >
+                  <Calendar className="h-5 w-5" />
+                  Free Consultation
+                </button>
+              </div>
+            </div>
           </div>
+          )}
 
           {/* Projects Gallery */}
+          {activeSection === 'projects' && (
           <div className="mb-8">
             <div className="text-center mb-8">
               <div className="inline-block px-6 py-2 mb-4 bg-white/80 backdrop-blur-sm border-2 border-blue-300 shadow-lg" style={{
@@ -382,12 +952,92 @@ Looking forward to hearing from you!`);
                   tech={project.tech}
                   image={project.image}
                   index={index}
+                  onViewDetails={handleViewProjectDetails}
                 />
               ))}
             </div>
           </div>
+          )}
 
-          {/* Contact Section */}
+          {/* Development Process */}
+          {activeSection === 'process' && (
+          <div className="mb-8">
+            <div className="text-center mb-8">
+              <div className="inline-block px-6 py-2 mb-4 bg-white/80 backdrop-blur-sm border-2 border-blue-300 shadow-lg" style={{
+                borderRadius: '25px 15px 30px 20px'
+              }}>
+                <span className="text-blue-700 text-sm font-semibold flex items-center gap-2">
+                  <Code className="h-4 w-4" />
+                  🔄 Our Process
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">
+                How We Build Your Software
+              </h3>
+              <p className="text-slate-600 max-w-2xl mx-auto">
+                Our proven development process ensures quality, transparency, and timely delivery
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {developmentProcess.map((phase, index) => (
+                <div
+                  key={index}
+                  className="bg-white/90 backdrop-blur-sm border-3 border-blue-300 p-6 relative"
+                  style={{
+                    borderRadius: index % 2 === 0 ? '30px 20px 35px 25px' : '25px 35px 20px 30px',
+                    boxShadow: '4px 4px 0px rgba(59, 130, 246, 0.3)'
+                  }}
+                >
+                  <div className="flex items-start gap-6">
+                    {/* Step Number */}
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-indigo-500 text-white font-bold text-xl flex items-center justify-center border-3 border-blue-600" style={{
+                        borderRadius: '50% 40% 60% 30%'
+                      }}>
+                        {phase.step}
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="flex-1">
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                        <h4 className="text-xl font-bold text-slate-800 mb-2 md:mb-0">
+                          {phase.title}
+                        </h4>
+                        <div className="flex items-center gap-2 text-blue-600 font-semibold">
+                          <Clock className="h-4 w-4" />
+                          {phase.duration}
+                        </div>
+                      </div>
+                      
+                      <p className="text-slate-600 mb-4 leading-relaxed">
+                        {phase.description}
+                      </p>
+                      
+                      <div>
+                        <h5 className="font-semibold text-slate-800 mb-2">Deliverables:</h5>
+                        <div className="flex flex-wrap gap-2">
+                          {phase.deliverables.map((deliverable, dIndex) => (
+                            <span
+                              key={dIndex}
+                              className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium border-2 border-blue-200"
+                              style={{borderRadius: '12px 8px 15px 10px'}}
+                            >
+                              {deliverable}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          )}
+
+          {/* Contact Section - Always visible */}
           <div className="bg-white/80 backdrop-blur-sm border-3 border-blue-300 p-8 relative" style={{
             borderRadius: '30px 20px 35px 25px',
             borderStyle: 'dashed'
@@ -411,14 +1061,14 @@ Looking forward to hearing from you!`);
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
-                  onClick={() => handleContact('Custom Project')}
+                  onClick={() => setShowProjectForm(true)}
                   className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-8 py-4 font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300"
                   style={{
                     borderRadius: '25px 15px 30px 20px',
                     boxShadow: '4px 4px 0px rgba(59, 130, 246, 0.4)'
                   }}
                 >
-                  🚀 Start Your Project
+                  🚀 Submit Your Project
                 </button>
                 <a
                   href="mailto:shiva@redesignr.ai"
@@ -435,6 +1085,18 @@ Looking forward to hearing from you!`);
           </div>
         </div>
       </div>
+      
+      {/* Modals */}
+      <ProjectDetailModal
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+      
+      <ProjectSubmissionForm
+        isOpen={showProjectForm}
+        onClose={() => setShowProjectForm(false)}
+      />
     </div>
   );
 };

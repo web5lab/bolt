@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, User, PenTool } from 'lucide-react';
+import { Menu, X, User, PenTool, Moon, Sun } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { UserSelector } from '../store/global.Selctor';
+import { useTheme } from '../context/ThemeContext';
 import logo from "../assets/logo.webp"
 
 const Navbar = () => {
@@ -10,6 +11,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const user = useSelector(UserSelector);
   const navigate = useNavigate();
+  const { isDarkMode, toggleDarkMode } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,8 +34,12 @@ const Navbar = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b-2 border-amber-200' 
-          : 'bg-white/90 backdrop-blur-sm'
+          ? isDarkMode
+            ? 'bg-slate-900/95 backdrop-blur-md shadow-lg border-b-2 border-amber-600'
+            : 'bg-white/95 backdrop-blur-md shadow-lg border-b-2 border-amber-200'
+          : isDarkMode
+            ? 'bg-slate-900/90 backdrop-blur-sm'
+            : 'bg-white/90 backdrop-blur-sm'
       }`}
       style={{
         borderRadius: isScrolled ? '0 0 20px 20px' : '0'
@@ -43,7 +49,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-2 text-amber-600 font-bold text-xl hover:text-orange-600 transition-colors">
+            <Link to="/" className={`flex items-center gap-2 font-bold text-xl transition-colors ${
+              isDarkMode 
+                ? 'text-amber-400 hover:text-orange-400' 
+                : 'text-amber-600 hover:text-orange-600'
+            }`}>
               <div className="relative">
                 <img src={logo} className="h-10 w-10" alt="Logo" />
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full opacity-70"></div>
@@ -64,7 +74,11 @@ const Navbar = () => {
               <li>
                 <a 
                   href="#features" 
-                  className="text-slate-700 hover:text-amber-600 transition-colors font-medium relative group"
+                  className={`transition-colors font-medium relative group ${
+                    isDarkMode 
+                      ? 'text-slate-300 hover:text-amber-400' 
+                      : 'text-slate-700 hover:text-amber-600'
+                  }`}
                 >
                   Features
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
@@ -73,7 +87,11 @@ const Navbar = () => {
               <li>
                 <Link 
                   to="/blog" 
-                  className="text-slate-700 hover:text-amber-600 transition-colors font-medium relative group"
+                  className={`transition-colors font-medium relative group ${
+                    isDarkMode 
+                      ? 'text-slate-300 hover:text-amber-400' 
+                      : 'text-slate-700 hover:text-amber-600'
+                  }`}
                 >
                   Blog
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
@@ -82,7 +100,11 @@ const Navbar = () => {
               <li>
                 <a 
                   href="#how-it-works" 
-                  className="text-slate-700 hover:text-amber-600 transition-colors font-medium relative group"
+                  className={`transition-colors font-medium relative group ${
+                    isDarkMode 
+                      ? 'text-slate-300 hover:text-amber-400' 
+                      : 'text-slate-700 hover:text-amber-600'
+                  }`}
                 >
                   How It Works
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
@@ -91,7 +113,11 @@ const Navbar = () => {
               <li>
                 <a 
                   href="#pricing" 
-                  className="text-slate-700 hover:text-amber-600 transition-colors font-medium relative group"
+                  className={`transition-colors font-medium relative group ${
+                    isDarkMode 
+                      ? 'text-slate-300 hover:text-amber-400' 
+                      : 'text-slate-700 hover:text-amber-600'
+                  }`}
                 >
                   Pricing
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
@@ -100,7 +126,11 @@ const Navbar = () => {
               <li>
                 <a 
                   href="#faq" 
-                  className="text-slate-700 hover:text-amber-600 transition-colors font-medium relative group"
+                  className={`transition-colors font-medium relative group ${
+                    isDarkMode 
+                      ? 'text-slate-300 hover:text-amber-400' 
+                      : 'text-slate-700 hover:text-amber-600'
+                  }`}
                 >
                   FAQ
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
@@ -111,6 +141,20 @@ const Navbar = () => {
 
           {/* Desktop User Section */}
           <div className="hidden lg:flex items-center space-x-4">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className={`p-2 transition-all duration-300 transform hover:scale-110 ${
+                isDarkMode
+                  ? 'bg-slate-800 border-2 border-amber-600 text-amber-400 hover:bg-slate-700'
+                  : 'bg-white border-2 border-amber-400 text-amber-600 hover:bg-amber-50'
+              }`}
+              style={{borderRadius: '12px 8px 15px 10px'}}
+              aria-label="Toggle dark mode"
+            >
+              {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
+
             {user && user.name ? (
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2 cursor-pointer group">
@@ -128,7 +172,11 @@ const Navbar = () => {
                   )}
                   <span 
                     onClick={() => navigate('/dashboard')}
-                    className="text-slate-700 cursor-pointer font-medium group-hover:text-amber-600 transition-colors"
+                    className={`cursor-pointer font-medium transition-colors ${
+                      isDarkMode 
+                        ? 'text-slate-300 group-hover:text-amber-400' 
+                        : 'text-slate-700 group-hover:text-amber-600'
+                    }`}
                   >
                     {user.name}
                   </span>
@@ -148,7 +196,11 @@ const Navbar = () => {
               <>
                 <a
                   href="https://discord.gg/mg7Z4XeF3k"
-                  className="bg-white border-2 border-amber-400 text-amber-600 px-6 py-2 font-semibold hover:bg-amber-50 hover:border-orange-400 hover:text-orange-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+                  className={`border-2 px-6 py-2 font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 ${
+                    isDarkMode
+                      ? 'bg-slate-800 border-amber-600 text-amber-400 hover:bg-slate-700 hover:border-orange-500 hover:text-orange-400'
+                      : 'bg-white border-amber-400 text-amber-600 hover:bg-amber-50 hover:border-orange-400 hover:text-orange-600'
+                  }`}
                   style={{
                     borderRadius: '15px 25px 15px 25px'
                   }}
@@ -171,6 +223,20 @@ const Navbar = () => {
 
           {/* Tablet User Section */}
           <div className="hidden md:flex lg:hidden items-center space-x-3">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className={`p-2 transition-all duration-300 ${
+                isDarkMode
+                  ? 'bg-slate-800 border-2 border-amber-600 text-amber-400'
+                  : 'bg-white border-2 border-amber-400 text-amber-600'
+              }`}
+              style={{borderRadius: '12px 8px 15px 10px'}}
+              aria-label="Toggle dark mode"
+            >
+              {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+
             {user && user.name ? (
               <div className="flex items-center space-x-3">
                 <div className="flex items-center space-x-2 cursor-pointer">
@@ -188,7 +254,9 @@ const Navbar = () => {
                   )}
                   <span 
                     onClick={() => navigate('/dashboard')}
-                    className="text-slate-700 cursor-pointer text-sm font-medium"
+                    className={`cursor-pointer text-sm font-medium ${
+                      isDarkMode ? 'text-slate-300' : 'text-slate-700'
+                    }`}
                   >
                     {user.name.length > 10 ? `${user.name.substring(0, 10)}...` : user.name}
                   </span>
@@ -205,7 +273,11 @@ const Navbar = () => {
               <>
                 <a
                   href="https://discord.gg/mg7Z4XeF3k"
-                  className="bg-white border-2 border-amber-400 text-amber-600 px-4 py-2 font-semibold hover:bg-amber-50 text-sm"
+                  className={`border-2 px-4 py-2 font-semibold text-sm ${
+                    isDarkMode
+                      ? 'bg-slate-800 border-amber-600 text-amber-400 hover:bg-slate-700'
+                      : 'bg-white border-amber-400 text-amber-600 hover:bg-amber-50'
+                  }`}
                   style={{borderRadius: '15px 20px 15px 20px'}}
                 >
                   Contact
@@ -223,6 +295,20 @@ const Navbar = () => {
 
           {/* Mobile Menu Button and Dashboard Link */}
           <div className="flex md:hidden items-center space-x-2">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className={`p-2 transition-all duration-300 ${
+                isDarkMode
+                  ? 'bg-slate-800 border-2 border-amber-600 text-amber-400'
+                  : 'bg-white border-2 border-amber-400 text-amber-600'
+              }`}
+              style={{borderRadius: '10px 15px 10px 15px'}}
+              aria-label="Toggle dark mode"
+            >
+              {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+
             {user && user.name && (
               <Link
                 to="/dashboard"
@@ -234,7 +320,11 @@ const Navbar = () => {
             )}
             <button
               onClick={toggleMobileMenu}
-              className="text-slate-700 p-2 hover:bg-amber-50 transition-colors border-2 border-amber-300 hover:border-orange-400"
+              className={`p-2 transition-colors border-2 ${
+                isDarkMode
+                  ? 'text-slate-300 hover:bg-slate-800 border-amber-600 hover:border-orange-500'
+                  : 'text-slate-700 hover:bg-amber-50 border-amber-300 hover:border-orange-400'
+              }`}
               style={{borderRadius: '10px 15px 10px 15px'}}
               aria-label="Toggle menu"
             >
@@ -245,8 +335,12 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-2 pb-4 border-t-2 border-amber-200" style={{
-            background: 'linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%)',
+          <div className={`md:hidden mt-2 pb-4 border-t-2 ${
+            isDarkMode ? 'border-amber-600' : 'border-amber-200'
+          }`} style={{
+            background: isDarkMode 
+              ? 'linear-gradient(135deg, #1e293b 0%, #334155 100%)'
+              : 'linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%)',
             borderRadius: '0 0 20px 20px'
           }}>
             <nav className="pt-4">
@@ -254,7 +348,11 @@ const Navbar = () => {
                 <li>
                   <a 
                     href="#features" 
-                    className="block text-slate-700 hover:text-amber-600 transition-colors py-2 px-4 hover:bg-white/50 font-medium"
+                    className={`block transition-colors py-2 px-4 font-medium ${
+                      isDarkMode
+                        ? 'text-slate-300 hover:text-amber-400 hover:bg-slate-800/50'
+                        : 'text-slate-700 hover:text-amber-600 hover:bg-white/50'
+                    }`}
                     onClick={closeMobileMenu}
                     style={{borderRadius: '15px 10px 15px 10px'}}
                   >
@@ -264,7 +362,11 @@ const Navbar = () => {
                 <li>
                   <Link 
                     to="/blog" 
-                    className="block text-slate-700 hover:text-amber-600 transition-colors py-2 px-4 hover:bg-white/50 font-medium"
+                    className={`block transition-colors py-2 px-4 font-medium ${
+                      isDarkMode
+                        ? 'text-slate-300 hover:text-amber-400 hover:bg-slate-800/50'
+                        : 'text-slate-700 hover:text-amber-600 hover:bg-white/50'
+                    }`}
                     onClick={closeMobileMenu}
                     style={{borderRadius: '10px 15px 10px 15px'}}
                   >
@@ -274,7 +376,11 @@ const Navbar = () => {
                 <li>
                   <a 
                     href="#how-it-works" 
-                    className="block text-slate-700 hover:text-amber-600 transition-colors py-2 px-4 hover:bg-white/50 font-medium"
+                    className={`block transition-colors py-2 px-4 font-medium ${
+                      isDarkMode
+                        ? 'text-slate-300 hover:text-amber-400 hover:bg-slate-800/50'
+                        : 'text-slate-700 hover:text-amber-600 hover:bg-white/50'
+                    }`}
                     onClick={closeMobileMenu}
                     style={{borderRadius: '15px 10px 15px 10px'}}
                   >
@@ -284,7 +390,11 @@ const Navbar = () => {
                 <li>
                   <a 
                     href="#pricing" 
-                    className="block text-slate-700 hover:text-amber-600 transition-colors py-2 px-4 hover:bg-white/50 font-medium"
+                    className={`block transition-colors py-2 px-4 font-medium ${
+                      isDarkMode
+                        ? 'text-slate-300 hover:text-amber-400 hover:bg-slate-800/50'
+                        : 'text-slate-700 hover:text-amber-600 hover:bg-white/50'
+                    }`}
                     onClick={closeMobileMenu}
                     style={{borderRadius: '10px 15px 10px 15px'}}
                   >
@@ -294,7 +404,11 @@ const Navbar = () => {
                 <li>
                   <a 
                     href="#faq" 
-                    className="block text-slate-700 hover:text-amber-600 transition-colors py-2 px-4 hover:bg-white/50 font-medium"
+                    className={`block transition-colors py-2 px-4 font-medium ${
+                      isDarkMode
+                        ? 'text-slate-300 hover:text-amber-400 hover:bg-slate-800/50'
+                        : 'text-slate-700 hover:text-amber-600 hover:bg-white/50'
+                    }`}
                     onClick={closeMobileMenu}
                     style={{borderRadius: '15px 10px 15px 10px'}}
                   >
@@ -305,7 +419,9 @@ const Navbar = () => {
               
               {/* Mobile User Section */}
               {user && user.name ? (
-                <div className="mt-4 pt-4 border-t-2 border-amber-200">
+                <div className={`mt-4 pt-4 border-t-2 ${
+                  isDarkMode ? 'border-amber-600' : 'border-amber-200'
+                }`}>
                   <div className="flex items-center space-x-3 px-4 py-2">
                     {user.profilePicture ? (
                       <img
@@ -318,14 +434,22 @@ const Navbar = () => {
                         <User className="h-4 w-4 text-white" />
                       </div>
                     )}
-                    <span className="text-slate-700 font-medium">{user.name}</span>
+                    <span className={`font-medium ${
+                      isDarkMode ? 'text-slate-300' : 'text-slate-700'
+                    }`}>{user.name}</span>
                   </div>
                 </div>
               ) : (
-                <div className="mt-4 pt-4 border-t-2 border-amber-200 space-y-2">
+                <div className={`mt-4 pt-4 border-t-2 space-y-2 ${
+                  isDarkMode ? 'border-amber-600' : 'border-amber-200'
+                }`}>
                   <a
                     href="https://discord.gg/mg7Z4XeF3k"
-                    className="block bg-white border-2 border-amber-400 text-amber-600 px-4 py-2 font-semibold hover:bg-amber-50 text-center mx-4"
+                    className={`block border-2 px-4 py-2 font-semibold text-center mx-4 ${
+                      isDarkMode
+                        ? 'bg-slate-800 border-amber-600 text-amber-400 hover:bg-slate-700'
+                        : 'bg-white border-amber-400 text-amber-600 hover:bg-amber-50'
+                    }`}
                     onClick={closeMobileMenu}
                     style={{borderRadius: '15px 20px 15px 20px'}}
                   >

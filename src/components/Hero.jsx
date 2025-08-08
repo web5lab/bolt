@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Wand2, Globe, FileText, Sparkles, ArrowRight, Zap, Github, PenTool } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { setWebsiteQueqe } from '../store/global.Slice';
+import { useTheme } from '../context/ThemeContext';
 
 const Hero = () => {
   const navigate = useNavigate();
   const [showVideo, setShowVideo] = useState(false);
   const [activeTab, setActiveTab] = useState('redesign');
   const dispatch = useDispatch()
+  const { isDarkMode } = useTheme();
   const [formData, setFormData] = useState({
     url: '',
     repoUrl: '',
@@ -68,7 +70,11 @@ const Hero = () => {
   };
 
   return (
-    <section className="pt-20 pb-12 min-h-[100vh] md:pt-24 md:pb-16 relative overflow-hidden bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50">
+    <section className={`pt-20 pb-12 min-h-[100vh] md:pt-24 md:pb-16 relative overflow-hidden transition-colors duration-300 ${
+      isDarkMode 
+        ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' 
+        : 'bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50'
+    }`}>
       {/* Paper texture overlay */}
       <div className="absolute inset-0 opacity-30" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a574' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='53' cy='53' r='1'/%3E%3Ccircle cx='13' cy='43' r='1'/%3E%3Ccircle cx='47' cy='17' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
@@ -110,10 +116,17 @@ const Hero = () => {
             <div className="space-y-8">
               {/* Hand-drawn badge */}
               <div className="inline-block px-6 py-2 bg-white/80 backdrop-blur-sm border-2 border-amber-300 shadow-lg transition-all duration-300 transform hover:scale-105" style={{
+              <div className={`inline-block px-6 py-2 backdrop-blur-sm border-2 shadow-lg transition-all duration-300 transform hover:scale-105 ${
+                isDarkMode 
+                  ? 'bg-slate-800/80 border-amber-600' 
+                  : 'bg-white/80 border-amber-300'
+              }`} style={{
                 borderRadius: '25px 20px 30px 15px',
                 boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
               }}>
-                <span className="text-amber-700 text-sm font-medium flex items-center gap-2">
+                <span className={`text-sm font-medium flex items-center gap-2 ${
+                  isDarkMode ? 'text-amber-400' : 'text-amber-700'
+                }`}>
                   <PenTool className="h-4 w-4" />
                   ✨ Hand-Crafted AI Web Creation
                 </span>
@@ -121,7 +134,9 @@ const Hero = () => {
 
               {/* Main Heading */}
               <div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-slate-800">
+                <h1 className={`text-4xl md:text-5xl lg:text-5xl font-bold mb-6 leading-tight ${
+                  isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                }`}>
                   <span className="relative inline-block">
                     Create Beautiful
                     <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 300 12" fill="none">
@@ -148,11 +163,16 @@ const Hero = () => {
                   </span>
                   <br />
                   <span className="text-slate-700">— in Minutes</span>
+                  <span className={isDarkMode ? 'text-slate-300' : 'text-slate-700'}>— in Minutes</span>
                 </h1>
 
-                <p className="text-slate-600 text-lg md:text-xl mb-8 leading-relaxed">
+                <p className={`text-lg md:text-xl mb-8 leading-relaxed ${
+                  isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                }`}>
                   Whether you're starting fresh or transforming existing content — our{' '}
-                  <span className="text-amber-600 font-semibold relative">
+                  <span className={`font-semibold relative ${
+                    isDarkMode ? 'text-amber-400' : 'text-amber-600'
+                  }`}>
                     AI Frontend Engineer
                     <svg className="absolute -bottom-1 left-0 w-full h-2" viewBox="0 0 200 8" fill="none">
                       <path d="M2 6 Q100 2 198 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.4"/>
@@ -197,15 +217,23 @@ const Hero = () => {
               </div>
 
               {/* Features Info */}
-              <div className="p-6 bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200" style={{
+              <div className={`p-6 border-2 ${
+                isDarkMode 
+                  ? 'bg-gradient-to-r from-slate-800 to-slate-700 border-amber-600' 
+                  : 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200'
+              }`} style={{
                 borderRadius: '20px 30px 15px 25px',
                 borderStyle: 'dashed'
               }}>
                 <div className="flex items-start gap-3">
                   <Sparkles className="h-6 w-6 text-amber-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="text-slate-800 font-bold mb-2 text-lg">What you'll get: ✨</h3>
-                    <ul className="text-slate-700 space-y-2">
+                    <h3 className={`font-bold mb-2 text-lg ${
+                      isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                    }`}>What you'll get: ✨</h3>
+                    <ul className={`space-y-2 ${
+                      isDarkMode ? 'text-slate-300' : 'text-slate-700'
+                    }`}>
                       <li className="flex items-center gap-2">
                         <span className="w-2 h-2 bg-amber-400 rounded-full"></span>
                         Production-ready HTML/CSS code
@@ -230,7 +258,11 @@ const Hero = () => {
 
             {/* Right Form */}
             <div className="lg:sticky lg:top-24">
-              <div className="bg-white/90 backdrop-blur-sm border-3 border-amber-300 p-6 md:p-8 shadow-2xl relative" style={{
+              <div className={`backdrop-blur-sm border-3 p-6 md:p-8 shadow-2xl relative ${
+                isDarkMode 
+                  ? 'bg-slate-800/90 border-amber-600' 
+                  : 'bg-white/90 border-amber-300'
+              }`} style={{
                 borderRadius: '30px 20px 35px 25px',
                 boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.2)'
               }}>
@@ -241,13 +273,17 @@ const Hero = () => {
                 <div className="absolute bottom-2 right-2 w-6 h-6 border-2 border-red-400 opacity-40 transform rotate-12" style={{borderRadius: '30% 70% 70% 30%'}}></div>
 
                 <div className="text-center mb-6">
-                  <h2 className="text-2xl font-bold text-slate-800 mb-2 relative">
+                  <h2 className={`text-2xl font-bold mb-2 relative ${
+                    isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                  }`}>
                     Start Creating Now
                     <svg className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-32 h-2" viewBox="0 0 128 8" fill="none">
                       <path d="M2 6 Q64 2 126 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
                     </svg>
                   </h2>
-                  <p className="text-slate-600">Choose your creation mode and let AI do the magic ✨</p>
+                  <p className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>
+                    Choose your creation mode and let AI do the magic ✨
+                  </p>
                 </div>
 
                 {/* Tabs */}
@@ -276,7 +312,11 @@ const Hero = () => {
                   <select
                     value={activeTab}
                     onChange={(e) => setActiveTab(e.target.value)}
-                    className="w-full bg-white text-slate-700 border-2 border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    className={`w-full border-2 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 ${
+                      isDarkMode
+                        ? 'bg-slate-700 text-slate-200 border-amber-600'
+                        : 'bg-white text-slate-700 border-amber-300'
+                    }`}
                     style={{borderRadius: '15px 25px 15px 25px'}}
                   >
                     {tabs.map((tab) => (
@@ -293,7 +333,9 @@ const Hero = () => {
                   {activeTab === 'redesign' && (
                     <div className="space-y-4">
                       <div>
-                        <label htmlFor="url" className="block text-slate-800 font-semibold mb-2">
+                        <label htmlFor="url" className={`block font-semibold mb-2 ${
+                          isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                        }`}>
                           Website URL to Redesign 🎨
                         </label>
                         <input
@@ -302,12 +344,18 @@ const Hero = () => {
                           value={formData.url}
                           onChange={(e) => handleInputChange('url', e.target.value)}
                           placeholder="https://example.com"
-                          className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                          className={`w-full border-2 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 ${
+                            isDarkMode
+                              ? 'bg-slate-700 border-slate-600 text-slate-200 placeholder-slate-400'
+                              : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'
+                          }`}
                           style={{borderRadius: '15px 20px 15px 20px'}}
                         />
                       </div>
                       <div>
-                        <label htmlFor="redesignInstructions" className="block text-slate-800 font-semibold mb-2">
+                        <label htmlFor="redesignInstructions" className={`block font-semibold mb-2 ${
+                          isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                        }`}>
                           Special Instructions (Optional) ✏️
                         </label>
                         <input
@@ -316,7 +364,11 @@ const Hero = () => {
                           value={formData.instructions}
                           onChange={(e) => handleInputChange('instructions', e.target.value)}
                           placeholder="e.g., Make it more modern, improve mobile design"
-                          className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                          className={`w-full border-2 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 ${
+                            isDarkMode
+                              ? 'bg-slate-700 border-slate-600 text-slate-200 placeholder-slate-400'
+                              : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'
+                          }`}
                           style={{borderRadius: '20px 15px 20px 15px'}}
                         />
                       </div>
@@ -327,14 +379,21 @@ const Hero = () => {
                   {activeTab === 'docs' && (
                     <div className="space-y-4">
                       {/* Source Selection */}
-                      <div className="flex bg-amber-50 p-2 mb-4" style={{borderRadius: '20px 15px 25px 10px', border: '2px dashed #f59e0b'}}>
+                      <div className={`flex p-2 mb-4 ${
+                        isDarkMode ? 'bg-slate-700' : 'bg-amber-50'
+                      }`} style={{
+                        borderRadius: '20px 15px 25px 10px', 
+                        border: isDarkMode ? '2px dashed #d97706' : '2px dashed #f59e0b'
+                      }}>
                         <button
                           type="button"
                           onClick={() => handleInputChange('docsSource', 'repo')}
                           className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold transition-all ${
                             (formData.docsSource || 'repo') === 'repo'
                               ? 'bg-amber-400 text-white shadow-lg'
-                              : 'text-slate-700 hover:bg-white hover:text-amber-700'
+                              : isDarkMode
+                                ? 'text-slate-300 hover:bg-slate-600 hover:text-amber-400'
+                                : 'text-slate-700 hover:bg-white hover:text-amber-700'
                           }`}
                           style={{borderRadius: '15px 10px 20px 15px'}}
                         >
@@ -347,7 +406,9 @@ const Hero = () => {
                           className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold transition-all ${
                             formData.docsSource === 'readme'
                               ? 'bg-amber-400 text-white shadow-lg'
-                              : 'text-slate-700 hover:bg-white hover:text-amber-700'
+                              : isDarkMode
+                                ? 'text-slate-300 hover:bg-slate-600 hover:text-amber-400'
+                                : 'text-slate-700 hover:bg-white hover:text-amber-700'
                           }`}
                           style={{borderRadius: '10px 15px 15px 20px'}}
                         >
@@ -359,7 +420,9 @@ const Hero = () => {
                       {/* Repository URL Input */}
                       {(formData.docsSource || 'repo') === 'repo' && (
                         <div>
-                          <label htmlFor="repoUrl" className="block text-slate-800 font-semibold mb-2">
+                          <label htmlFor="repoUrl" className={`block font-semibold mb-2 ${
+                            isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                          }`}>
                             GitHub Repository URL 📚
                           </label>
                           <input
@@ -368,10 +431,16 @@ const Hero = () => {
                             value={formData.repoUrl}
                             onChange={(e) => handleInputChange('repoUrl', e.target.value)}
                             placeholder="https://github.com/username/repository"
-                            className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className={`w-full border-2 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 ${
+                              isDarkMode
+                                ? 'bg-slate-700 border-slate-600 text-slate-200 placeholder-slate-400'
+                                : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'
+                            }`}
                             style={{borderRadius: '15px 20px 15px 20px'}}
                           />
-                          <p className="text-slate-600 text-sm mt-2">
+                          <p className={`text-sm mt-2 ${
+                            isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                          }`}>
                             We'll analyze your repository and create beautiful documentation ✨
                           </p>
                         </div>
@@ -380,7 +449,9 @@ const Hero = () => {
                       {/* README Content Input */}
                       {formData.docsSource === 'readme' && (
                         <div>
-                          <label htmlFor="readmeContent" className="block text-slate-800 font-semibold mb-2">
+                          <label htmlFor="readmeContent" className={`block font-semibold mb-2 ${
+                            isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                          }`}>
                             README Content 📝
                           </label>
                           <textarea
@@ -389,17 +460,25 @@ const Hero = () => {
                             onChange={(e) => handleInputChange('readmeContent', e.target.value)}
                             rows={6}
                             placeholder="Paste your README.md content here..."
-                            className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 font-mono text-sm"
+                            className={`w-full border-2 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 font-mono text-sm ${
+                              isDarkMode
+                                ? 'bg-slate-700 border-slate-600 text-slate-200 placeholder-slate-400'
+                                : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'
+                            }`}
                             style={{borderRadius: '20px 15px 25px 10px'}}
                           />
-                          <p className="text-slate-600 text-sm mt-2">
+                          <p className={`text-sm mt-2 ${
+                            isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                          }`}>
                             Paste your README.md content and we'll transform it into beautiful documentation 🎨
                           </p>
                         </div>
                       )}
 
                       <div>
-                        <label htmlFor="docsInstructions" className="block text-slate-800 font-semibold mb-2">
+                        <label htmlFor="docsInstructions" className={`block font-semibold mb-2 ${
+                          isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                        }`}>
                           Documentation Focus (Optional) 🎯
                         </label>
                         <textarea
@@ -408,7 +487,11 @@ const Hero = () => {
                           onChange={(e) => handleInputChange('instructions', e.target.value)}
                           rows={3}
                           placeholder="e.g., Focus on API documentation, include installation guide, highlight key features"
-                          className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                          className={`w-full border-2 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 ${
+                            isDarkMode
+                              ? 'bg-slate-700 border-slate-600 text-slate-200 placeholder-slate-400'
+                              : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'
+                          }`}
                           style={{borderRadius: '15px 25px 15px 25px'}}
                         />
                       </div>
@@ -419,7 +502,9 @@ const Hero = () => {
                   {activeTab === 'create' && (
                     <div className="space-y-4">
                       <div>
-                        <label htmlFor="createInstructions" className="block text-slate-800 font-semibold mb-2">
+                        <label htmlFor="createInstructions" className={`block font-semibold mb-2 ${
+                          isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                        }`}>
                           Describe Your Website 💭
                         </label>
                         <textarea
@@ -428,7 +513,11 @@ const Hero = () => {
                           onChange={(e) => handleInputChange('instructions', e.target.value)}
                           rows={4}
                           placeholder="e.g., A landing page for a SaaS product with pricing, testimonials, and signup form"
-                          className="w-full bg-white border-2 border-slate-300 px-4 py-3 text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                          className={`w-full border-2 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 ${
+                            isDarkMode
+                              ? 'bg-slate-700 border-slate-600 text-slate-200 placeholder-slate-400'
+                              : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'
+                          }`}
                           style={{borderRadius: '20px 15px 25px 10px'}}
                         />
                       </div>
@@ -474,18 +563,26 @@ const Hero = () => {
           {/* Mobile-only content for smaller screens */}
           <div className="lg:hidden text-center mt-12">
             {/* Hand-drawn badge */}
-            <div className="inline-block px-6 py-2 mb-6 bg-white/80 backdrop-blur-sm border-2 border-amber-300 shadow-lg transition-all duration-300 transform hover:scale-105" style={{
+           <div className={`inline-block px-6 py-2 mb-6 backdrop-blur-sm border-2 shadow-lg transition-all duration-300 transform hover:scale-105 ${
+             isDarkMode 
+               ? 'bg-slate-800/80 border-amber-600' 
+               : 'bg-white/80 border-amber-300'
+           }`} style={{
               borderRadius: '25px 20px 30px 15px',
               boxShadow: '3px 3px 0px rgba(245, 158, 11, 0.3)'
             }}>
-              <span className="text-amber-700 text-sm font-medium flex items-center gap-2">
+             <span className={`text-sm font-medium flex items-center gap-2 ${
+               isDarkMode ? 'text-amber-400' : 'text-amber-700'
+             }`}>
                 <PenTool className="h-4 w-4" />
                 ✨ Hand-Crafted AI Web Creation
               </span>
             </div>
 
             {/* Hand-drawn heading */}
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-slate-800">
+           <h1 className={`text-4xl md:text-5xl font-bold mb-6 leading-tight ${
+             isDarkMode ? 'text-slate-200' : 'text-slate-800'
+           }`}>
               <span className="relative inline-block">
                 Create Beautiful
                 <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 300 12" fill="none">
@@ -514,9 +611,13 @@ const Hero = () => {
               <span className="text-slate-700">— in Minutes</span>
             </h1>
 
-            <p className="text-slate-600 text-lg mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className={`text-lg mb-8 leading-relaxed max-w-3xl mx-auto ${
+              isDarkMode ? 'text-slate-400' : 'text-slate-600'
+            }`}>
               Whether you're starting fresh or transforming existing content — our{' '}
-              <span className="text-amber-600 font-semibold relative">
+              <span className={`font-semibold relative ${
+                isDarkMode ? 'text-amber-400' : 'text-amber-600'
+              }`}>
                 AI Frontend Engineer
                 <svg className="absolute -bottom-1 left-0 w-full h-2" viewBox="0 0 200 8" fill="none">
                   <path d="M2 6 Q100 2 198 6" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.4"/>

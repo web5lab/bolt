@@ -8,14 +8,22 @@ import Footer from '../components/Footer';
 import TemplateShowcase from '../components/Template';
 import { useDispatch } from 'react-redux';
 import { getPublicTemplates } from '../store/global.Action';
+import { useTheme } from '../context/ThemeContext';
+
 const Landing = () => {
   const dispatch = useDispatch();
+  const { isDarkMode } = useTheme();
+
   useEffect(() => {
     dispatch(getPublicTemplates())
   }, [])
   
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-200">
+    <div className={`min-h-screen transition-colors duration-300 ${
+      isDarkMode 
+        ? 'bg-slate-900 text-slate-200' 
+        : 'bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 text-slate-800'
+    }`}>
       <Navbar />
       <main>
         <Hero />

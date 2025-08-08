@@ -9,7 +9,7 @@ const Hero = () => {
   const navigate = useNavigate();
   const [showVideo, setShowVideo] = useState(false);
   const [activeTab, setActiveTab] = useState('redesign');
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { isDarkMode } = useTheme();
   const [formData, setFormData] = useState({
     url: '',
@@ -43,8 +43,8 @@ const Hero = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    console.log("form data =>", formData)
-    dispatch(setWebsiteQueqe({ formData, mode: activeTab }))
+    console.log("form data =>", formData);
+    dispatch(setWebsiteQueqe({ formData, mode: activeTab }));
     setIsSubmitting(false);
     navigate('/dashboard');
   };
@@ -115,7 +115,6 @@ const Hero = () => {
             {/* Left Content */}
             <div className="space-y-8">
               {/* Hand-drawn badge */}
-              <div className="inline-block px-6 py-2 bg-white/80 backdrop-blur-sm border-2 border-amber-300 shadow-lg transition-all duration-300 transform hover:scale-105" style={{
               <div className={`inline-block px-6 py-2 backdrop-blur-sm border-2 shadow-lg transition-all duration-300 transform hover:scale-105 ${
                 isDarkMode 
                   ? 'bg-slate-800/80 border-amber-600' 
@@ -162,7 +161,6 @@ const Hero = () => {
                     More
                   </span>
                   <br />
-                  <span className="text-slate-700">— in Minutes</span>
                   <span className={isDarkMode ? 'text-slate-300' : 'text-slate-700'}>— in Minutes</span>
                 </h1>
 
@@ -201,7 +199,11 @@ const Hero = () => {
 
                 <button
                   onClick={() => setShowVideo(true)}
-                  className="group px-8 py-4 border-3 border-slate-400 text-slate-700 font-bold text-lg hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50 transition-all duration-300"
+                  className={`group px-8 py-4 border-3 font-bold text-lg transition-all duration-300 ${
+                    isDarkMode 
+                      ? 'border-slate-400 text-slate-300 hover:border-amber-500 hover:text-amber-400 hover:bg-slate-800' 
+                      : 'border-slate-400 text-slate-700 hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50'
+                  }`}
                   style={{
                     borderRadius: '20px 30px 15px 25px',
                     borderStyle: 'dashed'
@@ -295,7 +297,9 @@ const Hero = () => {
                       className={`flex items-center gap-2 px-4 py-2 font-semibold transition-all duration-300 transform hover:scale-105 ${
                         activeTab === tab.id
                           ? 'bg-gradient-to-r from-amber-400 to-orange-400 text-white shadow-lg'
-                          : 'bg-white border-2 border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-amber-50'
+                          : isDarkMode
+                            ? 'bg-slate-700 border-2 border-slate-600 text-slate-300 hover:border-amber-400 hover:bg-slate-600'
+                            : 'bg-white border-2 border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-amber-50'
                       }`}
                       style={{
                         borderRadius: index % 2 === 0 ? '20px 10px 25px 15px' : '15px 25px 10px 20px',
@@ -608,7 +612,7 @@ const Hero = () => {
                 More
               </span>
               <br />
-              <span className="text-slate-700">— in Minutes</span>
+              <span className={isDarkMode ? 'text-slate-300' : 'text-slate-700'}>— in Minutes</span>
             </h1>
 
             <p className={`text-lg mb-8 leading-relaxed max-w-3xl mx-auto ${

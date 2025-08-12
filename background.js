@@ -364,6 +364,12 @@ class BackgroundService {
     }
 
     setupContextMenu() {
+        // Check if contextMenus API is available
+        if (!chrome.contextMenus) {
+            console.warn('Context menus API not available');
+            return;
+        }
+        
         // Create context menu items
         chrome.contextMenus.create({
             id: 'redesign-page',

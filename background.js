@@ -1,5 +1,8 @@
 // Background script for the Website AI Chrome Extension
 
+// Import AuthManager
+importScripts('auth.js');
+
 class BackgroundService {
     constructor() {
         this.init();

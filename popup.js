@@ -3,7 +3,6 @@ class WebsiteAIExtension {
         this.currentMode = 'redesign';
         this.currentUrl = '';
         this.capturedData = null;
-        this.authManager = new AuthManager();
         this.isAuthenticated = false;
         this.user = null;
         this.init();
@@ -197,18 +196,14 @@ class WebsiteAIExtension {
             console.log('Starting redesignr.ai authentication');
             this.showLoading('Authenticating...');
             
-            const user = await this.authManager.authenticate();
-            
-            console.log('Auth completed, user:', user);
-            
-            if (user) {
-                this.isAuthenticated = true;
-                this.user = user;
-                this.updateUI();
-                this.showSuccess('Authentication successful!');
-            } else {
-                throw new Error('Authentication failed');
-            }
+            // Send message to background script to handle authentication
+            chrome.runtime.sendMessage({ type: 'START_AUTH' }, (response) => {
+                if (response && response.success) {
+                    console.log('Auth started successfully');
+                } else {
+                    throw new Error('Failed to start authentication');
+                }
+            });
             
             this.hideLoading();
             
@@ -243,8 +238,13 @@ class WebsiteAIExtension {
         try {
             this.showLoading('Validating JWT token...');
             
-            // Exchange JWT token
-            const result = await this.authManager.exchangeJWT(jwtToken);
+            // Send JWT to background script for exchange
+            const result = await new Promise((resolve) => {
+                chrome.runtime.sendMessage({ 
+                    type: 'JWT_EXCHANGE', 
+                    token: jwtToken 
+                }, resolve);
+            });
             
             if (result.success) {
                 this.isAuthenticated = true;
@@ -527,21 +527,23 @@ class WebsiteAIExtension {
 
     async sendToServer(formData, endpoint) {
         try {
-            const response = await this.authManager.makeAuthenticatedRequest(
-                `${this.authManager.serverUrl}/api/${endpoint}`,
-                {
-                    method: 'POST',
-                    body: JSON.stringify(formData)
-                }
-            );
+            // Send request through background script
+            const result = await new Promise((resolve) => {
+                chrome.runtime.sendMessage({
+                    type: 'AUTHENTICATED_REQUEST',
+                    url: `https://redesignr.ai/api/${endpoint}`,
+                    options: {
+                        method: 'POST',
+                        body: JSON.stringify(formData)
+                    }
+                }, resolve);
+            });
 
-            if (response.ok) {
-                const result = await response.json();
+            if (result.success) {
                 this.showSuccess('Request sent successfully!');
-                console.log('Server response:', result);
+                console.log('Server response:', result.data);
             } else {
-                const error = await response.json();
-                throw new Error(error.message || 'Server request failed');
+                throw new Error(result.error || 'Server request failed');
             }
         } catch (error) {
             if (error.message === 'Authentication expired') {

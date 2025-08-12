@@ -27,6 +27,12 @@ class BackgroundService {
             return true; // Keep message channel open for async responses
         });
 
+        // Handle external messages (from redesignr.ai website)
+        chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+            this.handleExternalMessage(request, sender, sendResponse);
+            return true;
+        });
+
         // Handle tab updates
         chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             if (changeInfo.status === 'complete' && tab.url) {
@@ -101,12 +107,92 @@ class BackgroundService {
                     sendResponse({ success: true });
                     break;
 
+                case 'JWT_EXCHANGE':
+                    const jwtResult = await this.handleJWTExchange(request.token);
+                    sendResponse(jwtResult);
+                    break;
                 default:
                     sendResponse({ success: false, error: 'Unknown message type' });
             }
         } catch (error) {
             console.error('Error handling message:', error);
             sendResponse({ success: false, error: error.message });
+        }
+    }
+
+    async handleExternalMessage(request, sender, sendResponse) {
+        try {
+            // Only accept messages from redesignr.ai domain
+            const allowedOrigins = ['https://redesignr.ai', 'http://localhost:3000', 'http://localhost:5008'];
+            const senderOrigin = new URL(sender.url).origin;
+            
+            if (!allowedOrigins.includes(senderOrigin)) {
+                sendResponse({ success: false, error: 'Unauthorized origin' });
+                return;
+            }
+
+            switch (request.type) {
+                case 'JWT_TOKEN':
+                    // Handle JWT token from website
+                    await this.handleJWTFromWebsite(request.token);
+                    sendResponse({ success: true });
+                    break;
+
+                case 'AUTH_SUCCESS':
+                    // Handle auth success from website
+                    await this.handleAuthSuccessFromWebsite(request.data);
+                    sendResponse({ success: true });
+                    break;
+
+                default:
+                    sendResponse({ success: false, error: 'Unknown external message type' });
+            }
+        } catch (error) {
+            console.error('Error handling external message:', error);
+            sendResponse({ success: false, error: error.message });
+        }
+    }
+
+    async handleJWTExchange(token) {
+        try {
+            const result = await this.authManager.exchangeJWT(token);
+            return result;
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    }
+
+    async handleJWTFromWebsite(token) {
+        try {
+            // Forward JWT token to popup if it's open
+            chrome.runtime.sendMessage({
+                type: 'JWT_TOKEN_RECEIVED',
+                token: token
+            });
+
+            // Also try to exchange it directly
+            const result = await this.authManager.exchangeJWT(token);
+            
+            if (result.success) {
+                chrome.runtime.sendMessage({
+                    type: 'AUTH_SUCCESS',
+                    user: result.user
+                });
+            }
+        } catch (error) {
+            console.error('Error handling JWT from website:', error);
+        }
+    }
+
+    async handleAuthSuccessFromWebsite(data) {
+        try {
+            // Forward auth success to popup
+            chrome.runtime.sendMessage({
+                type: 'AUTH_SUCCESS',
+                user: data.user
+            });
+        } catch (error) {
+            console.error('Error handling auth success from website:', error);
         }
     }
 
@@ -250,7 +336,7 @@ class BackgroundService {
     }
 
     async openMainApp(data) {
-        const appUrl = 'https://yourdomain.com'; // Replace with your actual domain
+        const appUrl = 'https://redesignr.ai';
         
         try {
             // Check if app is already open

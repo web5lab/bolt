@@ -123,17 +123,78 @@ body {
     transform: translateY(-1px);
 }
 
+.primary-btn {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
+    border-color: rgba(79, 70, 229, 0.5) !important;
+    color: #ffffff !important;
+}
+
+.primary-btn:hover {
+    background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%) !important;
+    border-color: #4f46e5 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+}
+
+.secondary-btn {
+    background: rgba(30, 41, 59, 0.6) !important;
+    border-color: rgba(100, 116, 139, 0.3) !important;
+}
+
+.secondary-btn:hover {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border-color: rgba(100, 116, 139, 0.5) !important;
+}
+
 .auth-icon {
     width: 20px;
     height: 20px;
 }
 
-.google-btn:hover {
-    border-color: #4285F4;
+.jwt-input-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(100, 116, 139, 0.2);
 }
 
-.github-btn:hover {
-    border-color: #333;
+.jwt-input-section .form-group {
+    margin-bottom: 16px;
+}
+
+.jwt-input-section .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #f1f5f9;
+    margin-bottom: 6px;
+}
+
+.jwt-input-section .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+    border-radius: 8px;
+    color: #e2e8f0;
+    font-size: 13px;
+    font-family: monospace;
+    resize: vertical;
+    min-height: 60px;
+    transition: all 0.2s ease;
+}
+
+.jwt-input-section .form-group textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.jwt-input-section .form-group textarea::placeholder {
+    color: #64748b;
+}
+
+.jwt-input-section .auth-btn {
+    margin-bottom: 8px;
 }
 
 .auth-footer {

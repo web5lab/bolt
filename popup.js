@@ -145,12 +145,20 @@ class WebsiteAIExtension {
         });
         
         // Auth buttons
-        document.getElementById('google-auth-btn').addEventListener('click', () => {
-            this.handleAuth('google');
+        document.getElementById('redesignr-auth-btn').addEventListener('click', () => {
+            this.handleRedesignrAuth();
         });
 
-        document.getElementById('github-auth-btn').addEventListener('click', () => {
-            this.handleAuth('github');
+        document.getElementById('jwt-exchange-btn').addEventListener('click', () => {
+            this.showJWTInput();
+        });
+
+        document.getElementById('jwt-submit-btn').addEventListener('click', () => {
+            this.handleJWTSubmit();
+        });
+
+        document.getElementById('jwt-cancel-btn').addEventListener('click', () => {
+            this.hideJWTInput();
         });
 
         // Tab switching
@@ -184,14 +192,12 @@ class WebsiteAIExtension {
         });
     }
 
-    async handleAuth(provider) {
+    async handleRedesignrAuth() {
         try {
-            console.log('Starting auth for provider:', provider);
+            console.log('Starting redesignr.ai authentication');
             this.showLoading('Authenticating...');
             
-            // Create a new AuthManager instance for this authentication
-            const authManager = new AuthManager();
-            const user = await authManager.authenticate(provider);
+            const user = await this.authManager.authenticate();
             
             console.log('Auth completed, user:', user);
             
@@ -212,6 +218,70 @@ class WebsiteAIExtension {
             this.isAuthenticated = false;
             this.user = null;
             this.updateUI();
+            this.hideLoading();
+        }
+    }
+
+    showJWTInput() {
+        document.getElementById('jwt-input-section').style.display = 'block';
+        document.getElementById('jwt-token-input').focus();
+    }
+
+    hideJWTInput() {
+        document.getElementById('jwt-input-section').style.display = 'none';
+        document.getElementById('jwt-token-input').value = '';
+    }
+
+    async handleJWTSubmit() {
+        const jwtToken = document.getElementById('jwt-token-input').value.trim();
+        
+        if (!jwtToken) {
+            this.showError('Please enter a JWT token');
+            return;
+        }
+
+        try {
+            this.showLoading('Validating JWT token...');
+            
+            // Exchange JWT token
+            const result = await this.authManager.exchangeJWT(jwtToken);
+            
+            if (result.success) {
+                this.isAuthenticated = true;
+                this.user = result.user;
+                this.updateUI();
+                this.hideJWTInput();
+                this.showSuccess('Authentication successful!');
+            } else {
+                throw new Error(result.error || 'JWT exchange failed');
+            }
+            
+        } catch (error) {
+            console.error('JWT authentication failed:', error);
+            this.showError('Invalid JWT token. Please check your token and try again.');
+        } finally {
+            this.hideLoading();
+        }
+    }
+
+    // Handle JWT token received from redesignr.ai website
+    async handleJWTTokenReceived(token) {
+        try {
+            console.log('Handling JWT token from website');
+            this.showLoading('Processing authentication...');
+            
+            const result = await this.authManager.exchangeJWT(token);
+            
+            if (result.success) {
+                this.isAuthenticated = true;
+                this.user = result.user;
+                this.updateUI();
+                this.showSuccess('Authentication successful!');
+            }
+        } catch (error) {
+            console.error('JWT token processing failed:', error);
+            this.showError('Authentication failed. Please try again.');
+        } finally {
             this.hideLoading();
         }
     }

@@ -1,7 +1,7 @@
-// Enhanced Authentication manager for Chrome Extension with chrome.identity
+// Enhanced Authentication manager for Chrome Extension with JWT exchange
 class AuthManager {
     constructor() {
-        this.serverUrl = 'http://localhost:5008';
+        this.serverUrl = 'https://redesignr.ai';
         this.token = null;
         this.user = null;
         this.init();
@@ -23,6 +23,13 @@ class AuthManager {
             } else if (request.type === 'AUTH_LOGOUT') {
                 this.logout().then(() => {
                     sendResponse({ success: true });
+                });
+                return true;
+            } else if (request.type === 'JWT_EXCHANGE') {
+                this.handleJWTExchange(request.token).then((result) => {
+                    sendResponse(result);
+                }).catch((error) => {
+                    sendResponse({ success: false, error: error.message });
                 });
                 return true;
             }
@@ -55,9 +62,10 @@ class AuthManager {
         if (!this.token) return false;
 
         try {
-            const response = await fetch(`${this.serverUrl}/auth/me`, {
+            const response = await fetch(`${this.serverUrl}/api/auth/verify`, {
                 headers: {
-                    'Authorization': `Bearer ${this.token}`
+                    'Authorization': `Bearer ${this.token}`,
+                    'Content-Type': 'application/json'
                 }
             });
 
@@ -77,33 +85,80 @@ class AuthManager {
         return !!(this.token && this.user);
     }
 
-    // Main authenticate method using chrome.identity
-    async authenticate(provider = 'google') {
-        console.log('Starting Chrome identity authentication with provider:', provider);
+    // JWT Exchange method - main authentication flow
+    async exchangeJWT(jwtToken) {
+        console.log('Starting JWT exchange with token:', jwtToken ? 'present' : 'missing');
+        
+        try {
+            const response = await fetch(`${this.serverUrl}/api/auth/exchange`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}`
+                },
+                body: JSON.stringify({
+                    source: 'chrome_extension',
+                    timestamp: Date.now()
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'JWT exchange failed');
+            }
+
+            const data = await response.json();
+            console.log('JWT exchange successful:', data);
+
+            await this.handleAuthSuccess(data.token, data.user);
+            return { success: true, user: data.user };
+
+        } catch (error) {
+            console.error('JWT exchange failed:', error);
+            throw error;
+        }
+    }
+
+    // Handle JWT exchange from message
+    async handleJWTExchange(jwtToken) {
+        try {
+            const result = await this.exchangeJWT(jwtToken);
+            return result;
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    }
+
+    // Open redesignr.ai for authentication
+    async authenticate() {
+        console.log('Opening redesignr.ai for authentication');
         
         return new Promise((resolve, reject) => {
             try {
-                // Use chrome.identity.launchWebAuthFlow
-                const authUrl = `${this.serverUrl}/auth/${provider}`;
-                console.log('Starting web auth flow with URL:', authUrl);
+                // Generate a unique state parameter for security
+                const state = this.generateState();
                 
-                chrome.identity.launchWebAuthFlow({
+                // Store the state and resolve/reject functions
+                this.authState = { state, resolve, reject };
+                
+                // Open redesignr.ai auth page
+                const authUrl = `${this.serverUrl}/auth/extension?state=${state}&source=chrome_extension`;
+                console.log('Opening auth URL:', authUrl);
+                
+                chrome.tabs.create({
                     url: authUrl,
-                    interactive: true
-                }, (responseUrl) => {
+                    active: true
+                }, (tab) => {
                     if (chrome.runtime.lastError) {
-                        console.error('Auth flow error:', chrome.runtime.lastError);
                         reject(new Error(chrome.runtime.lastError.message));
                         return;
                     }
                     
-                    if (!responseUrl) {
-                        reject(new Error('No response URL received'));
-                        return;
-                    }
+                    console.log('Auth tab created:', tab.id);
+                    this.authTabId = tab.id;
                     
-                    console.log('Auth flow completed with URL:', responseUrl);
-                    this.handleAuthResponse(responseUrl, resolve, reject);
+                    // Set up tab listener for auth completion
+                    this.setupAuthTabListener();
                 });
                 
             } catch (error) {
@@ -113,30 +168,84 @@ class AuthManager {
         });
     }
 
-    handleAuthResponse(responseUrl, resolve, reject) {
-        try {
-            const url = new URL(responseUrl);
-            const params = new URLSearchParams(url.search);
+    setupAuthTabListener() {
+        // Listen for tab updates to detect auth completion
+        const tabUpdateListener = (tabId, changeInfo, tab) => {
+            if (tabId !== this.authTabId) return;
             
-            // Check for success parameters
-            const token = params.get('token');
-            const userParam = params.get('user');
-            
-            if (token && userParam) {
-                const user = JSON.parse(decodeURIComponent(userParam));
-                this.handleAuthSuccess(token, user, resolve);
-            } else {
-                // Check for error parameters
-                const error = params.get('error') || 'Authentication failed';
-                reject(new Error(error));
+            if (changeInfo.url && changeInfo.url.includes('/auth/extension/success')) {
+                console.log('Auth success detected in tab:', changeInfo.url);
+                
+                // Extract token from URL
+                try {
+                    const url = new URL(changeInfo.url);
+                    const token = url.searchParams.get('token');
+                    const state = url.searchParams.get('state');
+                    
+                    if (state !== this.authState?.state) {
+                        throw new Error('Invalid state parameter');
+                    }
+                    
+                    if (token) {
+                        this.handleAuthTokenReceived(token);
+                    } else {
+                        throw new Error('No token received');
+                    }
+                } catch (error) {
+                    console.error('Error processing auth success:', error);
+                    this.authState?.reject(error);
+                }
+                
+                // Clean up
+                chrome.tabs.onUpdated.removeListener(tabUpdateListener);
+                chrome.tabs.remove(tabId);
+                this.authTabId = null;
             }
+        };
+        
+        chrome.tabs.onUpdated.addListener(tabUpdateListener);
+        
+        // Set up tab removal listener
+        const tabRemovedListener = (tabId) => {
+            if (tabId === this.authTabId) {
+                console.log('Auth tab was closed');
+                chrome.tabs.onUpdated.removeListener(tabUpdateListener);
+                chrome.tabs.onRemoved.removeListener(tabRemovedListener);
+                
+                if (this.authState && !this.isAuthenticated()) {
+                    this.authState.reject(new Error('Authentication cancelled'));
+                }
+                
+                this.authTabId = null;
+                this.authState = null;
+            }
+        };
+        
+        chrome.tabs.onRemoved.addListener(tabRemovedListener);
+    }
+
+    async handleAuthTokenReceived(token) {
+        try {
+            console.log('Handling received auth token');
+            
+            // Exchange the token for user data
+            const result = await this.exchangeJWT(token);
+            
+            if (result.success) {
+                this.authState?.resolve(result.user);
+            } else {
+                throw new Error(result.error || 'Token exchange failed');
+            }
+            
         } catch (error) {
-            console.error('Error parsing auth response:', error);
-            reject(new Error('Failed to parse authentication response'));
+            console.error('Error handling auth token:', error);
+            this.authState?.reject(error);
+        } finally {
+            this.authState = null;
         }
     }
 
-    async handleAuthSuccess(token, user, resolve) {
+    async handleAuthSuccess(token, user) {
         console.log('Handling auth success with token and user:', !!token, user);
         
         try {
@@ -150,9 +259,6 @@ class AuthManager {
             });
             
             console.log('Auth success - user stored:', this.user);
-            
-            // Resolve the authentication promise
-            resolve(this.user);
             
             // Notify popup about auth success
             try {
@@ -180,17 +286,13 @@ class AuthManager {
     async logout() {
         try {
             if (this.token) {
-                await fetch(`${this.serverUrl}/auth/logout`, {
+                await fetch(`${this.serverUrl}/api/auth/logout`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${this.token}`
+                        'Authorization': `Bearer ${this.token}`,
+                        'Content-Type': 'application/json'
                     }
                 });
-            }
-            
-            // Clear chrome.identity token if it exists
-            if (chrome.identity) {
-                chrome.identity.clearAllCachedAuthTokens();
             }
         } catch (error) {
             console.error('Logout request failed:', error);
@@ -202,7 +304,7 @@ class AuthManager {
     async clearAuth() {
         this.token = null;
         this.user = null;
-        await chrome.storage.local.remove(['authToken', 'user', 'tempAuthToken', 'tempAuthUser']);
+        await chrome.storage.local.remove(['authToken', 'user']);
     }
 
     async makeAuthenticatedRequest(url, options = {}) {
@@ -227,6 +329,11 @@ class AuthManager {
         }
 
         return response;
+    }
+
+    generateState() {
+        return Math.random().toString(36).substring(2, 15) + 
+               Math.random().toString(36).substring(2, 15);
     }
 }
 

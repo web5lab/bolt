@@ -12,8 +12,15 @@
   "host_permissions": [
     "http://*/*",
     "https://*/*",
-    "http://localhost:5008/*"
+    "https://redesignr.ai/*",
+    "http://localhost:*/*"
   ],
+  "externally_connectable": {
+    "matches": [
+      "https://redesignr.ai/*",
+      "http://localhost:*/*"
+    ]
+  },
   "action": {
     "default_popup": "popup.html",
     "default_title": "Website AI",

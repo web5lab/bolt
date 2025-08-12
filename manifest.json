@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Website AI - Create, Redesign & Document",
+  "version": "1.0.0",
+  "description": "Create beautiful websites, redesign existing ones, and generate documentation with AI",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "identity"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*",
+    "http://localhost:5008/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Website AI",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["auth.js", "content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js", "auth.js"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
